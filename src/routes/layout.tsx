@@ -18,7 +18,7 @@ function Layout({ children }: LayoutProps) {
       <ClientSuspense fallback={<div></div>} >
         <Nprogress isAnimating={location && location?.pending ? true : false} />
       </ClientSuspense>
-      <Toolbar />
+      {/* <Toolbar /> */}
       {children}
       <ToastContainer
         position="bottom-right"
