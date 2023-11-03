@@ -3,7 +3,7 @@ interface FeaturesProps {}
 
 export function Features({}: FeaturesProps) {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-center gap-3">
       <h3 className="text-3xl">Features</h3>
       <div className="w-full h-full  flex flex-wrap items-center justify-center">
         <div className="h-full flex items-center justify-center p-3 gap-2">

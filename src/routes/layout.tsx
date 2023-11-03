@@ -1,9 +1,8 @@
-import { Toolbar } from "@/components/navigation/Toolbar";
 import { Nprogress } from "@/components/navigation/nprogress/Nprogress";
 import { ClientSuspense, Head, LayoutProps, PageContext, useLocation } from "rakkasjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import "cherry-markdown/dist/cherry-markdown.css";
+import "cherry-markdown/dist/cherry-markdown.css";
 // import "@/components/editor/styles/cherry-markdown.css"
 import "./index.css";
 import React from "react";

@@ -19,7 +19,7 @@ export function IntroSection({}: IntroSectionProps) {
           </p>
 
           <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-            <Link href="/dashboard" className="btn btn-outline">
+            <Link href="/editor" className="btn btn-outline">
               Get Started
             </Link>
           </div>

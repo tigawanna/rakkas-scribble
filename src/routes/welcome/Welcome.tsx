@@ -1,5 +1,4 @@
 import { IntroSection } from "./hero-sections/IntroSection";
-import { DescriptionBulletPoints } from "./hero-sections/DescriptionBulletPoints";
 import { LastStep } from "./hero-sections/LastStep";
 import { Features } from "./hero-sections/Features";
 
