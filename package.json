@@ -46,6 +46,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tanem/react-nprogress": "^5.0.51",
     "@unpic/react": "^0.0.39",
+    "axios": "^1.6.0",
     "cherry-markdown": "^0.8.26",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",

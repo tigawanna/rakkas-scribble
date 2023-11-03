@@ -73,7 +73,7 @@ export default function CherryMarkdownEditor({
 
   return (
     <div className="w-full h-full flex flex-col gap-2 min-h-[400px]">
-      <div className="w-full flex gap-3 items-center justify-end sticky top-[6%] z-50">
+      <div className="w-fit flex gap-3 items-center justify-end sticky top-[6%]  z-50">
         {cherry?.current&&<EditorOptionsPopOver cherry={cherry?.current} custom_element={custom_element}/>}
       </div>
       <div

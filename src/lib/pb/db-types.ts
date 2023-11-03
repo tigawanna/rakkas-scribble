@@ -455,76 +455,166 @@ export type SherpaResumeCollection = {
     };
 };
 
-// ===== scribbla_user =====
+// ===== scribble_posts =====
 
-export type ScribblaUserResponse = {
-    avatar?: string;
-} & AuthCollectionRecord;
-
-export type ScribblaUserCreate = {
-    avatar?: string;
-};
-
-export type ScribblaUserUpdate = {
-    avatar?: string;
-};
-
-export type ScribblaUserCollection = {
-    type: 'auth';
-    collectionId: 'd75sy32zrhxx8vi';
-    collectionName: 'scribbla_user';
-    response: ScribblaUserResponse;
-    create: ScribblaUserCreate;
-    update: ScribblaUserUpdate;
-    relations: {
-        'scribbla_publishers(user)': ScribblaPublishersCollection[];
-    };
-};
-
-// ===== scribbla_publishers =====
-
-export type ScribblaPublishersResponse = {
-    name?: 'devto' | 'hashnode' | 'medium' | 'linkedin' | 'gist';
-    api_key?: string;
-    user?: string;
+export type ScribblePostsResponse = {
+    title?: string;
+    content?: string;
+    contentMarkdown?: string;
+    user_id?: string;
+    status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED';
+    tags?: any;
+    publishingDetails?: any;
+    devToArticleCoverImagePath?: string;
+    devToArticleId?: string;
+    devToBlogUrl?: string;
+    hashNodeArticleCoverImagePath?: string;
+    hashNodeArticleId?: string;
+    hashNodeBlogUrl?: string;
+    last_published_at?: string;
+    mediumArticleId?: string;
+    mediumBlogUrl?: string;
 } & BaseCollectionRecord;
 
-export type ScribblaPublishersCreate = {
-    name?: 'devto' | 'hashnode' | 'medium' | 'linkedin' | 'gist';
-    api_key?: string;
-    user?: string;
+export type ScribblePostsCreate = {
+    title?: string;
+    content?: string;
+    contentMarkdown?: string;
+    user_id?: string;
+    status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED';
+    tags?: any;
+    publishingDetails?: any;
+    devToArticleCoverImagePath?: string | URL;
+    devToArticleId?: string;
+    devToBlogUrl?: string | URL;
+    hashNodeArticleCoverImagePath?: string | URL;
+    hashNodeArticleId?: string;
+    hashNodeBlogUrl?: string | URL;
+    last_published_at?: string | Date;
+    mediumArticleId?: string;
+    mediumBlogUrl?: string | URL;
 };
 
-export type ScribblaPublishersUpdate = {
-    name?: 'devto' | 'hashnode' | 'medium' | 'linkedin' | 'gist';
-    api_key?: string;
-    user?: string;
+export type ScribblePostsUpdate = {
+    title?: string;
+    content?: string;
+    contentMarkdown?: string;
+    user_id?: string;
+    status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED';
+    tags?: any;
+    publishingDetails?: any;
+    devToArticleCoverImagePath?: string | URL;
+    devToArticleId?: string;
+    devToBlogUrl?: string | URL;
+    hashNodeArticleCoverImagePath?: string | URL;
+    hashNodeArticleId?: string;
+    hashNodeBlogUrl?: string | URL;
+    last_published_at?: string | Date;
+    mediumArticleId?: string;
+    mediumBlogUrl?: string | URL;
 };
 
-export type ScribblaPublishersCollection = {
+export type ScribblePostsCollection = {
     type: 'base';
-    collectionId: 'p3tj86iy4mfp1vk';
-    collectionName: 'scribbla_publishers';
-    response: ScribblaPublishersResponse;
-    create: ScribblaPublishersCreate;
-    update: ScribblaPublishersUpdate;
-    relations: {
-        user: ScribblaUserCollection;
-    };
+    collectionId: '6itgi5d0trmi1yb';
+    collectionName: 'scribble_posts';
+    response: ScribblePostsResponse;
+    create: ScribblePostsCreate;
+    update: ScribblePostsUpdate;
+    relations: {};
+};
+
+// ===== scribble_user =====
+
+export type ScribbleUserResponse = {
+    github_username?: string;
+    linkedin_username?: string;
+    country?: string;
+    city?: string;
+    phone?: string;
+    langauges?: string;
+    avatar?: string;
+    about_me?: string;
+    github_access_token?: string;
+} & AuthCollectionRecord;
+
+export type ScribbleUserCreate = {
+    github_username?: string;
+    linkedin_username?: string;
+    country?: string;
+    city?: string;
+    phone?: string;
+    langauges?: string;
+    avatar?: string;
+    about_me?: string;
+    github_access_token?: string;
+};
+
+export type ScribbleUserUpdate = {
+    github_username?: string;
+    linkedin_username?: string;
+    country?: string;
+    city?: string;
+    phone?: string;
+    langauges?: string;
+    avatar?: string;
+    about_me?: string;
+    github_access_token?: string;
+};
+
+export type ScribbleUserCollection = {
+    type: 'auth';
+    collectionId: '51hjtt652zdrck6';
+    collectionName: 'scribble_user';
+    response: ScribbleUserResponse;
+    create: ScribbleUserCreate;
+    update: ScribbleUserUpdate;
+    relations: {};
+};
+
+// ===== scribble_providers =====
+
+export type ScribbleProvidersResponse = {
+    token?: string;
+    name?: 'devto' | 'mediaum' | 'hashnode';
+    other?: any;
+} & BaseCollectionRecord;
+
+export type ScribbleProvidersCreate = {
+    token?: string;
+    name?: 'devto' | 'mediaum' | 'hashnode';
+    other?: any;
+};
+
+export type ScribbleProvidersUpdate = {
+    token?: string;
+    name?: 'devto' | 'mediaum' | 'hashnode';
+    other?: any;
+};
+
+export type ScribbleProvidersCollection = {
+    type: 'base';
+    collectionId: 'hcmninkr66kpow4';
+    collectionName: 'scribble_providers';
+    response: ScribbleProvidersResponse;
+    create: ScribbleProvidersCreate;
+    update: ScribbleProvidersUpdate;
+    relations: {};
 };
 
 // ===== Schema =====
 
 export type Schema = {
-    sherpa_user: SherpaUserCollection;
-    sherpa_projects: SherpaProjectsCollection;
-    sherpa_education: SherpaEducationCollection;
-    sherpa_experience: SherpaExperienceCollection;
-    sherpa_content: SherpaContentCollection;
-    sherpa_hackathon: SherpaHackathonCollection;
-    sherpa_internship: SherpaInternshipCollection;
-    sherpa_job_application: SherpaJobApplicationCollection;
+    // sherpa_user: SherpaUserCollection;
+    // sherpa_projects: SherpaProjectsCollection;
+    // sherpa_education: SherpaEducationCollection;
+    // sherpa_experience: SherpaExperienceCollection;
+    // sherpa_content: SherpaContentCollection;
+    // sherpa_hackathon: SherpaHackathonCollection;
+    // sherpa_internship: SherpaInternshipCollection;
+    // sherpa_job_application: SherpaJobApplicationCollection;
     sherpa_resume: SherpaResumeCollection;
-    scribbla_user: ScribblaUserCollection;
-    scribbla_publishers: ScribblaPublishersCollection;
+    scribble_posts: ScribblePostsCollection;
+    scribble_user: ScribbleUserCollection;
+    scribble_providers: ScribbleProvidersCollection;
 };

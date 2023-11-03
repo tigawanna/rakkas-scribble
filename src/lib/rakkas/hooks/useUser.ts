@@ -1,5 +1,5 @@
-import { pb } from "@/lib/pb/client";
-import { ScribblaUserResponse} from "@/lib/pb/db-types";
+
+import { ScribbleUserResponse } from "@/lib/pb/db-types";
 import { useMutation, useQueryClient } from "rakkasjs";
 import { usePageContext } from "rakkasjs";
 
@@ -37,6 +37,6 @@ export function useUser() {
         }
     })
     
-    const user = qc.getQueryData("user") as ScribblaUserResponse
+    const user = qc.getQueryData("user") as ScribbleUserResponse
     return { user, user_mutation: mutation, page_ctx,loggout:mutation.mutate }
 }
