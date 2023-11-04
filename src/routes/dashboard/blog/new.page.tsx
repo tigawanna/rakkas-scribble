@@ -22,8 +22,12 @@ Strong understanding of web development best practices and accessibility standar
 Excellent problem-solving and communication skills.
 Ability to work independently or as part of a team.`);
   return (
-    <div className="w-full h-full min-h-screen flex items-center justify-center">
+    <div
+      className="w-full h-full min-h-screen flex items-center justify-center ">
+    <div
+      className="w-full h-full min-h-screen flex items-center justify-center fixed top-[5%]">
       <MainEditor input={input} getEditorContent={setInput} />
+    </div>
     </div>
   );
 }

@@ -21,8 +21,11 @@ export function MainEditor({
   return (
     <div className="flex flex-col h-full w-full items-center   gap-1 ">
       <ClientSuspense fallback={<Spinner size="100px" />}>
-        <div className="flex min-h-[300px] flex-col h-full items-center justify-center  gap-1 w-full 
-        max-w-[95%]">
+        <div
+          className="flex min-h-[300px] flex-col h-full items-center justify-center 
+            gap-1 w-full 
+            max-w-[95%] "
+        >
           <CherryMarkdownEditor
             input_string={input}
             // custom_element={(cherry: Cherry | null) => {

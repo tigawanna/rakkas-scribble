@@ -1,14 +1,6 @@
-import { copytoClipBoard } from "@/utils/helpers/copy-to-clipboard";
 import { useWindowSize } from "@/utils/hooks/useWindowSize";
 // import Cherry from 'cherry-markdown/dist/cherry-markdown.core';
 import Cherry from "cherry-markdown";
-import {
-  Copy,
-  FileEdit,
-  GalleryThumbnails,
-  Printer,
-  SplitSquareHorizontal,
-} from "lucide-react";
 import { useEffect, useRef } from "react";
 import { EditorOptionsPopOver } from "./EditorOptions";
 
@@ -72,14 +64,14 @@ export default function CherryMarkdownEditor({
 
 
   return (
-    <div className="w-full h-full flex flex-col gap-2 min-h-[400px]">
-      <div className="w-fit flex gap-3 items-center justify-end sticky top-[6%]  z-50">
+    <div className="w-full h-full flex flex-col gap-2 min-h-[400px] relative ">
+      <div className="w-fit flex gap-3 items-center justify-end  absolute top-[5%] right-[2%]  z-50">
         {cherry?.current&&<EditorOptionsPopOver cherry={cherry?.current} custom_element={custom_element}/>}
       </div>
       <div
         id="cherry-markdown"
-        className="w-full h-full theme__blue"
-        data-code-block-theme="coy"
+        className="w-full h-full absolute top-[3%]"
+   
       />
     </div>
   );
