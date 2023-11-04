@@ -54,11 +54,11 @@ export type SherpaUserCreate = {
     city?: string;
     phone?: string;
     skills?: string;
-    last_resume_on?: string | Date;
-    last_letter_on?: string | Date;
+    last_resume_on?: string;
+    last_letter_on?: string;
     langauges?: string;
     avatar?: string;
-    avatar_url?: string | URL;
+    avatar_url?: string ;
     about_me?: string;
     github_access_token?: string;
 };
@@ -70,11 +70,11 @@ export type SherpaUserUpdate = {
     city?: string;
     phone?: string;
     skills?: string;
-    last_resume_on?: string | Date;
-    last_letter_on?: string | Date;
+    last_resume_on?: string;
+    last_letter_on?: string;
     langauges?: string;
     avatar?: string;
-    avatar_url?: string | URL;
+    avatar_url?: string ;
     about_me?: string;
     github_access_token?: string;
 };
@@ -114,8 +114,8 @@ export type SherpaProjectsResponse = {
 export type SherpaProjectsCreate = {
     name: string;
     description: string;
-    repo_url: string | URL;
-    image_url?: string | URL;
+    repo_url: string ;
+    image_url?: string ;
     languages?: string;
     libraries?: string;
     image?: string;
@@ -125,8 +125,8 @@ export type SherpaProjectsCreate = {
 export type SherpaProjectsUpdate = {
     name?: string;
     description?: string;
-    repo_url?: string | URL;
-    image_url?: string | URL;
+    repo_url?: string ;
+    image_url?: string ;
     languages?: string;
     libraries?: string;
     image?: string;
@@ -161,8 +161,8 @@ export type SherpaEducationCreate = {
     school: string;
     qualification: 'Certificate' | 'Bachelors' | 'Masters' | 'Ph';
     field: string;
-    from: string | Date;
-    to: string | Date;
+    from: string;
+    to: string;
     user: string;
 };
 
@@ -170,8 +170,8 @@ export type SherpaEducationUpdate = {
     school?: string;
     qualification?: 'Certificate' | 'Bachelors' | 'Masters' | 'Ph';
     field?: string;
-    from?: string | Date;
-    to?: string | Date;
+    from?: string;
+    to?: string;
     user?: string;
 };
 
@@ -204,8 +204,8 @@ export type SherpaExperienceCreate = {
     company: string;
     description: string;
     user: string;
-    from: string | Date;
-    to: string | Date;
+    from: string;
+    to: string;
 };
 
 export type SherpaExperienceUpdate = {
@@ -213,8 +213,8 @@ export type SherpaExperienceUpdate = {
     company?: string;
     description?: string;
     user?: string;
-    from?: string | Date;
-    to?: string | Date;
+    from?: string;
+    to?: string;
 };
 
 export type SherpaExperienceCollection = {
@@ -244,7 +244,7 @@ export type SherpaContentCreate = {
     title: string;
     type?: 'Video' | 'Blog' | 'Gist' | 'Podcast';
     description: string;
-    content_url: string | URL;
+    content_url: string ;
     user: string;
 };
 
@@ -252,7 +252,7 @@ export type SherpaContentUpdate = {
     title?: string;
     type?: 'Video' | 'Blog' | 'Gist' | 'Podcast';
     description?: string;
-    content_url?: string | URL;
+    content_url?: string ;
     user?: string;
 };
 
@@ -285,9 +285,9 @@ export type SherpaHackathonCreate = {
     name: string;
     description: string;
     technologies: string;
-    from: string | Date;
-    to: string | Date;
-    link: string | URL;
+    from: string;
+    to: string;
+    link: string ;
     user: string;
 };
 
@@ -295,9 +295,9 @@ export type SherpaHackathonUpdate = {
     name?: string;
     description?: string;
     technologies?: string;
-    from?: string | Date;
-    to?: string | Date;
-    link?: string | URL;
+    from?: string;
+    to?: string;
+    link?: string ;
     user?: string;
 };
 
@@ -329,8 +329,8 @@ export type SherpaInternshipCreate = {
     description: string;
     role: string;
     company: string;
-    from: string | Date;
-    to: string | Date;
+    from: string;
+    to: string;
     user: string;
 };
 
@@ -338,8 +338,8 @@ export type SherpaInternshipUpdate = {
     description?: string;
     role?: string;
     company?: string;
-    from?: string | Date;
-    to?: string | Date;
+    from?: string;
+    to?: string;
     user?: string;
 };
 
@@ -370,7 +370,7 @@ export type SherpaJobApplicationResponse = {
 export type SherpaJobApplicationCreate = {
     title: string;
     description: string;
-    posting_url: string | URL;
+    posting_url: string ;
     cover_letter?: string;
     resume?: string;
     user: string;
@@ -379,7 +379,7 @@ export type SherpaJobApplicationCreate = {
 export type SherpaJobApplicationUpdate = {
     title?: string;
     description?: string;
-    posting_url?: string | URL;
+    posting_url?: string ;
     cover_letter?: string;
     resume?: string;
     user?: string;
@@ -474,6 +474,7 @@ export type ScribblePostsResponse = {
     last_published_at?: string;
     mediumArticleId?: string;
     mediumBlogUrl?: string;
+    post_media?: Array<string>;
 } & BaseCollectionRecord;
 
 export type ScribblePostsCreate = {
@@ -484,15 +485,16 @@ export type ScribblePostsCreate = {
     status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED';
     tags?: any;
     publishingDetails?: any;
-    devToArticleCoverImagePath?: string | URL;
+    devToArticleCoverImagePath?: string;
     devToArticleId?: string;
-    devToBlogUrl?: string | URL;
-    hashNodeArticleCoverImagePath?: string | URL;
+    devToBlogUrl?: string;
+    hashNodeArticleCoverImagePath?: string;
     hashNodeArticleId?: string;
-    hashNodeBlogUrl?: string | URL;
-    last_published_at?: string | Date;
+    hashNodeBlogUrl?: string;
+    last_published_at?: string;
     mediumArticleId?: string;
-    mediumBlogUrl?: string | URL;
+    mediumBlogUrl?: string;
+    post_media?: MaybeArray<string>;
 };
 
 export type ScribblePostsUpdate = {
@@ -503,17 +505,18 @@ export type ScribblePostsUpdate = {
     status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED';
     tags?: any;
     publishingDetails?: any;
-    devToArticleCoverImagePath?: string | URL;
+    devToArticleCoverImagePath?: string;
     devToArticleId?: string;
-    devToBlogUrl?: string | URL;
-    hashNodeArticleCoverImagePath?: string | URL;
+    devToBlogUrl?: string;
+    hashNodeArticleCoverImagePath?: string;
     hashNodeArticleId?: string;
-    hashNodeBlogUrl?: string | URL;
-    last_published_at?: string | Date;
+    hashNodeBlogUrl?: string;
+    last_published_at?: string;
     mediumArticleId?: string;
-    mediumBlogUrl?: string | URL;
+    mediumBlogUrl?: string ;
+    post_media?: MaybeArray<string>;
+    'post_media-'?: MaybeArray<string>;
 };
-
 export type ScribblePostsCollection = {
     type: 'base';
     collectionId: '6itgi5d0trmi1yb';
