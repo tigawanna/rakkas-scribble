@@ -8,7 +8,7 @@ export function IntroSection({}: IntroSectionProps) {
     <section className="w-full h-full flex min-h-screen justify-start items-start">
       <div className="w-full flex flex-col p-5 sm:p-6 sm:mx-auto  lg:flex-row lg:justify-between gap-5">
         <div className="flex min-h-[450px] flex-col justify-center sm:p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left gap-1">
-          <h1 className="text-8xl font-bold sm:text-8xl">Scribble</h1>
+          <h1 className="text-7xl font-bold sm:text-8xl">Scribble</h1>
           <p className="text-3xl  text-accent">Write one , Publish many</p>
           <p className="mt-6 mb-8  font-normal sm:text-lg sm:mb-12">
             Scribble is a powerful rich text editor that is powered by Markdown.

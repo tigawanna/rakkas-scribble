@@ -8,6 +8,8 @@ import { lazy, useDeferredValue, useEffect, useRef } from "react";
 import { BlogEditorControls } from "./BlogEditorControls";
 import { useUpdateBlogMutation } from "./useBlogMutation";
 import { SubmitButton } from "@/components/form/inputs/SubmitButton";
+import { ChefHat } from "lucide-react";
+import { CherryTypes } from "@/components/editor/utils/types";
 const CherryMarkdownEditor = lazy(
   () => import("@/components/editor/CherryMarkdownEditor"),
 );
@@ -51,20 +53,47 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
     },
   });
 
+  
+// useEffect(()=>{
+//   if(cherry.current){
+//   const options = cherry.current.options as CherryTypes["options"]
+//   cherry.current.options = options.
+//   fileUpload = (file, callback) => {
+//     console.log("aftre change");
+//     page_ctx.locals.pb
+//       ?.collection("scribble_posts")
+//       .update(blog_id, {
+//         // @ts-expect-error
+//         post_media: input.post_media ? [...input.post_media, file] : [file],
+//       })
+//       .then((res) => {
+//         console.log("res", res);
+//         if (res) {
+//           callback(res.post_media[0]);
+//         }
+//       })
+//       .catch((err) => console.log(err));
+//   };
+ 
+//   }
+  
+// },[cherry.current])
 
-console.log({cherry:cherry.current})
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center ">
       <ClientSuspense fallback={<Spinner size="100px" />}>
         <div className="w-full h-full flex flex-col items-center justify-center relative ">
           <div className="w-full h-[90%] absolute top-[2%] left-0 right-0 ">
             <CherryMarkdownEditor
+              // @ts-expect-error
+              post={input}
               input_string={input.content ?? ""}
               cherry_instance={cherry}
               custom_element={(cherry: Cherry | null) => {
                 return (
                   <BlogEditorControls
-                cherry={cherry}
+                    cherry={cherry}
                     // @ts-expect-error
                     post={input}
                     updating={true}
@@ -75,15 +104,21 @@ console.log({cherry:cherry.current})
             />
           </div>
           <div className="flex flex-col  gap-1  absolute bottom-[5%] right-[2%] z-50">
-        <button onClick={() => console.log(cherry.current?.getMarkdown())}>
-          get markdowb
-        </button>
-          <SubmitButton 
-          loading={update_post_mutation.isPending}
-          action={()=>update_post_mutation.mutate({id:blog_id,data:{
-            ...input,
-            content:cherry.current?.getMarkdown()
-          }})}/>
+            <button onClick={() => console.log(cherry.current?.getMarkdown())}>
+              get markdowb
+            </button>
+            <SubmitButton
+              loading={update_post_mutation.isPending}
+              action={() =>
+                update_post_mutation.mutate({
+                  id: blog_id,
+                  data: {
+                    ...input,
+                    content: cherry.current?.getMarkdown(),
+                  },
+                })
+              }
+            />
           </div>
         </div>
       </ClientSuspense>

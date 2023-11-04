@@ -77,7 +77,8 @@ export function NewPostModal({}: NewPostModalProps) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <Button
-            onClick={() => mutation.mutate({ ...input, status: "DRAFT" })}>
+            onClick={() => mutation.mutate({ ...input, status: "DRAFT" })}
+          >
             {mutation.isLoading ? (
               <>
                 Creating <Loader className="animate-spin w-4 h-4" />

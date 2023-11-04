@@ -4,19 +4,25 @@ import Cherry from "cherry-markdown";
 import { useEffect, useRef } from "react";
 import { EditorOptionsPopOver } from "./EditorOptions";
 import { CherryTypes } from "./utils/types";
+import { usePageContext } from "rakkasjs";
+import { ScribblePostsResponse } from "@/lib/pb/db-types";
+import { getFileURL } from "@/lib/pb/client";
 
 interface CherryMarkdownEditorProps {
   input_string: string;
-  cherry_instance?:React.MutableRefObject<Cherry | null>;
+  post:ScribblePostsResponse;
+  cherry_instance?: React.MutableRefObject<Cherry | null>;
   custom_element?: (cherry: Cherry | null) => JSX.Element;
 }
 
 export default function CherryMarkdownEditor({
+  post,
   input_string,
   cherry_instance,
   custom_element,
 }: CherryMarkdownEditorProps) {
-  const cherry =cherry_instance?? useRef<Cherry | null>(null);
+  const page_ctx= usePageContext()
+  const cherry = cherry_instance ?? useRef<Cherry | null>(null);
   const { width } = useWindowSize();
   const theme = [
     { className: "default", label: "Default" },
@@ -37,9 +43,32 @@ export default function CherryMarkdownEditor({
       theme: "dark",
       sidebar: ["mobilePreview", "copy", "theme"],
     },
-    // fileUpload:(file,callback)=>{
-    //     console.log("fileUpload",file)
-    // },
+     fileUpload:(file, callback) => {
+    console.log("aftre change");
+    page_ctx.locals.pb
+      ?.collection("scribble_posts")
+      .update(post.id, {
+        // @ts-expect-error
+        post_media: post.post_media ? [...post.post_media, file] : [file],
+      })
+      .then((res) => {
+        console.log("res url === ", res.post_media);
+        if (res.post_media) {
+          const latest_file= res.post_media[res.post_media.length - 1]
+          const post_media_url = getFileURL({
+            collection_id_or_name: "scribble_posts",
+            file_name:latest_file ,
+            record_id: post.id,
+          });
+            // console.log({post_media_url})
+          callback(post_media_url,{
+            name:latest_file
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+    // callback("")
+  },
     editor: {
       height: "100%",
       defaultModel: width > 850 ? "edit&preview" : "editOnly",
@@ -49,10 +78,9 @@ export default function CherryMarkdownEditor({
     if (!cherry.current) {
       cherry.current = new Cherry(config);
       //  how to check for user prefered theme
-      if (window&&window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      if (window && window.matchMedia("(prefers-color-scheme: dark)").matches) {
         cherry.current?.setTheme("dark");
-      } 
-      
+      }
     }
   }, []);
   useEffect(() => {
@@ -76,7 +104,10 @@ export default function CherryMarkdownEditor({
           />
         )}
       </div>
-      <div id="cherry-markdown" className="absolute top-[5%] w-full px-2 pr-5" />
+      <div
+        id="cherry-markdown"
+        className="absolute top-[5%] w-full px-2 pr-5"
+      />
     </div>
   );
 }
