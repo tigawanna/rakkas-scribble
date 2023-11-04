@@ -3,8 +3,8 @@ import { GithubOauthResponse } from "./types";
 import { TypedPocketBase } from "typed-pocketbase";
 import { Schema, ScribbleUserCreate,ScribbleUserUpdate } from "./db-types";
 import { tryCatchWrapper } from "@/utils/async";
-import { errorToClientResponseError } from "./utils";
 
+export type PocketBaseClient = TypedPocketBase<Schema>;
 const pb_url = import.meta.env.RAKKAS_PB_URL
 export const pb = new PocketBase(
   pb_url,

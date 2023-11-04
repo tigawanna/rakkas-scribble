@@ -3,7 +3,7 @@ import { useWindowSize } from "@/utils/hooks/useWindowSize";
 import Cherry from "cherry-markdown";
 import { useEffect, useRef } from "react";
 import { EditorOptionsPopOver } from "./EditorOptions";
-
+import { CherryTypes } from "./utils/types";
 
 interface CherryMarkdownEditorProps {
   input_string: string;
@@ -25,29 +25,27 @@ export default function CherryMarkdownEditor({
     { className: "violet", label: "violet" },
     { className: "blue", label: "blue" },
   ]
+
+  const config: Partial<CherryTypes["options"]> = {
+    id: "cherry-markdown",
+    value: "",
+    theme,
+    locale: "en_US",
+    toolbars: {
+      theme: "dark",
+      sidebar: ["mobilePreview", "copy", "theme"],
+    },
+    // fileUpload:(file,callback)=>{
+    //     console.log("fileUpload",file)
+    // },
+    editor: {
+      height: "100%",
+      defaultModel: width > 850 ? "edit&preview" : "editOnly",
+    },
+  }; 
   useEffect(() => {
     if (!cherry.current) {
-      cherry.current = new Cherry({
-        id: "cherry-markdown",
-        value: "",
-        theme,
-        locale: "en_US",
-        toolbars: {
-          sidebar: ["mobilePreview", "copy", "theme"],
-        },
-
-        editor: {
-   
-          height: "100%",
-          // theme: "idea",
-
-          // defaultModel The default mode of the editor after initialization. There are three modes: 1. Double column edit preview mode; 2. Pure editing mode; 3. Preview mode
-          // edit&preview: Double column edit preview mode
-          // editOnly: Pure editing mode (without preview, you can switch to double column or preview mode through toolbar)
-          // previewOnly: Preview mode (there is no edit box, the toolbar only displays the "return to edit" button, which can be switched to edit mode through the toolbar)
-          defaultModel: width > 850 ? "edit&preview" : "editOnly",
-        },
-      });
+      cherry.current = new Cherry(config);
     }
   }, []);
   useEffect(() => {
