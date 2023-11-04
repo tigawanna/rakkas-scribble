@@ -7,14 +7,16 @@ import { CherryTypes } from "./utils/types";
 
 interface CherryMarkdownEditorProps {
   input_string: string;
+  cherry_instance?:React.MutableRefObject<Cherry | null>;
   custom_element?: (cherry: Cherry | null) => JSX.Element;
 }
 
 export default function CherryMarkdownEditor({
   input_string,
+  cherry_instance,
   custom_element,
 }: CherryMarkdownEditorProps) {
-  const cherry = useRef<Cherry | null>(null);
+  const cherry =cherry_instance?? useRef<Cherry | null>(null);
   const { width } = useWindowSize();
   const theme = [
     { className: "default", label: "Default" },
@@ -24,7 +26,7 @@ export default function CherryMarkdownEditor({
     { className: "red", label: "red" },
     { className: "violet", label: "violet" },
     { className: "blue", label: "blue" },
-  ]
+  ];
 
   const config: Partial<CherryTypes["options"]> = {
     id: "cherry-markdown",
@@ -42,10 +44,15 @@ export default function CherryMarkdownEditor({
       height: "100%",
       defaultModel: width > 850 ? "edit&preview" : "editOnly",
     },
-  }; 
+  };
   useEffect(() => {
     if (!cherry.current) {
       cherry.current = new Cherry(config);
+      //  how to check for user prefered theme
+      if (window&&window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        cherry.current?.setTheme("dark");
+      } 
+      
     }
   }, []);
   useEffect(() => {
@@ -59,8 +66,6 @@ export default function CherryMarkdownEditor({
     cherry.current?.switchModel(width > 850 ? "edit&preview" : "editOnly");
   }, [width]);
 
-
-
   return (
     <div className="w-full  flex">
       <div className="w-fit flex gap-3 items-center justify-end  absolute top-[6%] right-[2%]  z-50">
@@ -71,7 +76,7 @@ export default function CherryMarkdownEditor({
           />
         )}
       </div>
-      <div id="cherry-markdown" className="absolute top-[5%]" />
+      <div id="cherry-markdown" className="absolute top-[5%] w-full px-2 pr-5" />
     </div>
   );
 }

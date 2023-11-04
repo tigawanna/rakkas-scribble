@@ -1,4 +1,4 @@
-import { MainEditor } from "@/routes/editor/components/MainEditor";
+
 import { PageProps } from "rakkasjs"
 import React from "react";
 import { useState } from "react";
@@ -22,9 +22,9 @@ Proficiency in building responsive and mobile-friendly web applications.
 Strong understanding of web development best practices and accessibility standards.
 Excellent problem-solving and communication skills.
 Ability to work independently or as part of a team.`);
-const MemoizedMainEditor = React.memo(MainEditor);
+
 return (
   <div className="w-full h-full min-h-screen flex items-center justify-center">
-        <MemoizedMainEditor input={input} getEditorContent={setInput} />
+    
   </div>
 );}

@@ -15,7 +15,7 @@ export default function DashboardPage({}: PageProps) {
               {user?.username}
             </h3>
           </div>
-          <NewPostModal/>
+     
         </div>
       </div>
         <div className="w-full h-full min-h-screen flex flex-col gap-2">

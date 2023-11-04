@@ -1,5 +1,4 @@
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/shadcn/ui/popover";
-import { Button } from "@/components/shadcn/ui/button";
 import { changeTheme } from "./config";
 import Cherry from "cherry-markdown";
 import { copytoClipBoard } from "@/utils/helpers/copy-to-clipboard";
@@ -11,6 +10,7 @@ interface EditorOptionsPopOverProps {
 }
 
 export function EditorOptionsPopOver({cherry, custom_element}: EditorOptionsPopOverProps) {
+
     const theme = [
       { className: "default", label: "Default" },
       { className: "dark", label: "dark" },
@@ -53,7 +53,9 @@ export function EditorOptionsPopOver({cherry, custom_element}: EditorOptionsPopO
               })}
             </div>
             <div className="w-full flex flex-wrap gap-3 items-center">
-              {custom_element && custom_element(cherry)}
+               <div className="flex flex-wrap gap-3 items-center">
+                {custom_element && custom_element(cherry)}
+                </div>
               <button
                 className="md:tooltip hover:md:tooltip-open md:tooltip-top text-xs font-normal rounded-full hover:text-accent "
                 about={"print content"}
