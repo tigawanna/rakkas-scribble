@@ -62,15 +62,16 @@ export default function CherryMarkdownEditor({
 
 
   return (
-    <div className="w-full h-full flex flex-col gap-2 min-h-[400px] relative ">
-      <div className="w-fit flex gap-3 items-center justify-end  absolute top-[5%] right-[2%]  z-50">
-        {cherry?.current&&<EditorOptionsPopOver cherry={cherry?.current} custom_element={custom_element}/>}
+    <div className="w-full  flex">
+      <div className="w-fit flex gap-3 items-center justify-end  absolute top-[6%] right-[2%]  z-50">
+        {cherry?.current && (
+          <EditorOptionsPopOver
+            cherry={cherry?.current}
+            custom_element={custom_element}
+          />
+        )}
       </div>
-      <div
-        id="cherry-markdown"
-        className="w-full h-full absolute top-[3%]"
-   
-      />
+      <div id="cherry-markdown" className="absolute top-[5%]" />
     </div>
   );
 }

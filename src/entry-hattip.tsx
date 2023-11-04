@@ -1,68 +1,77 @@
-import { createRequestHandler } from "rakkasjs";
+import { RequestContext, createRequestHandler } from "rakkasjs";
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { uneval } from "devalue";
 import { cookie } from "@hattip/cookie";
-import { TypedPocketBase } from "typed-pocketbase";
 import PocketBase from "pocketbase";
+import { TypedPocketBase } from "typed-pocketbase";
 import { Schema } from "./lib/pb/db-types";
+
+
+
+export async function beforePageLuciaMiddleware(ctx: RequestContext<unknown>) {}
 
 export default createRequestHandler({
   middleware: {
-    // HatTip middleware to be injected
-    // before the page routes handler.
     beforePages: [
       cookie(),
       (ctx) => {
-     	ctx.locals.pb = new PocketBase(
-          import.meta.env.RAKKAS_PB_URL,
+  
+        ctx.locals.pb = new PocketBase(
+          import.meta.env.RAKKAS_PB_URL
         ) as TypedPocketBase<Schema>;
         // load the store data from the request cookie string
         ctx.locals.pb.authStore.loadFromCookie(
-          ctx.request.headers.get("cookie") || "",
+          ctx.request.headers.get("cookie") || ""
         );
       },
     ],
-    // HatTip middleware to be injected
-    // after the page routes handler but
-    // before the API routes handler
     beforeApiRoutes: [],
-    // HatTip middleware to be injected
-    // after the API routes handler but
-    // before the 404 handler
     beforeNotFound: [],
   },
 
   createPageHooks(requestContext) {
+    let queries = Object.create(null);
     return {
       emitBeforeSsrChunk() {
-        // Return a string to emit into React's
-        // SSR stream just before React emits a
-        // chunk of the page.
-        return "";
+        if (Object.keys(queries).length === 0) return "";
+
+        // Emit a script that calls the global $TQS function with the
+        // newly fetched query data.
+
+        const queriesString = uneval(queries);
+        queries = Object.create(null);
+        return `<script>$TQS(${queriesString})</script>`;
       },
 
-      emitToDocumentHead() {
-        const cookie_theme = requestContext?.cookie?.theme;
-        return `
-     <link rel="icon" type="image/svg+xml" href="/site.svg" />
-     <script>
+    emitToDocumentHead() {
+    const cookie_theme = requestContext?.cookie?.theme;
+    return `
+    <link rel="icon" type="image/svg+xml" href="/site.svg" />
+    <script>
       (function() {
         document.documentElement.setAttribute("data-theme", "${cookie_theme}");
       })();
      </script>
-     `
+     <script>$TQD=Object.create(null);$TQS=data=>Object.assign($TQD,data);</script>
+  `;
       },
 
-      extendPageContext(ctx) {
+      async extendPageContext(ctx) {
         const request = ctx.requestContext?.request;
         if (!request) return;
 
 
         if (!ctx.locals.pb) {
           ctx.locals.pb = new PocketBase(
-            import.meta.env.RAKKAS_PB_URL,
+            import.meta.env.RAKKAS_PB_URL
           ) as TypedPocketBase<Schema>;
           // load the store data from the request cookie string
           ctx.locals.pb.authStore.loadFromCookie(
-            request.headers.get("cookie") || "",
+            request.headers.get("cookie") || ""
           );
         }
         try {
@@ -82,24 +91,45 @@ export default createRequestHandler({
       },
 
       wrapApp(app) {
-        // Wrap the Rakkas application in some provider
-        // component (only on the server).
-        return app;
+        const queryCache = new QueryCache({
+          onSuccess(data, query) {
+          queries[query.queryHash] = data;
+          },
+        });
+
+        const queryClient = new QueryClient({
+          queryCache,
+          defaultOptions: {
+            queries: {
+              suspense: true,
+              staleTime: Infinity,
+              refetchOnWindowFocus: false,
+              refetchOnReconnect: false,
+            },
+          },
+        });
+
+
+ 
+
+        return (
+         <QueryClientProvider client={queryClient}>{app}</QueryClientProvider>
+        );
       },
 
-      // wrapSsrStream(stream) {
-      // 	const { readable, writable } = new TransformStream({
-      // 		transform(chunk, controller) {
-      // 			// You can transform the chunks of the
-      // 			// React SSR stream here.
-      // 			controller.enqueue(chunk);
-      // 		},
-      // 	});
+      //   wrapSsrStream(stream) {
+      //     const { readable, writable } = new TransformStream({
+      //       transform(chunk, controller) {
+      //         // You can transform the chunks of the
+      //         // React SSR stream here.
+      //         controller.enqueue(chunk);
+      //       },
+      //     });
+      // // @ts-expect-error
+      //     stream.pipeThrough(writable);
 
-      // 	stream.pipeThrough(writable);
-
-      // 	return readable;
-      // },
+      //     return readable;
+      //   },
     };
   },
 });

@@ -1,7 +1,12 @@
 import { PageProps } from "rakkasjs"
-export default function EditBlogPage({}:PageProps) {
+import { BlogEditor } from "./components/BlogEditor"
+export default function EditBlogPage({params}:PageProps) {
+
 return (
-<div className="w-full h-full min-h-screen flex items-center justify-center">
-    update blog Page
+<div className="w-full flex h-screen ">
+    <div className="w-full h-[90%] fixed top-[2%] left-0 right-0 bottom-[100px]  px-2">
+   <BlogEditor blog_id={params.blog}/>
+
+    </div>
 </div>
 )}
