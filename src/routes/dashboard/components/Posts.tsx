@@ -1,11 +1,12 @@
 import { TheTextInput } from "@/components/form/inputs/TheTextInput";
 import { useSearchWithQuery } from "@/utils/hooks/search";
-import { Plus } from "lucide-react";
-import {Link, usePageContext} from "rakkasjs"
+import { navigate, usePageContext} from "rakkasjs"
 import { Suspense, useState } from "react";
-import { PostsList } from "./PostsList";
-import { SkeletonLoader } from "@/components/navigation/loaders/SkeletonLoader";
 import { NewPostModal } from "../blog/components/NewPostModal";
+import { useQuery } from "@tanstack/react-query";
+import { tryCatchWrapper } from "@/utils/async";
+import { PostCard } from "./PostCard";
+import { numberToArray } from "@/utils/helpers/others";
 
 interface PostsProps {
 
@@ -20,13 +21,32 @@ const page_number = parseInt(page_ctx.url.searchParams.get("p") ?? "1") ?? 1;
     setKeyword(e.target.value);
   }
 
+
+  const query = useQuery({
+    queryKey: ["posts",debouncedValue ,page_number],
+    queryFn:()=>{
+      return tryCatchWrapper(page_ctx.locals.pb?.collection("scribble_posts").getList(1,1, {
+        sort: "-created",
+        filter: `title~"${debouncedValue}"`,
+        page: page_number
+      }))
+    }
+  })
+
+  const data = query.data?.data
+    const total_pages = query?.data?.data?.totalPages;
+    const pages_arr = numberToArray(total_pages!);
+    function goToPage(page: number) {
+      page_ctx.url.searchParams.set("p", page.toString());
+      navigate(page_ctx.url);
+    }
 return (
   <div className="w-full h-full flex flex-col items-center justify-center">
     <div className="sticky top-[5%] flex flex-wrap w-full items-center justify-evenly p-2 gap-3">
       <div className=" relative flex md:min-w-[50%] min-w-[70%]  items-center justify-center gap-1">
         <TheTextInput
           label_classname="hidden"
-          value={keyword}
+          val={keyword}
           field_key={"keyword"}
           placeholder="Search"
           field_name="Search"
@@ -40,11 +60,29 @@ return (
       </div>
       <NewPostModal />
     </div>
-      <div className="w-full h-full">
-    <Suspense fallback={<SkeletonLoader items={6} />}>
-        <PostsList keyword={debouncedValue} setIsRefetching={setIsRefetching} />
-    </Suspense>
-      </div>
+
+    <div className="w-full h-full flex flex-wrap items-center justify-center gap-3 p-2">
+      {data?.items.map((item) => {
+        return <PostCard key={item.id} item={item} />;
+      })}
+    </div>
+    <div className="join gap2">
+      {pages_arr.map((item) => {
+        return (
+          <button
+            key={item}
+            onClick={() => goToPage(item)}
+            className={
+              item === page_number
+                ? "join-item btn btn-sm btn-active"
+                : "join-item btn btn-sm"
+            }
+          >
+            {item}
+          </button>
+        );
+      })}
+    </div>
   </div>
 );
 }

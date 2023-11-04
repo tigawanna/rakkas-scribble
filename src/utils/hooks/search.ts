@@ -7,6 +7,11 @@ export function useSearchWithQuery() {
   const url = current;
   const [keyword, setKeyword] = useState(url?.searchParams?.get("q") ?? "");
   const { debouncedValue, isDebouncing } = useDebouncedValue(keyword, 2000);
+  // useEffect(() => {
+  //   if (current) {
+  //     setKeyword(url?.searchParams?.get("q") ?? "");
+  //   }
+  // },[])
   useEffect(() => {
     if (current) {
       url?.searchParams?.set("q", debouncedValue);
