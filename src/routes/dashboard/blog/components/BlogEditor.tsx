@@ -10,6 +10,9 @@ import { useUpdateBlogMutation } from "./useBlogMutation";
 import { SubmitButton } from "@/components/form/inputs/SubmitButton";
 import { ChefHat } from "lucide-react";
 import { CherryTypes } from "@/components/editor/utils/types";
+import { BlogImages } from "./BlogImages";
+import { NewPostModal } from "./NewPostModal";
+import { BlogImagesmodal } from "./BlogImagesmodal";
 const CherryMarkdownEditor = lazy(
   () => import("@/components/editor/CherryMarkdownEditor"),
 );
@@ -84,6 +87,8 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
     <div className="w-full h-full flex flex-col items-center justify-center ">
       <ClientSuspense fallback={<Spinner size="100px" />}>
         <div className="w-full h-full flex flex-col items-center justify-center relative ">
+          {/* <BlogImages input={input} /> */}
+
           <div className="w-full h-[90%] absolute top-[2%] left-0 right-0 ">
             <CherryMarkdownEditor
               // @ts-expect-error
@@ -104,9 +109,9 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
             />
           </div>
           <div className="flex flex-col  gap-1  absolute bottom-[5%] right-[2%] z-50">
-            <button onClick={() => console.log(cherry.current?.getMarkdown())}>
-              get markdowb
-            </button>
+{/* <NewPostModal/> */}
+{/* @ts-expect-error */}
+        <BlogImagesmodal input={input}/>
             <SubmitButton
               loading={update_post_mutation.isPending}
               action={() =>

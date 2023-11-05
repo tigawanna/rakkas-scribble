@@ -73,9 +73,10 @@ export async function oneClickOauthLogin(provider: "github" | "google") {
 
 
 
+type CollectionName  = keyof Schema
 
 export function getFileURL({collection_id_or_name,file_name,record_id}:{
-  collection_id_or_name: string,
+  collection_id_or_name: CollectionName,
   record_id: string,
   file_name: string
 }){
