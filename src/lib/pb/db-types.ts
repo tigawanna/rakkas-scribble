@@ -436,6 +436,8 @@ export type SherpaResumeUpdate = {
     body?: string;
 };
 
+
+
 export type SherpaResumeCollection = {
     type: 'base';
     collectionId: 'a4fxdhn0qbp2edh';
@@ -529,6 +531,17 @@ export type ScribblePostsCollection = {
 
 // ===== scribble_user =====
 
+export type ScribbleApiKeys = {
+    hashnode?: {
+        key: string;
+        username: string;
+    };
+    devto?: string;
+    medium?: string;
+    github?: string;
+};
+
+
 export type ScribbleUserResponse = {
     github_username?: string;
     linkedin_username?: string;
@@ -538,12 +551,7 @@ export type ScribbleUserResponse = {
     langauges?: string;
     avatar?: string;
     about_me?: string;
-    keys?: {
-        hashnode?: string;
-        devto?: string;
-        medium?: string;
-        github?: string;
-    };
+    keys?: ScribbleApiKeys;
     github_access_token?: string;
 } & AuthCollectionRecord;
 
@@ -556,12 +564,7 @@ export type ScribbleUserCreate = {
     langauges?: string;
     avatar?: string;
     about_me?: string;
-    keys?: {
-        hashnode?: string;
-        devto?: string;
-        medium?: string;
-        github?: string;
-    };
+    keys?: ScribbleApiKeys;
     github_access_token?: string;
 };
 
@@ -574,12 +577,7 @@ export type ScribbleUserUpdate = {
     langauges?: string;
     avatar?: string;
     about_me?: string;
-    keys?: {
-        hashnode?:string;
-        devto?: string;
-        medium?: string;
-        github?: string;
-    };
+    keys?:ScribbleApiKeys;
     github_access_token?: string;
 };
 

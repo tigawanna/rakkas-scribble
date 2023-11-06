@@ -4,11 +4,19 @@ import { json } from "@hattip/response";
 
 export async function POST(ctx: RequestContext) {
   const req = ctx.request;
-  const { apiKey } = await req.json();
+  try {
+    const { apiKey } = await req.json();
+    const client = new HashNodeApiClient(apiKey);
+    const { tags } = await client.getAvailableTags();
 
-  const client = new HashNodeApiClient(apiKey);
-
-  const { tags } = await client.getAvailableTags();
-
-  return json({ tags });
+    return json({ data: { tags }, error: null });
+  } catch (error: any) {
+    return json(
+      { data: null, 
+        error: { message: error.message, original_error: error } },
+      {
+        status: 500,
+      },
+    );
+  }
 }
