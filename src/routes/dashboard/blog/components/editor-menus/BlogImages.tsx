@@ -3,7 +3,7 @@ import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { Image } from "@unpic/react";
 import { Loader, X } from "lucide-react";
 import { useState } from "react";
-import { useUpdateBlogMutation } from "./useBlogMutation";
+import { useUpdateBlogMutation } from "../useBlogMutation";
 
 interface BlogImagesProps {
 input:ScribblePostsResponse

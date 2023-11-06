@@ -1,7 +1,7 @@
 import { ScribblePostsResponse} from "@/lib/pb/db-types";
 import Cherry from "cherry-markdown";
 import { Loader, Save } from "lucide-react";
-import { useUpdateBlogMutation } from "./useBlogMutation";
+import { useUpdateBlogMutation } from "../useBlogMutation";
 
 interface BlogEditorControlsProps {
   setBlogPost: (post: ScribblePostsResponse) => void;

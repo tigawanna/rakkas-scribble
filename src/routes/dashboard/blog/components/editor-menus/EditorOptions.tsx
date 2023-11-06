@@ -3,15 +3,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/shadcn/ui/popover";
-import { BlogImagesmodal } from "../BlogImagesModal";
+import { BlogImagesmodal } from "./BlogImagesModal";
 import { UseMutationResult } from "@tanstack/react-query";
-import { ScribblePostsUpdate } from "@/lib/pb/db-types";
+import { ScribblePostsResponse, ScribblePostsUpdate } from "@/lib/pb/db-types";
 import { Loader, PencilRuler, Save } from "lucide-react";
+import { PublishBlog } from "./PublishBlog";
 
 interface EditOptionsProps {
   cherry: any;
   blog_id: string;
-  input: any;
+  input: Partial<ScribblePostsResponse>;
   update_post_mutation: UseMutationResult<
     any,
     Error,
@@ -31,8 +32,12 @@ export function EditorOptions({
       <PopoverTrigger>
         <PencilRuler />
       </PopoverTrigger>
-      <PopoverContent className="w-fit flex gap-5 py-2 px-3 items-center justify-center border rounded-lg">
+      <PopoverContent
+        className="w-fit flex flex-col
+      gap-5 py-2 md:px-3 items-center justify-center rounded-lg"
+      >
         <BlogImagesmodal input={input} />
+        <PublishBlog input={input} />
         <button
           className="md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
           data-tip={"save content"}
@@ -51,8 +56,6 @@ export function EditorOptions({
             <Loader className="animate-spin" />
           )}
         </button>
-
-
       </PopoverContent>
     </Popover>
   );

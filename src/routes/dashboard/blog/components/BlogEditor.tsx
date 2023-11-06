@@ -5,7 +5,7 @@ import { tryCatchWrapper } from "@/utils/async";
 import Cherry from "cherry-markdown";
 import { ClientSuspense, useQuery } from "rakkasjs";
 import { lazy, useRef } from "react";
-import { BlogEditorControls } from "./BlogEditorControls";
+import { BlogEditorControls } from "./editor-menus/BlogEditorControls";
 import { useUpdateBlogMutation } from "./useBlogMutation";
 import { EditorOptions } from "./editor-menus/EditorOptions";
 
@@ -30,7 +30,7 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
     );
   });
   const data = query.data.data;
-  const { input, setInput } = useFormHook<BlogFormInput>({
+  const { input, setInput } = useFormHook<Partial<ScribblePostsResponse>>({
     initialValues: {
       id: data?.id!,
       content: data?.content,

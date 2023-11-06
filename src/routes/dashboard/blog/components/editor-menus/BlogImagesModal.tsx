@@ -3,24 +3,23 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogFooter,
-
   AlertDialogTrigger,
 } from "@/components/shadcn/ui/alert-dialog";
 import { Button } from "@/components/shadcn/ui/button";
 import { getFileURL } from "@/lib/pb/client";
 import { ImageIcon, Loader, X } from "lucide-react";
 import { useState } from "react";
-import { useUpdateBlogMutation } from "./useBlogMutation";
+import { useUpdateBlogMutation } from "../useBlogMutation";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { Image } from "@unpic/react";
 
 interface BlogImagesmodalProps {
-  input: ScribblePostsResponse;
+  input: Partial<ScribblePostsResponse>;
 }
 
-export function BlogImagesmodal({input}: BlogImagesmodalProps) {
-    const [imgs, setImgs] = useState(input.post_media);
-    const { update_post_mutation} = useUpdateBlogMutation();
+export function BlogImagesmodal({ input }: BlogImagesmodalProps) {
+  const [imgs, setImgs] = useState(input.post_media);
+  const { update_post_mutation } = useUpdateBlogMutation();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -39,7 +38,7 @@ export function BlogImagesmodal({input}: BlogImagesmodalProps) {
               const img_url = getFileURL({
                 collection_id_or_name: "scribble_posts",
                 file_name: item,
-                record_id: input.id,
+                record_id: input.id!,
               });
               return (
                 <div className="relative " key={item + idx}>
@@ -64,10 +63,10 @@ export function BlogImagesmodal({input}: BlogImagesmodalProps) {
               );
             })}
         </div>
-        <div className="text-lg">
+        <div className="">
           <h2>{imgs?.length} Images</h2>
-          <p className="text-xs font-mono text-warning-content">
-            Note:Remove all the deleteed inage links from your post after
+          <p className="text-sm font-mono text-warning-content">
+            Note:Remove all the deleted inage links from your post after
             deleting the images
           </p>
         </div>
@@ -78,7 +77,7 @@ export function BlogImagesmodal({input}: BlogImagesmodalProps) {
               className="btn btn-sm btn-outline"
               onClick={() => {
                 update_post_mutation.mutate({
-                  id: input.id,
+                  id: input.id!,
                   data: { post_media: imgs },
                 });
               }}
