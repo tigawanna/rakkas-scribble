@@ -538,6 +538,12 @@ export type ScribbleUserResponse = {
     langauges?: string;
     avatar?: string;
     about_me?: string;
+    keys?: {
+        hashnode?: string;
+        devto?: string;
+        medium?: string;
+        github?: string;
+    };
     github_access_token?: string;
 } & AuthCollectionRecord;
 
@@ -550,6 +556,12 @@ export type ScribbleUserCreate = {
     langauges?: string;
     avatar?: string;
     about_me?: string;
+    keys?: {
+        hashnode?: string;
+        devto?: string;
+        medium?: string;
+        github?: string;
+    };
     github_access_token?: string;
 };
 
@@ -562,6 +574,12 @@ export type ScribbleUserUpdate = {
     langauges?: string;
     avatar?: string;
     about_me?: string;
+    keys?: {
+        hashnode?:string;
+        devto?: string;
+        medium?: string;
+        github?: string;
+    };
     github_access_token?: string;
 };
 
