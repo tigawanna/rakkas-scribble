@@ -3,16 +3,13 @@ import { Spinner } from "@/components/navigation/loaders/Spinner";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
 import Cherry from "cherry-markdown";
-import { ClientSuspense, usePageContext, useQuery } from "rakkasjs";
-import { lazy, useDeferredValue, useEffect, useRef } from "react";
+import { ClientSuspense, useQuery } from "rakkasjs";
+import { lazy, useRef } from "react";
 import { BlogEditorControls } from "./BlogEditorControls";
 import { useUpdateBlogMutation } from "./useBlogMutation";
-import { SubmitButton } from "@/components/form/inputs/SubmitButton";
-import { ChefHat } from "lucide-react";
-import { CherryTypes } from "@/components/editor/utils/types";
-import { BlogImages } from "./BlogImages";
-import { NewPostModal } from "./NewPostModal";
-import { BlogImagesmodal } from "./BlogImagesmodal";
+import { EditorOptions } from "./editor-menus/EditorOptions";
+
+
 const CherryMarkdownEditor = lazy(
   () => import("@/components/editor/CherryMarkdownEditor"),
 );
@@ -25,7 +22,7 @@ interface EditBlogProps {
 
 type BlogFormInput = Omit<ScribblePostsResponse,"created" | "updated">;
 export function BlogEditor({ blog_id }: EditBlogProps) {
-  const cherry =useRef<Cherry | null>(null);
+const cherry =useRef<Cherry | null>(null);
 const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
   const query = useQuery("blog" + blog_id, () => {
     return tryCatchWrapper(
@@ -108,22 +105,14 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
               }}
             />
           </div>
-          <div className="flex flex-col  gap-1  absolute bottom-[5%] right-[2%] z-50">
-{/* <NewPostModal/> */}
-{/* @ts-expect-error */}
-        <BlogImagesmodal input={input}/>
-            <SubmitButton
-              loading={update_post_mutation.isPending}
-              action={() =>
-                update_post_mutation.mutate({
-                  id: blog_id,
-                  data: {
-                    ...input,
-                    content: cherry.current?.getMarkdown(),
-                  },
-                })
-              }
+          <div className="flex flex-col  gap-1  absolute bottom-[20%] right-[7%] z-50">
+            <EditorOptions  
+            blog_id={blog_id}
+            update_post_mutation={update_post_mutation}
+            cherry={cherry}
+            input={input}
             />
+
           </div>
         </div>
       </ClientSuspense>
