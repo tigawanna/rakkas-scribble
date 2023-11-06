@@ -31,7 +31,7 @@ export function EditorOptions({
       <PopoverTrigger>
         <PencilRuler />
       </PopoverTrigger>
-      <PopoverContent className="w-fit flex gap-5 p-1 items-center justify-center">
+      <PopoverContent className="w-fit flex gap-5 py-2 px-3 items-center justify-center border rounded-lg">
         <BlogImagesmodal input={input} />
         <button
           className="md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
