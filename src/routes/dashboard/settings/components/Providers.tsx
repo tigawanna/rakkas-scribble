@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 import { IconProps, Icons } from "@/components/icons/Iconts";
 import { DeleteConfirm } from "@/components/modal/DeleteConfirm";
 import { useState } from "react";
-import { Edit } from "lucide-react";
+import { Edit, Loader } from "lucide-react";
 
 interface ProvidresProps {}
 
@@ -224,8 +224,8 @@ export function ProviderCard({ provider }: ProviderCardProps) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <button className="btn btn-sm" onClick={() => mutation.mutate()}>
-          Update
+        <button className="btn btn-sm flex gap-2" onClick={() => mutation.mutate()}>
+          Update {mutation.isPending&&<Loader className="animate-spin"/>}
         </button>
         <DeleteConfirm
           handleDelete={() => {
