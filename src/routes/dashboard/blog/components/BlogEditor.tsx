@@ -54,30 +54,7 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
   });
 
   
-// useEffect(()=>{
-//   if(cherry.current){
-//   const options = cherry.current.options as CherryTypes["options"]
-//   cherry.current.options = options.
-//   fileUpload = (file, callback) => {
-//     console.log("aftre change");
-//     page_ctx.locals.pb
-//       ?.collection("scribble_posts")
-//       .update(blog_id, {
-//         // @ts-expect-error
-//         post_media: input.post_media ? [...input.post_media, file] : [file],
-//       })
-//       .then((res) => {
-//         console.log("res", res);
-//         if (res) {
-//           callback(res.post_media[0]);
-//         }
-//       })
-//       .catch((err) => console.log(err));
-//   };
- 
-//   }
-  
-// },[cherry.current])
+
 
 
   return (

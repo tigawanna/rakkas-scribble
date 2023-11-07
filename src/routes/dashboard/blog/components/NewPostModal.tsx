@@ -13,7 +13,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/shadcn/ui/alert-dialog";
-import { Loader } from "lucide-react";
+import { Loader, Plus } from "lucide-react";
 import { toast } from "react-toastify";
 
 interface NewPostModalProps {}
@@ -54,7 +54,11 @@ export function NewPostModal({}: NewPostModalProps) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className="btn btn-outline btn-sm"> New Post</button>
+        <button className="btn btn-outline btn-sm">
+          {" "}
+          New Post
+          <Plus />
+        </button>
       </AlertDialogTrigger>
       <AlertDialogContent className="sm:max-w-[425px]">
         <AlertDialogHeader>

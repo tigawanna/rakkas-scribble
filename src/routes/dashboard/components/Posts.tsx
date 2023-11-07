@@ -66,7 +66,7 @@ return (
         return <PostCard key={item.id} item={item} />;
       })}
     </div>
-    <div className="join gap2">
+    <div className="join gap-2">
       {pages_arr.map((item) => {
         return (
           <button

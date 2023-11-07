@@ -98,11 +98,14 @@ dependencies:
   typed-pocketbase:
     specifier: ^0.0.8
     version: 0.0.8(pocketbase@0.19.0)
+  zod:
+    specifier: ^3.22.4
+    version: 3.22.4
 
 devDependencies:
   '@rakkasjs/eslint-config':
-    specifier: 0.7.0-next.22
-    version: 0.7.0-next.22(eslint@8.52.0)(typescript@5.2.2)
+    specifier: 0.7.0-next.23
+    version: 0.7.0-next.23(eslint@8.52.0)(typescript@5.2.2)
   '@tanstack/react-query-devtools':
     specifier: ^5.4.2
     version: 5.4.3(@tanstack/react-query@5.4.3)(react-dom@18.2.0)(react@18.2.0)
@@ -131,8 +134,8 @@ devDependencies:
     specifier: 0.5.6
     version: 0.5.6(prettier@3.0.3)
   rakkasjs:
-    specifier: 0.7.0-next.22
-    version: 0.7.0-next.22(react-dom@18.2.0)(react@18.2.0)(vite@4.5.0)
+    specifier: 0.7.0-next.23
+    version: 0.7.0-next.23(react-dom@18.2.0)(react@18.2.0)(vite@4.5.0)
   tailwindcss:
     specifier: 3.3.5
     version: 3.3.5
@@ -1961,8 +1964,8 @@ packages:
       '@babel/runtime': 7.23.2
     dev: false
 
-  /@rakkasjs/eslint-config@0.7.0-next.22(eslint@8.52.0)(typescript@5.2.2):
-    resolution: {integrity: sha512-oWMUMKhJ3AViDKs6p7msrCE4HdUyWK1AFD3xYXfO2hXMzNNXYgQ6fw/bI7ADcSGLykiwNIqOsXBIwx9/1RkRsg==}
+  /@rakkasjs/eslint-config@0.7.0-next.23(eslint@8.52.0)(typescript@5.2.2):
+    resolution: {integrity: sha512-NHnCIJ8SMvCWxIetCZcvwkpUHpLM5HamNvIoP8RDZZkSVg/uuN9gDD4rB5pAfNPW6ymYx7UeYGGbn5muC7ozvw==}
     peerDependencies:
       eslint: ^8.7.0
       typescript: 4 || 5
@@ -5463,8 +5466,8 @@ packages:
   /queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  /rakkasjs@0.7.0-next.22(react-dom@18.2.0)(react@18.2.0)(vite@4.5.0):
-    resolution: {integrity: sha512-N6+n+hNx3ptYNsAHxmP9z+OG85zagFSx9Rdu3nVTNR4QM9H7RGRXudofO4ohD9n/Hwga63eBRJV+MGcUbMyO3Q==}
+  /rakkasjs@0.7.0-next.23(react-dom@18.2.0)(react@18.2.0)(vite@4.5.0):
+    resolution: {integrity: sha512-0W2F7r+DMbxBaDZ4CwndUpIAKmaj66lS6j5+IrVYecp7j6bl62+OuQuU02nbtUjXahVmBuQtuY5ZAWs6x+EMcA==}
     hasBin: true
     peerDependencies:
       react: '18'
@@ -6680,3 +6683,7 @@ packages:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
     dev: true
+
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: false

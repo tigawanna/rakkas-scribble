@@ -536,9 +536,18 @@ export type ScribbleApiKeys = {
         key: string;
         username: string;
     };
-    devto?: string;
-    medium?: string;
-    github?: string;
+    devto?:{
+        key: string;
+        username: string;
+    };
+    medium?: {
+        key: string;
+        username: string;
+    }
+    github?: {
+        key: string;
+        username: string;
+    }
 };
 
 
