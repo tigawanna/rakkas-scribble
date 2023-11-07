@@ -1,8 +1,7 @@
 import { AxiosError } from "axios";
 import { RequestContext } from "rakkasjs";
-import { DevToApiClient } from "../helpers/dev.to";
-import { DevToRepublishArticle } from "../helpers/dev.to/types";
 import { json } from "@hattip/response";
+import { DevToRepublishArticle, DevToApiClient } from "@/lib/publish/devto";
 
 export async function post(){
     

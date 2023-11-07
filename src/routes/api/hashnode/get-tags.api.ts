@@ -1,6 +1,6 @@
 import { RequestContext } from "rakkasjs";
-import { HashNodeApiClient } from "../helpers/hashnode";
 import { json } from "@hattip/response";
+import { HashNodeApiClient } from "@/lib/publish/hashnode";
 
 export async function POST(ctx: RequestContext) {
   const req = ctx.request;

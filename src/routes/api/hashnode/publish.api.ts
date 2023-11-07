@@ -1,8 +1,7 @@
 import { AxiosError } from "axios";
-import { HashNodeApiClient } from "../helpers/hashnode";
-import { HashNodeArticleInput } from "../helpers/hashnode/types";
 import { RequestContext } from "rakkasjs";
 import { json } from "@hattip/response";
+import { HashNodeArticleInput, HashNodeApiClient } from "@/lib/publish/hashnode";
 
 export async function POST(ctx: RequestContext) {
   const req = ctx.request;

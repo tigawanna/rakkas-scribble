@@ -1,8 +1,7 @@
 import { RequestContext } from "rakkasjs";
-import { DevToArticleInput } from "../helpers/dev.to/types";
-import { DevToApiClient } from "../helpers/dev.to";
 import { json } from "@hattip/response";
 import { AxiosError } from "axios";
+import { DevToArticleInput, DevToApiClient } from "@/lib/publish/devto";
 
 export async function POST(ctx:RequestContext) {
     const req = ctx.request

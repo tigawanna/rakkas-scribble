@@ -1,6 +1,6 @@
 import { BlogUser, PublishBlogResponse } from "@/types";
 import Axios, { AxiosInstance } from "axios";
-import { MediumUser } from "./types";
+
 
 export class MediumApiClient {
   private _apiKey: string;
@@ -27,4 +27,13 @@ export class MediumApiClient {
     } = await this.axios.get<MediumUser>("/me");
     return { id, name, username, avatarUrl: imageUrl };
   }
+}
+
+
+export interface MediumUser {
+  id: string;
+  username: string;
+  name: string;
+  url: string;
+  imageUrl: string;
 }

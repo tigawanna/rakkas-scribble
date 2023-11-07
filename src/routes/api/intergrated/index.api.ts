@@ -2,10 +2,10 @@ import { BlogProviders, BlogUser } from "@/types";
 import { json } from "@hattip/response";
 import { AxiosError } from "axios";
 import { RequestContext } from "rakkasjs";
-import { DevToApiClient } from "../helpers/dev.to";
-import { HashNodeApiClient } from "../helpers/hashnode";
-import { MediumApiClient } from "../helpers/medium";
 import { ScribbleUserResponse } from "@/lib/pb/db-types";
+import { DevToApiClient } from "@/lib/publish/devto";
+import { HashNodeApiClient } from "@/lib/publish/hashnode";
+import { MediumApiClient } from "@/lib/publish/meduim";
 
 export async function POST(ctx: RequestContext) {
   const req = ctx.request;
@@ -13,10 +13,10 @@ export async function POST(ctx: RequestContext) {
     const user = await ctx.locals.pb
       ?.collection("scribble_user")
       .authRefresh<ScribbleUserResponse>();
-    const devToAPIKey = user.record.keys?.devto;
+    const devToAPIKey = user.record.keys?.devto?.key;
     const hashNodeAPIKey = user.record.keys?.hashnode?.key;
     const hashNodeUsername = user.record.keys?.hashnode?.username;
-    const mediumAPIKey = user.record.keys?.medium;
+    const mediumAPIKey = user.record.keys?.medium?.key;
     // const { devToAPIKey, hashNodeAPIKey, hashNodeUsername, mediumAPIKey } = user.record.keys
 
     let devToAccount;
