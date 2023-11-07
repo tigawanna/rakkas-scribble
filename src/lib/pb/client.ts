@@ -49,8 +49,9 @@ export async function triggerOuathLogin(options: OAuth2AuthConfig) {
 
 export async function oneClickOauthLogin(provider: "github" | "google") {
   try {
-    const authData = await pb.collection('scribble_user').authWithOAuth2({ provider});
-    // console.log("============== AUTH DATA ============== ",authData)
+    // const authData = await pb.collection('scribble_user').authWithOAuth2({ provider});
+    const authData = await pb.collection('scribble_user').authWithOAuth2({ provider: 'github' });
+  
     const dev = authData.record;
     const data: ScribbleUserUpdate = authData?.meta?.isNew?{
       github_access_token: authData.meta?.accessToken,
@@ -64,6 +65,7 @@ export async function oneClickOauthLogin(provider: "github" | "google") {
     const updated_user =await pb.collection("scribble_user").update(dev.id, data)
     document.cookie = pb.authStore.exportToCookie({ httpOnly: false });
     return updated_user
+  
 
   } catch (error) {
     throw error

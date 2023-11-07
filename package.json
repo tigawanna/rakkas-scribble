@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "rakkas",
+    "pb":"node pb/pocketbase serve",
     "build": "rakkas build",
     "start": "node dist/server",
     "format": "prettier --write --ignore-unknown src",

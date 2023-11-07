@@ -2,6 +2,7 @@ import { useUser } from "@/lib/rakkas/hooks/useUser";
 import { Link, PageProps } from "rakkasjs";
 import { NewPostModal } from "./blog/components/NewPostModal";
 import { Posts } from "./components/Posts";
+import { Settings } from "lucide-react";
 export default function DashboardPage({}: PageProps) {
   const { user } = useUser();
   return (
@@ -15,7 +16,9 @@ export default function DashboardPage({}: PageProps) {
               {user?.username}
             </h3>
           </div>
-     
+           <div className="flex justify-between p-5">
+        <Link href="/dashboard/settings"><Settings className=""/></Link>
+           </div>
         </div>
       </div>
         <div className="w-full h-full min-h-screen flex flex-col gap-2">

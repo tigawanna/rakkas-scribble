@@ -32,11 +32,11 @@ export function useUser() {
 
     const mutation = useMutation(async()=>{return await clearAuthStore()},{
         onSuccess: () => {
-            qc.invalidateQueries("user")
+            qc.invalidateQueries("scribble_user")
             window?.location && window?.location.reload();
         }
     })
     
-    const user = qc.getQueryData("user") as ScribbleUserResponse
+    const user = page_ctx.locals?.pb.authStore.model as ScribbleUserResponse
     return { user, user_mutation: mutation, page_ctx,loggout:mutation.mutate }
 }
