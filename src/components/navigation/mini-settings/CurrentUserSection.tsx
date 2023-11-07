@@ -15,7 +15,7 @@ export function CurrentUserSection({setOpen}:CurrentUserSectionProps){
  const { user,user_mutation } = useUser();
 
 async function logoutUser() {
-    await artificialDelay(3000);
+    // await artificialDelay(3000);
     user_mutation.mutateAsync()
 }
 
