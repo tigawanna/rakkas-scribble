@@ -57,7 +57,7 @@ export type ScribblePostsResponse = {
     contentMarkdown?: string;
     user_id?: string;
     status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED' | 'REPUBLISHED';
-    tags?: any;
+    tags?:string;
     publishingDetails?: any;
     devToArticleCoverImagePath?: string;
     devToArticleId?: string;
@@ -81,7 +81,7 @@ export type ScribblePostsCreate = {
     contentMarkdown?: string;
     user_id?: string;
     status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED' | 'REPUBLISHED';
-    tags?: any;
+    tags?:string;
     publishingDetails?: any;
     devToArticleCoverImagePath?: string | URL;
     devToArticleId?: string;
@@ -105,7 +105,7 @@ export type ScribblePostsUpdate = {
     contentMarkdown?: string;
     user_id?: string;
     status?: 'DRAFT' | 'SCHEDULED' | 'PUBLISHED' | 'REPUBLISHED';
-    tags?: any;
+    tags?:string;
     publishingDetails?: any;
     devToArticleCoverImagePath?: string | URL;
     devToArticleId?: string;
