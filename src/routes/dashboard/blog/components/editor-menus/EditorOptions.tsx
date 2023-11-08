@@ -8,11 +8,16 @@ import { UseMutationResult } from "@tanstack/react-query";
 import { ScribblePostsResponse, ScribblePostsUpdate } from "@/lib/pb/db-types";
 import { Loader, PencilRuler, Save } from "lucide-react";
 import { PublishBlog } from "./PublishBlog";
+import Cherry from "cherry-markdown";
+import { PublishModal } from "./PublishModal";
 
 interface EditOptionsProps {
-  cherry: any;
+  cherry: Cherry|null;
   blog_id: string;
   input: Partial<ScribblePostsResponse>;
+  setInput: React.Dispatch<
+    React.SetStateAction<Partial<ScribblePostsResponse>>
+  >;
   update_post_mutation: UseMutationResult<
     any,
     Error,
@@ -25,6 +30,7 @@ export function EditorOptions({
   blog_id,
   cherry,
   input,
+  setInput,
   update_post_mutation,
 }: EditOptionsProps) {
   return (
@@ -37,7 +43,18 @@ export function EditorOptions({
       gap-5 py-2 md:px-3 items-center justify-center rounded-lg"
       >
         <BlogImagesmodal input={input} />
-        <PublishBlog input={input} />
+        <button
+          className="btn btn-sm"
+          onClick={() =>{
+            // @ts-expect-error
+            document && document?.getElementById("publish_modal")?.showModal();
+          }
+          }
+        >
+          Publish
+        </button>
+        <PublishBlog cherry={cherry} input={input} setInput={setInput} />
+        <PublishModal cherry={cherry} input={input} setInput={setInput} />
         <button
           className="md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
           data-tip={"save content"}
@@ -46,7 +63,7 @@ export function EditorOptions({
               id: blog_id,
               data: {
                 ...input,
-                content: cherry.current?.getMarkdown(),
+                content: cherry?.getMarkdown(),
               },
             });
           }}

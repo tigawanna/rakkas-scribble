@@ -78,10 +78,13 @@ export async function oneClickOauthLogin(provider: "github" | "google") {
 type CollectionName  = keyof Schema
 
 export function getFileURL({collection_id_or_name,file_name,record_id}:{
-  collection_id_or_name: CollectionName,
-  record_id: string,
-  file_name: string
+  collection_id_or_name?: CollectionName,
+  record_id?: string,
+  file_name?: string
 }){
+  if(!collection_id_or_name || !file_name || !record_id){
+    return ""
+  }
   // http://127.0.0.1:8090/api/files/COLLECTION_ID_OR_NAME/RECORD_ID/FILENAME?thumb=100x300
   return `${pb_url}/api/files/${collection_id_or_name}/${record_id}/${file_name}`;
 }

@@ -86,8 +86,9 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
             <EditorOptions  
             blog_id={blog_id}
             update_post_mutation={update_post_mutation}
-            cherry={cherry}
+            cherry={cherry.current}
             input={input}
+            setInput={setInput}
             />
 
           </div>
