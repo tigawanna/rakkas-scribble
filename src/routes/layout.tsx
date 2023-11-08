@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "@/components/editor/styles/cherry-markdown.css"
 import "./index.css";
 import React from "react";
+import { Toolbar } from "@/components/navigation/Toolbar";
 
 
 function Layout({ children }: LayoutProps) {
@@ -18,7 +19,7 @@ function Layout({ children }: LayoutProps) {
       <ClientSuspense fallback={<div></div>}>
         <Nprogress isAnimating={location && location?.pending ? true : false} />
       </ClientSuspense>
-      {/* <Toolbar /> */}
+      <Toolbar />
       {children}
       <ToastContainer
         position="bottom-right"
