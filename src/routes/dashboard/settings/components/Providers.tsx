@@ -1,10 +1,7 @@
-import { ScribbleApiKeys } from "@/lib/pb/db-types";
 import { useUser } from "@/lib/rakkas/hooks/useUser";
-import { Button } from "@/components/shadcn/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,

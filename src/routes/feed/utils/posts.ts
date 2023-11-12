@@ -32,8 +32,18 @@ export async function getOneDevToPost({ctx,id}:GetOneDevToPostsParameters){
     if (!user.keys?.devto?.key){
         throw new Error("No devto api key");
     }
-    const devTo = new DevToApiClient(user.keys?.devto?.key);
-    return devTo.one(parseInt(id))
+
+    // const devTo = new DevToApiClient(user.keys?.devto?.key);
+    // return devTo.one(parseInt(id))
+        const response = await ctx.fetch(`https://dev.to/api/articles/${id}`,{
+            headers:{
+              
+                "api-key": user.keys?.devto?.key,
+                accept: "application/vnd.forem.api-v1+json",
+            }
+        }).then(res=>res.json())
+        console.log(" one devtoo post response ============= ",response)
+        return response
     }catch(error){
         throw error
     }

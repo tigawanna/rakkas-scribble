@@ -8,13 +8,7 @@ export function useUser() {
     const qc = useQueryClient()
     const locals = page_ctx.locals
     
-//     async function logoutUser()[
-// return new Promise((resolve,reject)=>{
-//     locals.pb?.authStore.clear();
-//     document.cookie = locals.pb?.authStore.exportToCookie({ httpOnly: false });
-//     resolve(null)
-// }
-//     ]
+
 
     const clearAuthStore = (): Promise<void> => {
         return new Promise((resolve, reject) => {
