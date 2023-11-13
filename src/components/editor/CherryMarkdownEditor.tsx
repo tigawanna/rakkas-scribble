@@ -10,13 +10,13 @@ import { extraOptions } from "@/routes/dashboard/blog/components/editor-menus/To
 
 interface CherryMarkdownEditorProps {
   input_string: string;
-  post: ScribblePostsResponse;
+  input: Partial<ScribblePostsResponse>;
   cherry_instance?: React.MutableRefObject<Cherry | null>;
   custom_element?: (cherry: Cherry | null) => JSX.Element;
 }
 
 export default function CherryMarkdownEditor({
-  post,
+  input,
   input_string,
   cherry_instance,
   custom_element,
@@ -86,21 +86,21 @@ export default function CherryMarkdownEditor({
       console.log("aftre change");
       page_ctx.locals.pb
         ?.collection("scribble_posts")
-        .update(post.id, {
+        .update(input.id!, {
           // @ts-expect-error
-          post_media: post.post_media ? [...post.post_media, file] : [file],
+          input_media: input.input_media ? [...input.input_media, file] : [file],
         })
         .then((res) => {
           console.log("res url === ", res.post_media);
           if (res.post_media) {
             const latest_file = res.post_media[res.post_media.length - 1];
-            const post_media_url = getFileURL({
+            const input_media_url = getFileURL({
               collection_id_or_name: "scribble_posts",
               file_name: latest_file,
-              record_id: post.id,
+              record_id: input.id,
             });
-            // console.log({post_media_url})
-            callback(post_media_url, {
+            // console.log({input_media_url})
+            callback(input_media_url, {
               name: latest_file,
             });
           }

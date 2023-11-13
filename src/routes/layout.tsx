@@ -14,6 +14,7 @@ import "@/components/editor/styles/cherry-markdown.css";
 import "./index.css";
 import React from "react";
 import { Toolbar } from "@/components/navigation/Toolbar";
+import "@toast-ui/editor/dist/toastui-editor.css";
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
