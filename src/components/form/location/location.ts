@@ -8,7 +8,7 @@ export function getLocalCoordinates() {
     },
     (error) => {
       location = error;
-    }
+    },
   );
   // @ts-expect-error
   return location;
@@ -31,11 +31,11 @@ export function getCountries() {
       .then((data: Country[]) =>
         data.filter((item) => {
           return item;
-        })
+        }),
       )
       .catch((err) => {
         // console.log("error getting countries ", err.message);
         throw err;
-      })
+      }),
   );
 }

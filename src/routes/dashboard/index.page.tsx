@@ -12,17 +12,17 @@ export default function DashboardPage({}: PageProps) {
         <div className="w-full flex justify-between p-5">
           <div className="text-4xl font-bold flex items-center gap-3 justify-center">
             Welcome
-            <h3 className="text-4xl font-bold text-accent">
-              {user?.username}
-            </h3>
+            <h3 className="text-4xl font-bold text-accent">{user?.username}</h3>
           </div>
-           <div className="flex justify-between p-5">
-        <Link href="/dashboard/settings"><Settings className=""/></Link>
-           </div>
+          <div className="flex justify-between p-5">
+            <Link href="/dashboard/settings">
+              <Settings className="" />
+            </Link>
+          </div>
         </div>
       </div>
-        <div className="w-full h-full min-h-screen flex flex-col gap-2">
-          <Posts/>
+      <div className="w-full h-full min-h-screen flex flex-col gap-2">
+        <Posts />
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
-interface DialogModalProps {
+interface DialogModalProps {}
 
-}
-
-export function DialogModal({}:DialogModalProps){
-return (
+export function DialogModal({}: DialogModalProps) {
+  return (
     <dialog id="consent_modal" className="modal">
       <div className="modal-box">
         <h3 className="text-lg font-bold">Hello!</h3>
@@ -13,5 +11,5 @@ return (
         <button>close</button>
       </form>
     </dialog>
-);
+  );
 }

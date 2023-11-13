@@ -26,40 +26,40 @@ export function TheTextInput<T>({
   const [error_message, setError] = useState(
     props.error_message && props.error_message.length > 0
       ? props.error_message
-      : undefined
+      : undefined,
   );
   useEffect(() => {
-    if(props.error_message){
-      setError((prev)=>{
-      if(prev !== props.error_message){
-        return props.error_message
+    if (props.error_message) {
+      setError((prev) => {
+        if (prev !== props.error_message) {
+          return props.error_message;
         }
-      return prev
-      })
+        return prev;
+      });
     }
-  },[props.error_message])
+  }, [props.error_message]);
   // console.log("the text input error message ",error_message)
   // console.log("the text input props error message", props.error_message);
   const default_input_tw = error_message
     ? " input  input-sm w-full border-error border-2"
     : "input  input-sm w-full border-accent";
 
-    function handlePossiblyDateOrUrl(item:typeof props.val){
-      if(item instanceof Date){
-        return item.toISOString()
-      }
-      if(item instanceof URL){
-        return item.href
-      }
-      return item
+  function handlePossiblyDateOrUrl(item: typeof props.val) {
+    if (item instanceof Date) {
+      return item.toISOString();
     }
-    const value = handlePossiblyDateOrUrl(props.val);
+    if (item instanceof URL) {
+      return item.href;
+    }
+    return item;
+  }
+  const value = handlePossiblyDateOrUrl(props.val);
   return (
     <div
       key={field_key as string}
       className={twMerge(
         "flex w-full flex-col justify-center gap-1",
-        props.container_classname
+        props.container_classname,
       )}
     >
       <Label
@@ -85,7 +85,7 @@ export function TheTextInput<T>({
             <p
               className={twMerge(
                 "text-xs italic text-info",
-                props.description_classname
+                props.description_classname,
               )}
             >
               {props.description}
@@ -96,7 +96,7 @@ export function TheTextInput<T>({
         <div
           className={twMerge(
             "w-full border-b px-0.5 py-1 text-sm",
-            props.output_classname
+            props.output_classname,
           )}
         >
           {value}

@@ -9,26 +9,26 @@ export function useMultiStepForm(steps: UseMultiStepForm[]) {
 
   function next() {
     startTransition(() => {
-    setCurrentStepIndex((i) => {
-      if (i >= steps.length - 1) return i;
-      return i + 1;
+      setCurrentStepIndex((i) => {
+        if (i >= steps.length - 1) return i;
+        return i + 1;
+      });
     });
-    })
   }
 
   function back() {
     startTransition(() => {
-    setCurrentStepIndex((i) => {
-      if (i <= 0) return i;
-      return i - 1;
+      setCurrentStepIndex((i) => {
+        if (i <= 0) return i;
+        return i - 1;
+      });
     });
-    })
   }
 
   function goTo(index: number) {
     startTransition(() => {
-    setCurrentStepIndex(index);
-  })
+      setCurrentStepIndex(index);
+    });
   }
 
   return {

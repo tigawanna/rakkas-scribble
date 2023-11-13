@@ -31,7 +31,7 @@ export function Providers({}: ProvidresProps) {
       description:
         "Dev.to is a place where coders share, stay up-to-date and grow their careers.",
       apiKeyName: "devToAPIKey",
-      icon:Icons.devto
+      icon: Icons.devto,
     },
     {
       name: "hashnode",
@@ -41,7 +41,7 @@ export function Providers({}: ProvidresProps) {
       secondaryLinkUrl: "https://hashnode.com/settings",
       description: "Everything you need to start blogging as a developer!",
       apiKeyName: "hashNodeAPIKey",
-      icon:Icons.hashnode
+      icon: Icons.hashnode,
     },
     {
       name: "medium",
@@ -50,7 +50,7 @@ export function Providers({}: ProvidresProps) {
       linkUrl: "https://medium.com/me/settings",
       description: "Medium is a place to write, read, and connect.",
       apiKeyName: "mediumAPIKey",
-      icon:Icons.medium
+      icon: Icons.medium,
     },
   ];
   return (
@@ -58,7 +58,7 @@ export function Providers({}: ProvidresProps) {
       <h3 className="text-3xl font-bold">Publishing Platforms </h3>
       <div className="w-full h-full gap-5 p-5 flex flex-col md:flex-row items-center justify-center">
         {user_providers.map((item) => {
-          return <ProviderCard provider={item} />
+          return <ProviderCard provider={item} />;
         })}
       </div>
     </div>
@@ -90,8 +90,10 @@ interface ProviderCardProps {
 
 export function ProviderCard({ provider }: ProviderCardProps) {
   const { page_ctx, user } = useUser();
-    const qc = useQueryClient();
-  const [editing, setEditing] = useState((!provider?.key||(provider?.key && provider.key.length<2))?true:false);
+  const qc = useQueryClient();
+  const [editing, setEditing] = useState(
+    !provider?.key || (provider?.key && provider.key.length < 2) ? true : false,
+  );
   const { input, setError, setInput, handleChange } = useFormHook({
     initialValues: {
       key: provider.key,
@@ -112,7 +114,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
     onSuccess(data) {
       if (data.data) {
         qc.invalidateQueries({ queryKey: ["scribble_user"] });
-                  setEditing(false);
+        setEditing(false);
         toast("token updated successfully", { type: "success" });
       }
       if (data.error) {
@@ -136,8 +138,8 @@ export function ProviderCard({ provider }: ProviderCardProps) {
     },
     onSuccess(data) {
       if (data.data) {
-          qc.invalidateQueries({ queryKey: ["scribble_user"] });
-          setEditing(false);
+        qc.invalidateQueries({ queryKey: ["scribble_user"] });
+        setEditing(false);
         toast("token deleted successfully", {
           type: "success",
           autoClose: false,
@@ -195,7 +197,7 @@ export function ProviderCard({ provider }: ProviderCardProps) {
             {"secondaryLinkUrl" in provider && (
               <div className="flex w-full flex-col gap-1">
                 <PbTheTextInput
-                  placeholder={"your "+provider.name+" username"}
+                  placeholder={"your " + provider.name + " username"}
                   label_classname="text-sm text-accent first-letter:uppercase"
                   field_key={"username"}
                   editing={editing}
@@ -221,8 +223,11 @@ export function ProviderCard({ provider }: ProviderCardProps) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <button className="btn btn-sm flex gap-2" onClick={() => mutation.mutate()}>
-          Update {mutation.isPending&&<Loader className="animate-spin"/>}
+        <button
+          className="btn btn-sm flex gap-2"
+          onClick={() => mutation.mutate()}
+        >
+          Update {mutation.isPending && <Loader className="animate-spin" />}
         </button>
         <DeleteConfirm
           handleDelete={() => {

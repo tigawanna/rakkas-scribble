@@ -5,8 +5,8 @@ import { usePageContext } from "rakkasjs";
 import { toast } from "react-toastify";
 
 interface UseUpdateBlogMutationProps {
-// onSuccess: (data: any, variables: any, context: any) => void;
-// onError: (error: any, variables: any, context: any) => void;
+  // onSuccess: (data: any, variables: any, context: any) => void;
+  // onError: (error: any, variables: any, context: any) => void;
 }
 export function useUpdateBlogMutation() {
   const page_ctx = usePageContext();
@@ -37,5 +37,5 @@ export function useUpdateBlogMutation() {
       toast(error.message, { type: "error", autoClose: false });
     },
   });
-  return { update_post_mutation, page_ctx,qc };
+  return { update_post_mutation, page_ctx, qc };
 }

@@ -6,11 +6,11 @@ import { CherryTypes } from "./utils/types";
 import { usePageContext } from "rakkasjs";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { getFileURL } from "@/lib/pb/client";
-import {  extraOptions } from "@/routes/dashboard/blog/components/editor-menus/Toobarmenus";
+import { extraOptions } from "@/routes/dashboard/blog/components/editor-menus/Toobarmenus";
 
 interface CherryMarkdownEditorProps {
   input_string: string;
-  post:ScribblePostsResponse;
+  post: ScribblePostsResponse;
   cherry_instance?: React.MutableRefObject<Cherry | null>;
   custom_element?: (cherry: Cherry | null) => JSX.Element;
 }
@@ -21,7 +21,7 @@ export default function CherryMarkdownEditor({
   cherry_instance,
   custom_element,
 }: CherryMarkdownEditorProps) {
-  const page_ctx= usePageContext()
+  const page_ctx = usePageContext();
   const cherry = cherry_instance ?? useRef<Cherry | null>(null);
   const { width } = useWindowSize();
   const theme = [
@@ -34,7 +34,6 @@ export default function CherryMarkdownEditor({
     { className: "blue", label: "blue" },
   ];
 
-  
   const config: Partial<CherryTypes["options"]> = {
     id: "cherry-markdown",
     value: "",
@@ -45,7 +44,6 @@ export default function CherryMarkdownEditor({
       theme: "dark",
       customMenu: {
         extra: extraOptions,
-
       },
 
       toolbar: [
@@ -57,7 +55,7 @@ export default function CherryMarkdownEditor({
         "header",
         "|",
         "list",
-       
+
         {
           insert: [
             "image",
@@ -80,7 +78,7 @@ export default function CherryMarkdownEditor({
         "settings",
       ],
 
-      sidebar: ["mobilePreview", "copy", "theme","extra"],
+      sidebar: ["mobilePreview", "copy", "theme", "extra"],
       toolbarRight: ["fullScreen", "export"],
     },
 

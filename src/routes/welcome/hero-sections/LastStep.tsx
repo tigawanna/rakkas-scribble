@@ -1,5 +1,5 @@
-import { Link } from 'rakkasjs';
-import { Footer } from './Footer';
+import { Link } from "rakkasjs";
+import { Footer } from "./Footer";
 
 interface LastStepProps {}
 

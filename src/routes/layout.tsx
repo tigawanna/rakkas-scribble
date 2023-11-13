@@ -1,18 +1,23 @@
 import { Nprogress } from "@/components/navigation/nprogress/Nprogress";
-import { ClientSuspense, Head, LayoutProps, PageContext, useLocation, usePageContext } from "rakkasjs";
+import {
+  ClientSuspense,
+  Head,
+  LayoutProps,
+  PageContext,
+  useLocation,
+  usePageContext,
+} from "rakkasjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import "cherry-markdown/dist/cherry-markdown.css";
-import "@/components/editor/styles/cherry-markdown.css"
-
+import "@/components/editor/styles/cherry-markdown.css";
 import "./index.css";
 import React from "react";
 import { Toolbar } from "@/components/navigation/Toolbar";
 
-
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
-  const page_ctx = usePageContext()
+  const page_ctx = usePageContext();
   // console.log(" page ctx ==== ",page_ctx.locals.pb)
   return (
     <div className="w-full min-h-screen h-full flex flex-col items-center ">
@@ -44,7 +49,7 @@ Layout.preload = (ctx: PageContext) => {
       title: "Scribble",
       keywords:
         "rich text editor, markdown, cherry, markdown based rich text editor,AI editor",
-      description:"cherry markdown based rich text editor "
+      description: "cherry markdown based rich text editor ",
     },
   };
 };

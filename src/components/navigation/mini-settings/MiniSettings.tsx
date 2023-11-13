@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -10,16 +10,15 @@ import {
   DropdownMenuContent,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/shadcn/ui/dropdown-menu';
-import { CurrentUserSection } from './CurrentUserSection';
-import { ThemeToggle } from './ThemeToggle';
-import { useUser } from '@/lib/rakkas/hooks/useUser';
-
+} from "@/components/shadcn/ui/dropdown-menu";
+import { CurrentUserSection } from "./CurrentUserSection";
+import { ThemeToggle } from "./ThemeToggle";
+import { useUser } from "@/lib/rakkas/hooks/useUser";
 
 interface MiniSettingsModalProps {}
 
 export function MiniSettingsModal({}: MiniSettingsModalProps) {
-const {user} = useUser()
+  const { user } = useUser();
 
   const [open, setOpen] = useState(false);
   return (

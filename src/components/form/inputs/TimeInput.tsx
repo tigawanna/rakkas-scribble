@@ -23,14 +23,14 @@ export function TheTimeInput<T>({
       key={field_key as string}
       className={twMerge(
         "flex w-full flex-col justify-center",
-        props.container_classname
+        props.container_classname,
       )}
     >
       <label
         htmlFor={field_key as string}
         className={twMerge(
           "text px-2 font-serif font-bold",
-          props.label_classname
+          props.label_classname,
         )}
       >
         {field_name as string}
@@ -45,14 +45,14 @@ export function TheTimeInput<T>({
             title={props.placeholder}
             className={twMerge(
               "input input-bordered input-sm w-full border-accent",
-              props.className
+              props.className,
             )}
           />
           {props.description && editing && (
             <p
               className={twMerge(
                 "text-xs italic text-info",
-                props.description_classname
+                props.description_classname,
               )}
             >
               {props.description}
@@ -63,7 +63,7 @@ export function TheTimeInput<T>({
         <div
           className={twMerge(
             "w-full border-b px-2 py-1 text-sm",
-            props.output_classname
+            props.output_classname,
           )}
         >
           {props.value}

@@ -10,7 +10,7 @@ export async function fetchLangauges() {
       .then((data: GithubLanguages[]) =>
         data.map((item) => {
           return { ...item, value: item.name, label: item.name };
-        })
+        }),
       );
     // console.log(languages);
     return languages;

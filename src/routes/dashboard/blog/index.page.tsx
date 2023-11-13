@@ -1,9 +1,8 @@
-
-import { PageProps, useSSM } from "rakkasjs"
+import { PageProps, useSSM } from "rakkasjs";
 import React from "react";
 import { useState } from "react";
-export default function BlogsPage({}:PageProps) {
-const [input, setInput] = useState(`
+export default function BlogsPage({}: PageProps) {
+  const [input, setInput] = useState(`
 Job Title: Web Developer
 
 Responsibilities:
@@ -22,18 +21,17 @@ Proficiency in building responsive and mobile-friendly web applications.
 Strong understanding of web development best practices and accessibility standards.
 Excellent problem-solving and communication skills.
 Ability to work independently or as part of a team.`);
-const mutatuion = useSSM((ctx) => {
-  return {
-    head: {
-      title: "Scribbla",
-      keywords:
-        "rich text editor, markdown, cherry, markdown based rich text editor,AI editor",
-      description: "cherry markdown based rich text editor ",
-    },
-  };
-});
-return (
-  <div className="w-full h-full min-h-screen flex items-center justify-center">
-    
-  </div>
-);}
+  const mutatuion = useSSM((ctx) => {
+    return {
+      head: {
+        title: "Scribbla",
+        keywords:
+          "rich text editor, markdown, cherry, markdown based rich text editor,AI editor",
+        description: "cherry markdown based rich text editor ",
+      },
+    };
+  });
+  return (
+    <div className="w-full h-full min-h-screen flex items-center justify-center"></div>
+  );
+}

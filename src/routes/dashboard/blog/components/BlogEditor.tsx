@@ -9,21 +9,18 @@ import { BlogEditorControls } from "./editor-menus/BlogEditorControls";
 import { useUpdateBlogMutation } from "./useBlogMutation";
 import { EditorOptions } from "./editor-menus/EditorOptions";
 
-
 const CherryMarkdownEditor = lazy(
   () => import("@/components/editor/CherryMarkdownEditor"),
 );
 
 interface EditBlogProps {
   blog_id: string;
-
-
 }
 
-type BlogFormInput = Omit<ScribblePostsResponse,"created" | "updated">;
+type BlogFormInput = Omit<ScribblePostsResponse, "created" | "updated">;
 export function BlogEditor({ blog_id }: EditBlogProps) {
-const cherry =useRef<Cherry | null>(null);
-const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
+  const cherry = useRef<Cherry | null>(null);
+  const { update_post_mutation, page_ctx } = useUpdateBlogMutation();
   const query = useQuery("blog" + blog_id, () => {
     return tryCatchWrapper(
       page_ctx.locals.pb?.collection("scribble_posts").getOne(blog_id),
@@ -53,10 +50,6 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
     },
   });
 
-  
-
-
-
   return (
     <div className="w-full h-full flex flex-col items-center justify-center ">
       <ClientSuspense fallback={<Spinner size="100px" />}>
@@ -83,14 +76,13 @@ const { update_post_mutation,page_ctx } = useUpdateBlogMutation();
             />
           </div>
           <div className="flex flex-col  gap-1  absolute bottom-[20%] right-[7%] z-50">
-            <EditorOptions  
-            blog_id={blog_id}
-            update_post_mutation={update_post_mutation}
-            cherry={cherry.current}
-            input={input}
-            setInput={setInput}
+            <EditorOptions
+              blog_id={blog_id}
+              update_post_mutation={update_post_mutation}
+              cherry={cherry.current}
+              input={input}
+              setInput={setInput}
             />
-
           </div>
         </div>
       </ClientSuspense>

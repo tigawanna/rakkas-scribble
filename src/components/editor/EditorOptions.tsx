@@ -1,25 +1,39 @@
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/shadcn/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/shadcn/ui/popover";
 import { changeTheme } from "./config";
 import Cherry from "cherry-markdown";
 import { copytoClipBoard } from "@/utils/helpers/copy-to-clipboard";
-import { Printer, Copy, SplitSquareHorizontal, FileEdit, GalleryThumbnails, Option, MoreVertical } from "lucide-react";
+import {
+  Printer,
+  Copy,
+  SplitSquareHorizontal,
+  FileEdit,
+  GalleryThumbnails,
+  Option,
+  MoreVertical,
+} from "lucide-react";
 
 interface EditorOptionsPopOverProps {
   cherry: Cherry;
   custom_element: ((cherry: Cherry | null) => JSX.Element) | undefined;
 }
 
-export function EditorOptionsPopOver({cherry, custom_element}: EditorOptionsPopOverProps) {
-
-    const theme = [
-      { className: "default", label: "Default" },
-      { className: "dark", label: "dark" },
-      { className: "light", label: "light" },
-      { className: "green", label: "green" },
-      { className: "red", label: "red" },
-      { className: "violet", label: "violet" },
-      { className: "blue", label: "blue" },
-    ];
+export function EditorOptionsPopOver({
+  cherry,
+  custom_element,
+}: EditorOptionsPopOverProps) {
+  const theme = [
+    { className: "default", label: "Default" },
+    { className: "dark", label: "dark" },
+    { className: "light", label: "light" },
+    { className: "green", label: "green" },
+    { className: "red", label: "red" },
+    { className: "violet", label: "violet" },
+    { className: "blue", label: "blue" },
+  ];
 
   return (
     <Popover>
@@ -27,8 +41,6 @@ export function EditorOptionsPopOver({cherry, custom_element}: EditorOptionsPopO
         <button className="bg-base-100 rounded-lg">
           <MoreVertical />
         </button>
-
-
       </PopoverTrigger>
       <PopoverContent className="w-80">
         <div className="w-ful h-full bg-base-200">
@@ -53,9 +65,9 @@ export function EditorOptionsPopOver({cherry, custom_element}: EditorOptionsPopO
               })}
             </div>
             <div className="w-full flex flex-wrap gap-3 items-center">
-               <div className="flex flex-wrap gap-3 items-center">
+              <div className="flex flex-wrap gap-3 items-center">
                 {custom_element && custom_element(cherry)}
-                </div>
+              </div>
               <button
                 className="md:tooltip hover:md:tooltip-open md:tooltip-top text-xs font-normal rounded-full hover:text-accent "
                 about={"print content"}

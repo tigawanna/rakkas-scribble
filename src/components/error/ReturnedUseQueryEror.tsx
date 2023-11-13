@@ -1,9 +1,12 @@
 interface ReturnedUseQueryErorProps {
-  data: any 
+  data: any;
   error: Error;
 }
 
-export function ReturnedUseQueryEror({ error, data }: ReturnedUseQueryErorProps) {
+export function ReturnedUseQueryEror({
+  error,
+  data,
+}: ReturnedUseQueryErorProps) {
   return (
     <div className="flex h-full  w-full items-center justify-center p-2">
       {error && (

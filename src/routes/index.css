@@ -2,15 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-
-
-
 @layer base {
   :root {
-
-
     --popover: theme(colors.base-200);
     --popover-foreground: theme(colors.base-content);
 
@@ -73,6 +66,8 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }

@@ -89,9 +89,10 @@ hue-6-2: #e6c07b
 .hljs-link {
   text-decoration: underline
 }
-`
+`;
 
-export const gfmStyles = `
+export const gfmStyles =
+  `
 
 
 
@@ -114,7 +115,8 @@ hr {
 
 .hljs-operator {
     color: #868686;
-    /* There is a bug where the syntax highlighter would pick no color for e.g. `&& ` symbols in the code samples. Let's overwrite this */
+    /* There is a bug where the syntax highlighter would pick no color for e.g. ` &&
+  ` symbols in the code samples. Let's overwrite this */
 }
 
 
@@ -284,4 +286,4 @@ h3 {
 code>* {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }
-`
+`;

@@ -1,4 +1,3 @@
-
 import { ApiRouteResponse } from "@/lib/rakkas/utils/types";
 import { ClientResponseError } from "pocketbase";
 import { PageContext } from "rakkasjs";
@@ -18,9 +17,6 @@ export function isLinkCurrentPathname(path: string, url: URL | string) {
   return false;
 }
 
-
-
-
 /**
  * Fetches data from the API using the specified URL and parameters.
  *
@@ -35,39 +31,44 @@ export function isLinkCurrentPathname(path: string, url: URL | string) {
  * The `pathname` is the API URL pathname. In Rakks, they must all start with "/api".
  * The `params` is the parameters to be sent with the API request.
  */
-export async function useQueryFetcher(ctx:PageContext,pathname:string,params:Record<string,any>)
-{
+export async function useQueryFetcher(
+  ctx: PageContext,
+  pathname: string,
+  params: Record<string, any>,
+) {
   try {
-  const api_url = new URL(ctx.url.origin)
+    const api_url = new URL(ctx.url.origin);
     api_url.pathname = pathname;
     Object.entries(params).forEach(([key, value]) => {
       api_url.searchParams.set(key, value);
     });
-    return fetch(api_url.toString(), {
-    }).then((res) => res.json());
-  } catch (error:any) {
+    return fetch(api_url.toString(), {}).then((res) => res.json());
+  } catch (error: any) {
     throw {
-      error:error,
-      message:error.message
-    }
+      error: error,
+      message: error.message,
+    };
   }
 }
 
-export async function useMutationFetcher<T=any>(ctx:PageContext,pathname:string,body:Record<string,any>,
-  method:"POST"|"PUT"|"DELETE"):Promise<T>
-{
+export async function useMutationFetcher<T = any>(
+  ctx: PageContext,
+  pathname: string,
+  body: Record<string, any>,
+  method: "POST" | "PUT" | "DELETE",
+): Promise<T> {
   try {
-  const api_url = new URL(ctx.url.origin)
+    const api_url = new URL(ctx.url.origin);
     api_url.pathname = pathname;
     return fetch(api_url.toString(), {
       body: JSON.stringify(body),
       method: method,
     }).then((res) => res.json());
-  } catch (error:any) {
+  } catch (error: any) {
     throw {
-      error:error,
-      message:error.message
-    }
+      error: error,
+      message: error.message,
+    };
   }
 }
 
@@ -75,32 +76,33 @@ export interface ErrorNotData {
   error: {
     message: any;
     original_error: any;
-  }
+  };
 }
 
-export type DataOrError<T> = T | ErrorNotData
+export type DataOrError<T> = T | ErrorNotData;
 
-export function narrowOutError<T = unknown>(data?:DataOrError<T>) {
+export function narrowOutError<T = unknown>(data?: DataOrError<T>) {
   // @ts-expect-error
-  if (data && !('error' in data)) {
+  if (data && !("error" in data)) {
     return data;
   }
-
 }
 
-
-
-export async function tryCatchWrapper<T>(fn:Promise<T>): Promise<{ data: T | null; error: ClientResponseError | null }> {
+export async function tryCatchWrapper<T>(
+  fn: Promise<T>,
+): Promise<{ data: T | null; error: ClientResponseError | null }> {
   try {
-    const data = await fn
+    const data = await fn;
     return { data, error: null };
   } catch (error: any) {
     return { data: null, error };
   }
 }
-export async function apiRouteTryCatchWrapper<T>(fn:Promise<T>): Promise<ApiRouteResponse<T>> {
+export async function apiRouteTryCatchWrapper<T>(
+  fn: Promise<T>,
+): Promise<ApiRouteResponse<T>> {
   try {
-    const data = await fn
+    const data = await fn;
     return { data, error: null };
   } catch (error: any) {
     return { data: null, error };

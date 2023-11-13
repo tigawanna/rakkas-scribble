@@ -99,7 +99,7 @@ export function readmeStringToHtml(text: string) {
         </body>
       </html>`;
 
-//   const html = preContent + converter.makeHtml(text) + postContent;
+  //   const html = preContent + converter.makeHtml(text) + postContent;
   const html = preContent + converter.makeHtml(text) + postContent;
   converter.setFlavor("github");
   return html;

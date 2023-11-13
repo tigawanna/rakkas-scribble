@@ -29,7 +29,7 @@ export function ThePicUrlInput({
     <div
       className={twMerge(
         "flex flex-col items-center justify-center w-full rounded-lg gap-4",
-        container_classname
+        container_classname,
       )}
     >
       {typeof pic === "string" && pic.length > 0 ? (

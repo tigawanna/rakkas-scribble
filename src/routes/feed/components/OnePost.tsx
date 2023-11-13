@@ -3,8 +3,6 @@ import { useSSQ } from "rakkasjs";
 import { getOneDevToPost } from "../utils/posts";
 import { readmeStringToHtml } from "@/lib/gfm/toHtml";
 
-
-
 interface OnePostProps {
   post_id: string;
 }
@@ -14,7 +12,7 @@ export function OnePost({ post_id }: OnePostProps) {
     return tryCatchWrapper(getOneDevToPost({ ctx, id: post_id! }));
   });
   const data = query.data.data;
-  console.log("data === ",data)
+  console.log("data === ", data);
   const post_html = readmeStringToHtml(data?.body_markdown || "");
   return (
     <div className="w-full h-full min-h-screen flex flex-col items-center justify-center gap-4 p-5">
@@ -30,7 +28,10 @@ export function OnePost({ post_id }: OnePostProps) {
         <h1 className="text-3xl font-bold text-accent">{data?.title}</h1>
         <p className="text-lg ">{data?.description}</p>
       </div>
-      <div dangerouslySetInnerHTML={{ __html:post_html|| "" }} className="w-[90%] prose" />
+      <div
+        dangerouslySetInnerHTML={{ __html: post_html || "" }}
+        className="w-[90%] prose"
+      />
       {/* <Markdown remarkPlugins={[remarkGfm]}>{data?.body_markdown || ""}</Markdown> */}
       {/* <ClientSuspense fallback={<div>Loading...</div>}> */}
       {/* <ToastUiViewMode value={data?.body_markdown??""}/> */}

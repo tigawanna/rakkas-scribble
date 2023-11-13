@@ -9,14 +9,13 @@ import {
 import { DevToArticle } from "@/lib/publish/devto/client/articles";
 import { Link } from "rakkasjs";
 
-
 interface PostCardProps {
-    item:DevToArticle["get"]["responses"]["200"]["content"]['application/json'][number]
+  item: DevToArticle["get"]["responses"]["200"]["content"]["application/json"][number];
 }
 
-export function PostCard({item}: PostCardProps) {
+export function PostCard({ item }: PostCardProps) {
   return (
-    <Link href={'/feed/'+item.id} className={'w-full'}>
+    <Link href={"/feed/" + item.id} className={"w-full"}>
       <Card key={item.id} className="flex flex-col w-[95%]">
         {item.cover_image && (
           <img

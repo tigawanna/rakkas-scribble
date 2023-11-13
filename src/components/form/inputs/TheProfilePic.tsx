@@ -7,7 +7,6 @@ interface TheProfilePicProps {
 }
 
 export function TheProfilePic({ img_url, setFileImage }: TheProfilePicProps) {
-
   const [pic, setPic] = useState(img_url);
   const [input_pic, setInputPic] = useState<File | null>(null);
   const ref = useRef<HTMLInputElement>(null);

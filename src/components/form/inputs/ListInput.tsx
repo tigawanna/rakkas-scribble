@@ -27,7 +27,7 @@ export function TheListInput<T>({
 
   function removeItem(skill: string) {
     setInput((prev) => {
-      const prev_list = prev[field_key] as string[]
+      const prev_list = prev[field_key] as string[];
       if (Array.isArray(prev_list)) {
         return {
           ...prev,

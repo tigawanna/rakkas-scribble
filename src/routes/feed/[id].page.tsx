@@ -11,9 +11,7 @@ export default function Page({ params }: PageProps) {
   // console.log("======== QUERY ===========",query.data)
   return (
     <div className="w-full h-full min-h-screen flex flex-col items-center justify-center gap-4 p-5">
-
-        <OnePost post_id={params.id} />
-   
+      <OnePost post_id={params.id} />
     </div>
   );
 }

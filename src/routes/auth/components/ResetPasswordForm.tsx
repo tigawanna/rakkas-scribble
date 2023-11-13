@@ -13,15 +13,15 @@ interface PasswordResetFormProps {}
 export function PasswordResetForm({}: PasswordResetFormProps) {
   const show_form = true;
   const [show, setShow] = useState(false);
-  const [requested,setRequested]=useState(false)
+  const [requested, setRequested] = useState(false);
   const page_ctx = usePageContext();
- const requesting_email = page_ctx.url.searchParams.get("email")
+  const requesting_email = page_ctx.url.searchParams.get("email");
   const qc = useQueryClient();
 
   const { handleChange, input, setError, setInput, validateInputs } =
     useFormHook({
       initialValues: {
-        email: requesting_email??"",
+        email: requesting_email ?? "",
         token: "",
         password: "",
         passwordConfirm: "",
@@ -43,7 +43,7 @@ export function PasswordResetForm({}: PasswordResetFormProps) {
         toast("Password reset request sent, check your email", {
           type: "success",
         });
-        setRequested(true)
+        setRequested(true);
       }
       if (data && data?.error) {
         toast(data.error.message, { type: "error", autoClose: false });
@@ -62,7 +62,7 @@ export function PasswordResetForm({}: PasswordResetFormProps) {
           ),
       );
     },
-        onSuccess(data) {
+    onSuccess(data) {
       if (data && data?.data) {
         qc.invalidateQueries({ queryKey: ["sherpa_user"] });
         toast("Password reset successfully", {
@@ -87,7 +87,7 @@ export function PasswordResetForm({}: PasswordResetFormProps) {
 
   function handleConfirmPasswordChange(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-   pw_reset_confirm_mutation.mutate(input);
+    pw_reset_confirm_mutation.mutate(input);
   }
   return (
     <div className="w-full min-h-screen h-full flex flex-col items-center justify-center p-5 gap-5">
@@ -181,8 +181,6 @@ export function PasswordResetForm({}: PasswordResetFormProps) {
             </Button>
           </form>
         )}
-
-
       </div>
       {show_form && (
         <p className=" text-sm">

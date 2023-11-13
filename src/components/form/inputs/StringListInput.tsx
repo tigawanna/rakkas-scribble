@@ -46,7 +46,8 @@ export function TheStringListInput<T>({
       const prev_list = prev[field_key].split(",") as string[];
       if (Array.isArray(prev_list)) {
         return {
-          ...prev,[field_key]: prev_list.filter((s) => s !== item).join(","),
+          ...prev,
+          [field_key]: prev_list.filter((s) => s !== item).join(","),
         };
       }
       return prev;
@@ -57,7 +58,7 @@ export function TheStringListInput<T>({
 
     setInput((prev) => {
       // @ts-expect-error
-      const prev_list = prev[field_key].split(",") as string[]
+      const prev_list = prev[field_key].split(",") as string[];
       if (!Array.isArray(prev_list)) return prev;
       const itemSet = new Set(prev_list);
       one_item.split(",").forEach((entry) => itemSet.add(entry.trim()));
@@ -67,7 +68,7 @@ export function TheStringListInput<T>({
     setItem("");
   }
   // @ts-expect-error
-  const items = input[field_key].split(",") as string[]
+  const items = input[field_key].split(",") as string[];
   return (
     <div
       className={twMerge(
@@ -119,4 +120,3 @@ export function TheStringListInput<T>({
     </div>
   );
 }
-

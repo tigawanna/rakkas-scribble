@@ -4,28 +4,25 @@ let filename = process.argv[4] || "README.md";
 let pageTitle = process.argv[2] || "";
 let plausibleDomain = process.argv[3] || "";
 var hljs = require("highlight.js");
-  function htmlunencode(text) {
-    return text
-      .replace(/&amp;/g, "&")
-      .replace(/&lt;/g, "<")
-      .replace(/&gt;/g, ">");
-  }
+function htmlunencode(text) {
+  return text
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
 
-        var replacement = function (wholeMatch, match, left, right) {
-          match = htmlunencode(match);
-          var lang = (left.match(/class=\"([^ \"]+)/) || [])[1];
-          left = left.slice(0, 18) + "hljs " + left.slice(18);
-          if (lang && hljs.getLanguage(lang)) {
-            return (
-              left + hljs.highlight(match, { language: lang }).value + right
-            );
-          } else {
-            return left + hljs.highlightAuto(match).value + right;
-          }
-        };
+var replacement = function (wholeMatch, match, left, right) {
+  match = htmlunencode(match);
+  var lang = (left.match(/class=\"([^ \"]+)/) || [])[1];
+  left = left.slice(0, 18) + "hljs " + left.slice(18);
+  if (lang && hljs.getLanguage(lang)) {
+    return left + hljs.highlight(match, { language: lang }).value + right;
+  } else {
+    return left + hljs.highlightAuto(match).value + right;
+  }
+};
 
 showdown.extension("highlight", function () {
-
   return [
     {
       type: "output",
@@ -45,9 +42,6 @@ showdown.extension("highlight", function () {
     },
   ];
 });
-
-
-
 
 fs.readFile(__dirname + "/style.css", function (err, styleData) {
   fs.readFile(

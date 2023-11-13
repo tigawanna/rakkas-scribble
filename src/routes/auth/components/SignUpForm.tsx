@@ -12,12 +12,9 @@ import { SherpaUserCreate } from "@/lib/pb/db-types";
 import { Loader } from "lucide-react";
 import { PbTheTextInput } from "@/lib/pb/components/form/PBTheTextInput";
 
+interface SignupFormProps {}
 
-interface SignupFormProps {
-
-}
-
-export function SignUpForm({ }: SignupFormProps) {
+export function SignUpForm({}: SignupFormProps) {
   const show_form = true;
   const [show, setShow] = useState(false);
   const page_ctx = usePageContext();
@@ -29,13 +26,13 @@ export function SignUpForm({ }: SignupFormProps) {
         email: "",
         username: "",
         password: "",
-        passwordConfirm:"",
+        passwordConfirm: "",
       },
     });
   const mutation = useMutation({
-    mutationFn: (vars:typeof input) => {
+    mutationFn: (vars: typeof input) => {
       return tryCatchWrapper(
-        page_ctx.locals.pb?.collection("scribble_user").create(input)
+        page_ctx.locals.pb?.collection("scribble_user").create(input),
       );
     },
     onError(error: any) {
@@ -55,20 +52,19 @@ export function SignUpForm({ }: SignupFormProps) {
     },
   });
 
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-      const is_valid = validateInputs((ipt) => {
-        if (ipt.password !== ipt.passwordConfirm) {
-          setError({
-            name: "passwordConfirm",
-            message: "passwords do not match",
-          });
-          return false;
-        }
-        return true;
-      });
+    const is_valid = validateInputs((ipt) => {
+      if (ipt.password !== ipt.passwordConfirm) {
+        setError({
+          name: "passwordConfirm",
+          message: "passwords do not match",
+        });
+        return false;
+      }
+      return true;
+    });
     e.preventDefault();
-    if(is_valid){
+    if (is_valid) {
       mutation.mutate(input);
     }
     // mutation.mutate(input);

@@ -10,8 +10,6 @@ import PocketBase from "pocketbase";
 import { TypedPocketBase } from "typed-pocketbase";
 import { Schema } from "./lib/pb/db-types";
 
-
-
 export async function beforePageLuciaMiddleware(ctx: RequestContext<unknown>) {}
 
 export default createRequestHandler({
@@ -19,13 +17,12 @@ export default createRequestHandler({
     beforePages: [
       cookie(),
       (ctx) => {
-  
         ctx.locals.pb = new PocketBase(
-          import.meta.env.RAKKAS_PB_URL
+          import.meta.env.RAKKAS_PB_URL,
         ) as TypedPocketBase<Schema>;
         // load the store data from the request cookie string
         ctx.locals.pb.authStore.loadFromCookie(
-          ctx.request.headers.get("cookie") || ""
+          ctx.request.headers.get("cookie") || "",
         );
       },
     ],
@@ -47,9 +44,9 @@ export default createRequestHandler({
         return `<script>$TQS(${queriesString})</script>`;
       },
 
-    emitToDocumentHead() {
-    const cookie_theme = requestContext?.cookie?.theme;
-    return `
+      emitToDocumentHead() {
+        const cookie_theme = requestContext?.cookie?.theme;
+        return `
     <link rel="icon" type="image/svg+xml" href="/site.svg" />
     <script>
       (function() {
@@ -64,14 +61,13 @@ export default createRequestHandler({
         const request = ctx.requestContext?.request;
         if (!request) return;
 
-
         if (!ctx.locals.pb) {
           ctx.locals.pb = new PocketBase(
-            import.meta.env.RAKKAS_PB_URL
+            import.meta.env.RAKKAS_PB_URL,
           ) as TypedPocketBase<Schema>;
           // load the store data from the request cookie string
           ctx.locals.pb.authStore.loadFromCookie(
-            request.headers.get("cookie") || ""
+            request.headers.get("cookie") || "",
           );
         }
         try {
@@ -93,7 +89,7 @@ export default createRequestHandler({
       wrapApp(app) {
         const queryCache = new QueryCache({
           onSuccess(data, query) {
-          queries[query.queryHash] = data;
+            queries[query.queryHash] = data;
           },
         });
 
@@ -109,11 +105,8 @@ export default createRequestHandler({
           },
         });
 
-
- 
-
         return (
-         <QueryClientProvider client={queryClient}>{app}</QueryClientProvider>
+          <QueryClientProvider client={queryClient}>{app}</QueryClientProvider>
         );
       },
 

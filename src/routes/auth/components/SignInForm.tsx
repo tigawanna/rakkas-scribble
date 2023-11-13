@@ -10,71 +10,64 @@ import { useEffect, useState } from "react";
 import { Loader, Unlock } from "lucide-react";
 import { tryCatchWrapper } from "@/utils/async";
 
-interface SignInFormProps {
+interface SignInFormProps {}
 
-}
-
-export function SignInForm({  }: SignInFormProps) {
-  const page_ctx = usePageContext()
-  const [show,setShow]=useState(false)
+export function SignInForm({}: SignInFormProps) {
+  const page_ctx = usePageContext();
+  const [show, setShow] = useState(false);
   const qc = useQueryClient();
-  const show_form=true
-    const { handleChange, input, setError, setInput, validateInputs } =
-      useFormHook<{ usernameOrEmail: string; password: string }>({
-        initialValues: {
-          password:"",
-          usernameOrEmail:"",
-        },
-      });
-
-
-  const mutation = useMutation(
-    {
-      mutationFn:(vars: { usernameOrEmail: string; password: string }) => {
-        return emailPasswordLogin(vars.usernameOrEmail, vars.password);
-      },
-      onError(error: any) {
-        toast(error.message, { type: "error", autoClose: false });
-      },
-      onSuccess(data) {
-        if (data && data?.data) {
-          qc.invalidateQueries({queryKey:["scribble_user"]})
-          toast("Welcome back " + data?.data?.record?.username, {
-            type: "success",
-          });
-          navigate("/dashboard");
-        }
-        if (data && data?.error) {
-          toast(data.error.message, { type: "error", autoClose: false });
-        }
-      },
-    },
-  );
-
-    const pw_reset_request_mutation = useMutation({
-      mutationFn: (vars: { email: string }) => {
-        return tryCatchWrapper(
-          page_ctx.locals.pb
-            ?.collection("scribble_user")
-            .requestPasswordReset(vars.email),
-        );
-      },
-      onError(error: any) {
-        toast(error.message, { type: "error", autoClose: false });
-      },
-      onSuccess(data) {
-        if (data && data?.data) {
-          toast("Password reset request sent, check your email", {
-            type: "success",
-          });
-    
-        }
-        if (data && data?.error) {
-          toast(data.error.message, { type: "error", autoClose: false });
-        }
+  const show_form = true;
+  const { handleChange, input, setError, setInput, validateInputs } =
+    useFormHook<{ usernameOrEmail: string; password: string }>({
+      initialValues: {
+        password: "",
+        usernameOrEmail: "",
       },
     });
 
+  const mutation = useMutation({
+    mutationFn: (vars: { usernameOrEmail: string; password: string }) => {
+      return emailPasswordLogin(vars.usernameOrEmail, vars.password);
+    },
+    onError(error: any) {
+      toast(error.message, { type: "error", autoClose: false });
+    },
+    onSuccess(data) {
+      if (data && data?.data) {
+        qc.invalidateQueries({ queryKey: ["scribble_user"] });
+        toast("Welcome back " + data?.data?.record?.username, {
+          type: "success",
+        });
+        navigate("/dashboard");
+      }
+      if (data && data?.error) {
+        toast(data.error.message, { type: "error", autoClose: false });
+      }
+    },
+  });
+
+  const pw_reset_request_mutation = useMutation({
+    mutationFn: (vars: { email: string }) => {
+      return tryCatchWrapper(
+        page_ctx.locals.pb
+          ?.collection("scribble_user")
+          .requestPasswordReset(vars.email),
+      );
+    },
+    onError(error: any) {
+      toast(error.message, { type: "error", autoClose: false });
+    },
+    onSuccess(data) {
+      if (data && data?.data) {
+        toast("Password reset request sent, check your email", {
+          type: "success",
+        });
+      }
+      if (data && data?.error) {
+        toast(data.error.message, { type: "error", autoClose: false });
+      }
+    },
+  });
 
   // function resetPassordUrl(){
   //   page_ctx.url.searchParams.get("reset_password")
@@ -85,10 +78,10 @@ export function SignInForm({  }: SignInFormProps) {
   //   page_ctx.url.pathname = "/auth/reset"
   //   return page_ctx.url.toString()
   // }
-  
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    mutation.mutate(input)
+    e.preventDefault();
+    mutation.mutate(input);
   }
   return (
     <div className="w-full min-h-screen h-full flex flex-col items-center justify-center p-5 gap-5">

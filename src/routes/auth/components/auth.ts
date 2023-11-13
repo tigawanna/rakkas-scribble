@@ -32,9 +32,9 @@ export const signupformSchema = z.object({
     }),
 });
 
-export type TSignupformSchema = z.infer<typeof signupformSchema>
+export type TSignupformSchema = z.infer<typeof signupformSchema>;
 export const signinformSchema = z.object({
-    usernameOrEmail: z.string({
+  usernameOrEmail: z.string({
     required_error: "Email or Username is required.",
   }),
   password: z
@@ -45,4 +45,4 @@ export const signinformSchema = z.object({
       message: "Password must be at least 8 characters.",
     }),
 });
-export type TSigninformSchema = z.infer<typeof signinformSchema>
+export type TSigninformSchema = z.infer<typeof signinformSchema>;

@@ -13,7 +13,7 @@ export function useFormHook<T>({ initialValues }: IUseFormHook<T>) {
   const [error, setError] = useState<IUseFormError>({ message: "", name: "" });
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     setInput({
       ...input,
@@ -21,9 +21,9 @@ export function useFormHook<T>({ initialValues }: IUseFormHook<T>) {
     });
   }
 
-  function validateInputs(checker:(inpt:T)=>boolean) {
+  function validateInputs(checker: (inpt: T) => boolean) {
     setError({ name: "", message: "" });
-    return checker(input)
+    return checker(input);
   }
 
   return { input, setInput, handleChange, error, setError, validateInputs };

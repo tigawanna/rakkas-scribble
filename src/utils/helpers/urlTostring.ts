@@ -1,7 +1,7 @@
-export function stringOrURLToString(url:string|URL){
-if(typeof url === 'string'){
+export function stringOrURLToString(url: string | URL) {
+  if (typeof url === "string") {
     return url;
-}else{
+  } else {
     return url.toString();
-}
+  }
 }

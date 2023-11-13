@@ -25,7 +25,7 @@ export function TheTextAreaInput<T>({
   const [error_message, setError] = useState(
     props.error_message && props.error_message.length > 0
       ? props.error_message
-      : undefined
+      : undefined,
   );
   const default_textarea_tw = error_message
     ? " textarea  textarea-sm w-full border-error border-2"
@@ -35,15 +35,12 @@ export function TheTextAreaInput<T>({
       key={field_key as string}
       className={twMerge(
         "flex w-full flex-col justify-center gap-1",
-        props.container_classname
+        props.container_classname,
       )}
     >
       <Label
         htmlFor={field_key as string}
-        className={twMerge(
-          "font-serif text-sm ",
-          props.label_classname
-        )}
+        className={twMerge("font-serif text-sm ", props.label_classname)}
       >
         {field_name as string}
       </Label>
@@ -71,7 +68,7 @@ export function TheTextAreaInput<T>({
         <div
           className={twMerge(
             "w-full border-b px-2 py-1 text-sm",
-            props.output_classname
+            props.output_classname,
           )}
         >
           {props.value}

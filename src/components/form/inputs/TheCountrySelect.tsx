@@ -37,7 +37,7 @@ export function TheCountrySelect({
         return data.filter((item) =>
           item.name.common
             .toLocaleLowerCase()
-            .includes(keyword.word.toLocaleLowerCase())
+            .includes(keyword.word.toLocaleLowerCase()),
         );
       }
       return data;

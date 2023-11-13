@@ -13,16 +13,17 @@ Using your GitHub `README` as the main landing point works great for open source
 Some issues you run into when using GitHub as your main landing page
 
 ```tsx
+
 ```
 
 - Maybe your project isn't actually an open source project, so you can't just host a `README` on GitHub
 - If you want to link to just the `README`, you could append `#readme` to your browser URL (making the URL less pretty), or the visitor has to know they have to scroll down
 - The mobile page of GitHub is still pretty bad, and it only renders the first few lines, as soon as you have a logo and badges on your page, it doesn't render at all, unless the visitor hits `View all of `README`.md`
-    - Non-tech visitors don't know what's a `README.md`
-    - The button is small, and people don't know what is
-    - GitHub renders the GitHub Pulse below, something that doens't make sense for non-tech visitors
-    - The URL changes from something nice like `github.com/krausefx/fastlane` to `github.com/krausefx/fastlane/blob/master/README.md`, meaning you can either link directly to this page to have a nice content, or you link to the root page and have the downside of the extra buttons
-    - [Nat announced](https://twitter.com/natfriedman/status/1126544306712350721), that they working on improving the mobile experience, which is great news for everybody :)
+  - Non-tech visitors don't know what's a `README.md`
+  - The button is small, and people don't know what is
+  - GitHub renders the GitHub Pulse below, something that doens't make sense for non-tech visitors
+  - The URL changes from something nice like `github.com/krausefx/fastlane` to `github.com/krausefx/fastlane/blob/master/README.md`, meaning you can either link directly to this page to have a nice content, or you link to the root page and have the downside of the extra buttons
+  - [Nat announced](https://twitter.com/natfriedman/status/1126544306712350721), that they working on improving the mobile experience, which is great news for everybody :)
 - You can't use your own domain
 - If you use your own domain, you have to use GitHub Pages (which is excellent btw), but then you have to have HTML files ready, which is exactly what this project solves.
 
@@ -76,8 +77,8 @@ Check out the [open issues](https://github.com/KrauseFx/markdown-to-html-github-
 
 - Bullet list item 1
 - Bullet list item 2
-    - Bullet list item 2.1
-    - Bullet list item 2.2
+  - Bullet list item 2.1
+  - Bullet list item 2.2
 
 ---
 
@@ -91,9 +92,13 @@ Inline `code` comments are `100`
 **Bold text** is **bold** and [inline links](https://krausefx.com) work as well.
 
 # Header 1
+
 ## Header 2
+
 ### Header 3
+
 #### Header 4
+
 ##### Header 5
 
 <table>
@@ -147,4 +152,3 @@ Normal text content again, lorem ipsum
     </td>
   </tr>
 </table>
-

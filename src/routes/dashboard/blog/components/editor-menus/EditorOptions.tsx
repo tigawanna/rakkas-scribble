@@ -12,7 +12,7 @@ import Cherry from "cherry-markdown";
 import { PublishModal } from "./PublishModal";
 
 interface EditOptionsProps {
-  cherry: Cherry|null;
+  cherry: Cherry | null;
   blog_id: string;
   input: Partial<ScribblePostsResponse>;
   setInput: React.Dispatch<
@@ -45,11 +45,10 @@ export function EditorOptions({
         <BlogImagesmodal input={input} />
         <button
           className="btn btn-sm"
-          onClick={() =>{
+          onClick={() => {
             // @ts-expect-error
             document && document?.getElementById("publish_modal")?.showModal();
-          }
-          }
+          }}
         >
           Publish
         </button>

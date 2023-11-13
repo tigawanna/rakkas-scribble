@@ -1,7 +1,6 @@
 import { TheTextInput } from "@/components/form/inputs/TheTextInput";
 import {
   Dialog,
-
   DialogContent,
   DialogFooter,
   DialogTrigger,
@@ -9,13 +8,12 @@ import {
 import { ScrollArea } from "@/components/shadcn/ui/scroll-area";
 import { PbTheTextAreaInput } from "@/lib/pb/components/form/PBTheTextAreaInput";
 import { PbTheImagePicker } from "@/lib/pb/components/form/PbTheImagePicker";
-import { ScribblePostsResponse} from "@/lib/pb/db-types";
+import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
-import { useMutation} from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import Cherry from "cherry-markdown";
-import { usePageContext} from "rakkasjs";
+import { usePageContext } from "rakkasjs";
 import { useState } from "react";
-
 
 interface PublishBlogProps {
   cherry: Cherry | null;
@@ -25,7 +23,7 @@ interface PublishBlogProps {
   >;
 }
 
-export function PublishBlog({ input,setInput }: PublishBlogProps) {
+export function PublishBlog({ input, setInput }: PublishBlogProps) {
   const page_ctx = usePageContext();
   const targets = ["devto", "medium", "hashnode"] as const;
   const [platforms, setPlatforms] = useState<
@@ -64,7 +62,7 @@ export function PublishBlog({ input,setInput }: PublishBlogProps) {
   //     });
   // });
 
-  // 
+  //
   // const mutation = useSSM(async (ctx) => {
   //   const user = ctx.locals.pb?.authStore.model as ScribbleUserResponse;
   //   const hashnode_key = user.keys?.devto?.key;
@@ -84,10 +82,12 @@ export function PublishBlog({ input,setInput }: PublishBlogProps) {
   // });
 
   const mutation = useMutation({
-    mutationFn:()=>{
-      return tryCatchWrapper(page_ctx.locals.pb?.collection("scribble_posts").create(input))
-    }
-  })
+    mutationFn: () => {
+      return tryCatchWrapper(
+        page_ctx.locals.pb?.collection("scribble_posts").create(input),
+      );
+    },
+  });
 
   return (
     <Dialog>
@@ -103,17 +103,16 @@ export function PublishBlog({ input,setInput }: PublishBlogProps) {
       </DialogTrigger>
       <DialogContent className="max-h-[90%] w-full">
         <div className="w-full h-full overflow-y-scroll">
-       
-            <h3 className="font-bold text-2xl">{input.title}</h3>
-            <PbTheTextAreaInput
+          <h3 className="font-bold text-2xl">{input.title}</h3>
+          <PbTheTextAreaInput
             field_key={"description"}
             field_name={"description"}
             value={input.description}
-             onChange={(e) => {
+            onChange={(e) => {
               setInput((prev) => ({ ...prev, description: e.target.value }));
-             }}
-            />
-            <div className="w-full">
+            }}
+          />
+          <div className="w-full">
             <PbTheImagePicker
               collection_id_or_name="scribble_posts"
               record_id={input.id}
@@ -123,25 +122,21 @@ export function PublishBlog({ input,setInput }: PublishBlogProps) {
                 setInput((prev) => ({ ...prev, main_post_image: file }));
               }}
             />
-
-            </div>
-            <h2 className="text-xl">Publish to</h2>
-            <div className="w-full flex gap-4">
-              {targets.map((target) => (
-                <div key={target} className="w-full flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-accent border-4 border-accent"
-                    id={target}
-                    checked={platforms.includes(target)}
-                    onChange={handleCheckboxChange}
-                  />
-                  <h2 className="font-bold first-letter:capitalize">
-                    {target}
-                  </h2>
-                </div>
-              ))}
-       
+          </div>
+          <h2 className="text-xl">Publish to</h2>
+          <div className="w-full flex gap-4">
+            {targets.map((target) => (
+              <div key={target} className="w-full flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  className="checkbox checkbox-accent border-4 border-accent"
+                  id={target}
+                  checked={platforms.includes(target)}
+                  onChange={handleCheckboxChange}
+                />
+                <h2 className="font-bold first-letter:capitalize">{target}</h2>
+              </div>
+            ))}
           </div>
           <DialogFooter>
             {/* <DialogCancel>Cancel</DialogCancel> */}

@@ -10,7 +10,6 @@ import {
   SelectValue,
 } from "@/components/shadcn/ui/select";
 
-
 interface ThemeToggleModalProps {}
 
 export function ThemeToggle({}: ThemeToggleModalProps) {
