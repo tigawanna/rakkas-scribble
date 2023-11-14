@@ -16,6 +16,24 @@ export type ScribbleApiKeys = {
     username: string;
   };
 };
+export type ScribblePublishers = {
+  hashnode?: {
+    url: string;
+    id: string;
+  };
+  devto?: {
+    url: string;
+    id: string;
+  };
+  medium?: {
+    url: string;
+    id: string;
+  };
+  github?: {
+    url: string;
+    id: string;
+  };
+};
 
 /**
  * This file was @generated using typed-pocketbase
@@ -58,15 +76,10 @@ export type ScribblePostsResponse = {
   status?: "DRAFT" | "SCHEDULED" | "PUBLISHED" | "REPUBLISHED";
   tags?: string;
   publishingDetails?: any;
-  devToArticleCoverImagePath?: string;
-  devToArticleId?: string;
-  devToBlogUrl?: string;
-  hashNodeArticleCoverImagePath?: string;
-  hashNodeArticleId?: string;
-  hashNodeBlogUrl?: string;
+  publishers?: ScribblePublishers;
+
   last_published_at?: string;
-  mediumArticleId?: string;
-  mediumBlogUrl?: string;
+
   post_media?: Array<string>;
   main_post_image?: string;
   description?: string;
@@ -82,15 +95,10 @@ export type ScribblePostsCreate = {
   status?: "DRAFT" | "SCHEDULED" | "PUBLISHED" | "REPUBLISHED";
   tags?: string;
   publishingDetails?: any;
-  devToArticleCoverImagePath?: string | URL;
-  devToArticleId?: string;
-  devToBlogUrl?: string | URL;
-  hashNodeArticleCoverImagePath?: string | URL;
-  hashNodeArticleId?: string;
-  hashNodeBlogUrl?: string | URL;
+
+  publishers?: ScribblePublishers;
   last_published_at?: string | Date;
-  mediumArticleId?: string;
-  mediumBlogUrl?: string | URL;
+
   post_media?: MaybeArray<string>;
   main_post_image?: string;
   description?: string;
@@ -106,17 +114,11 @@ export type ScribblePostsUpdate = {
   status?: "DRAFT" | "SCHEDULED" | "PUBLISHED" | "REPUBLISHED";
   tags?: string;
   publishingDetails?: any;
-  devToArticleCoverImagePath?: string | URL;
-  devToArticleId?: string;
-  devToBlogUrl?: string | URL;
-  hashNodeArticleCoverImagePath?: string | URL;
-  hashNodeArticleId?: string;
-  hashNodeBlogUrl?: string | URL;
+
   last_published_at?: string | Date;
-  mediumArticleId?: string;
-  mediumBlogUrl?: string | URL;
+  publishers?: ScribblePublishers;
   post_media?: MaybeArray<string>;
-  "post_media-"?: MaybeArray<string>;
+
   main_post_image?: string;
   description?: string;
   series?: string;

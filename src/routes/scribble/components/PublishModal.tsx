@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 
 import { Loader, X } from "lucide-react";
 import { useUpdateScribbleMutation } from "../utils/scribble";
+import { usePageContext } from "rakkasjs";
 
 interface PublishModalProps {
   cherry: Cherry | null;
@@ -19,7 +20,7 @@ interface PublishModalProps {
 }
 
 export function PublishModal({cherry,input,setInput}:PublishModalProps){
-
+const page_ctx= usePageContext()
   useEffect(()=>{
     if(cherry){
       setInput((prev)=>{
@@ -120,6 +121,7 @@ return (
               providers: platforms,
               id: input?.id!,
               data: input,
+              keys:page_ctx.locals.pb?.authStore?.model?.keys,
             })
           }>
           Publish{" "}

@@ -1,24 +1,14 @@
 import Axios, { AxiosInstance } from "axios";
 import { paths } from "../types";
 import { OneDevtoPost } from "./types";
+import { DevToArticleInput } from "../devto/devto-publish";
+
 export type DevToArticle = paths["/api/articles"];
 export type OneDevToArticle = paths["/api/articles/{id}"];
 export type DevToTags = paths["/api/tags"];
 
-export type DevToArticlePublish = {
 
-        title?: string | undefined;
-        body_markdown?: string | undefined;
-        published?: boolean | undefined;
-        series?: string | null | undefined;
-        main_image?: string | undefined;
-        canonical_url?: string | undefined;
-        description?: string | undefined;
-        tags?: string | undefined;
-        organization_id?: number | undefined;
-      
-   
-};
+
 
 export class DevToApiClient {
   private _apiKey: string;
@@ -35,15 +25,18 @@ export class DevToApiClient {
     });
   }
 
-    public async publish(article: DevToArticlePublish) {
+  public async publish(article: DevToArticleInput) {
     type ArticleRespoenses = DevToArticle["post"]["responses"];
     interface Response {
       id: number;
       url: string;
     }
-    const { data, status } = await this.axios.post<ArticleRespoenses["201"]>("/articles", {
-      article,
-    });
+    const { data, status } = await this.axios.post<ArticleRespoenses["201"]>(
+      "/articles",
+      {
+        article,
+      },
+    );
     if (status !== 201) {
       throw new Error("Failed to publish article");
     }
@@ -67,7 +60,9 @@ export class DevToApiClient {
     return data;
   }
   public async one(id: number) {
-    const { data, status } = await this.axios.get<OneDevtoPost>(`/articles/${id}`);
+    const { data, status } = await this.axios.get<OneDevtoPost>(
+      `/articles/${id}`,
+    );
     if (status !== 200) {
       throw new Error("Failed to get article");
     }

@@ -48,17 +48,14 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       content: data?.content,
       title: data?.title,
       contentMarkdown: data?.contentMarkdown,
-      devToArticleId: data?.devToArticleId,
-      devToBlogUrl: data?.devToBlogUrl,
-      main_post_image: data?.main_post_image,
+      publishers: data?.publishers,
+      main_post_image: data?.main_post_image ?? "https://picsum.photos/500/900",
       description: data?.description,
       published_at: data?.published_at,
       series: data?.series,
-      hashNodeArticleId: data?.hashNodeArticleId,
-      hashNodeBlogUrl: data?.hashNodeBlogUrl,
+
       last_published_at: data?.last_published_at,
-      mediumArticleId: data?.mediumArticleId,
-      mediumBlogUrl: data?.mediumBlogUrl,
+
       post_media: data?.post_media,
       publishingDetails: data?.publishingDetails,
       status: data?.status,
@@ -66,7 +63,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       user_id: data?.user_id,
     },
   });
-  const { update_post_mutation } = useUpdateScribbleMutation();
+  const { update_post_mutation } = useUpdateScribbleMutation(data?.id!);
   return (
     <div className="w-full h-full flex justify-center items-center">
       <ClientSuspense fallback={<Spinner size="100px" />}>
