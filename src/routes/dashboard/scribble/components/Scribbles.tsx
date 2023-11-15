@@ -9,6 +9,7 @@ import { Search, ExternalLink } from "lucide-react";
 import { Link, navigate, usePageContext, useSSQ } from "rakkasjs";
 import { Suspense } from "react";
 import { NewScribbleModal } from "./NewScribbleModal";
+import { useQuery } from "@tanstack/react-query";
 
 interface ScribbbleProps {}
 
@@ -17,14 +18,31 @@ export function Scribbles({}: ScribbbleProps) {
   const { debouncedValue, isDebouncing, keyword, setKeyword } =
     useSearchWithQuery();
   const page_number = parseInt(page_ctx.url.searchParams.get("p") ?? "1") ?? 1;
-  const query = useSSQ((ctx) => {
-    return tryCatchWrapper(
-      ctx.locals.pb?.collection("scribble_posts").getList(page_number, 12, {
-        sort: "-created",
-        filter: `title~"${debouncedValue}"`,
-      }),
-    );
-  });
+  // const query = useSSQ((ctx) => {
+  //   return tryCatchWrapper(
+  //     ctx.locals.pb?.collection("scribble_posts").getList(page_number, 12, {
+  //       sort: "-created",
+  //       filter: `title~"${debouncedValue}"`,
+  //     }),
+  //   );
+  // },{
+  //   refetchOnMount: true,
+  //   refetchOnWindowFocus: true,
+  //   refetchOnReconnect: true,
+  // });
+    const query = useQuery({
+      queryKey: ["scribbles", debouncedValue, page_number],
+      queryFn: () => {
+        return tryCatchWrapper(
+          page_ctx.locals.pb
+            ?.collection("scribble_posts")
+            .getList(page_number, 12, {
+              sort: "-created",
+              filter: `title~"${debouncedValue}"`,
+            }),
+        );
+      },
+    });
   function handleChange(e: any) {
     setKeyword(e.target.value);
   }
@@ -103,7 +121,7 @@ export function Scribbles({}: ScribbbleProps) {
                       </div>
                     </Link>
                     <Link
-                      href={"/scribble/" + post.id}
+                      href={"scribble/" + post.id}
                       className="text-sm text-info hover:text-info/50"
                     >
                       <div className="flex gap-2 p-1">
