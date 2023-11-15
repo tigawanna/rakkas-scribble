@@ -9,12 +9,11 @@ import {
 } from "rakkasjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import "cherry-markdown/dist/cherry-markdown.css";
-import "@/components/editor/styles/cherry-markdown.css";
+import "cherry-markdown/dist/cherry-markdown.css";
 import "./index.css";
 import React from "react";
 import { Toolbar } from "@/components/navigation/Toolbar";
-import "@toast-ui/editor/dist/toastui-editor.css";
+
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
