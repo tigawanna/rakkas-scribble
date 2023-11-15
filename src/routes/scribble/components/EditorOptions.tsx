@@ -3,16 +3,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/shadcn/ui/popover";
-import { BlogImagesmodal } from "./BlogImagesModal";
 import { UseMutationResult } from "@tanstack/react-query";
 import { ScribblePostsResponse, ScribblePostsUpdate } from "@/lib/pb/db-types";
 import { Loader, PencilRuler, Save } from "lucide-react";
-import { PublishBlog } from "./PublishBlog";
 import Cherry from "cherry-markdown";
-import { PublishModal } from "./PublishModal";
+import { navigate } from "rakkasjs";
+import { useEffect } from "react";
 
 interface EditOptionsProps {
-  cherry: Cherry|null;
+  cherry: React.MutableRefObject<Cherry | null>;
   scribble_id: string;
   input: Partial<ScribblePostsResponse>;
   setInput: React.Dispatch<
@@ -33,6 +32,16 @@ export function EditorOptions({
   setInput,
   update_post_mutation,
 }: EditOptionsProps) {
+    // useEffect(() => {
+    //   if (cherry) {
+    //     setInput((prev) => {
+    //       return { ...prev, contentMarkdown: cherry?.getMarkdown() };
+    //     });
+    //   }
+    // }, []);
+    console.log("============= cherry =========== ", cherry.current);
+    console.log("cherry?.getMarkdown() =========== ", cherry.current?.getMarkdown());
+    console.log("INPUT INSIDE Editor Options ====  ", input);
   return (
     <Popover>
       <PopoverTrigger>
@@ -40,32 +49,54 @@ export function EditorOptions({
       </PopoverTrigger>
       <PopoverContent
         className="w-fit flex flex-col 
-      gap-5 py-2 md:px-3 items-center justify-center rounded-lg">
-        <BlogImagesmodal input={input} />
+      gap-2 py-2 md:px-3 items-center justify-center rounded-lg"
+      >
         <button
-          className="btn btn-sm "
-          onClick={() => {
-            // @ts-expect-error
-            document && document?.getElementById("publish_modal")?.showModal();
-          }}>
-          Save
-        </button>
-        <PublishBlog cherry={cherry} input={input} setInput={setInput} />
-        <PublishModal cherry={cherry} input={input} setInput={setInput} />
-        <button
-          className="md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
+          className="btn btn-sm md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
           data-tip={"save content"}
           onClick={() => {
+
             update_post_mutation.mutate({
               id: scribble_id,
               data: {
                 ...input,
-                content: cherry?.getMarkdown(),
+                content: cherry.current?.getMarkdown(),
+                contentMarkdown: cherry.current?.getMarkdown(),
               },
             });
-          }}>
-          <Save className="w-7 h-7" />
-          {update_post_mutation.isPending && <Loader className="animate-spin" />}
+          }}
+        >
+          {/* <Save className="w-7 h-7" /> */}
+          Save
+          {update_post_mutation.isPending && (
+            <Loader className="animate-spin" />
+          )}
+        </button>
+        <button
+          className="btn btn-sm md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
+          data-tip={"save content"}
+          onClick={() => {
+            update_post_mutation.mutate(
+              {
+                id: scribble_id,
+                data: {
+                  ...input,
+                  content: cherry.current?.getMarkdown(),
+                  contentMarkdown: cherry.current?.getMarkdown(),
+                },
+              },
+              {
+                onSuccess(data, variables, context) {
+                  navigate("/scribble/publish/" + scribble_id);
+                },
+              },
+            );
+          }}
+        >
+          Save and Publish
+          {update_post_mutation.isPending && (
+            <Loader className="animate-spin" />
+          )}
         </button>
       </PopoverContent>
     </Popover>

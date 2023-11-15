@@ -28,18 +28,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       );
     },
   });
-  // const query = useSSQ(
-  //   async (ctx) => {
-  //     return tryCatchWrapper(
-  //       ctx.locals.pb?.collection("scribble_posts").getOne(scribble_id),
-  //     );
-  //   },
-  //   {
-  //     refetchOnMount: true,
-  //     refetchOnWindowFocus: true,
-  //     refetchOnReconnect: true,
-  //   },
-  // );
+
 
   const data = query.data?.data;
   const { input, setInput } = useFormHook<Partial<ScribblePostsResponse>>({
@@ -88,7 +77,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
             <EditorOptions
               scribble_id={data?.id!}
               update_post_mutation={update_post_mutation}
-              cherry={cherry.current}
+              cherry={cherry}
               input={input}
               setInput={setInput}
             />

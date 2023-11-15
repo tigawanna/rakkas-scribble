@@ -19,24 +19,24 @@ export default {
   daisyui: {
     themes: [
       {
-        // custom: {
-        //   ...require("daisyui/src/theming/themes")["[data-theme=cupcake]"],
-        //   primary: "#433922",
-        //   secondary: "#34d399",
-        //   accent: "#a3e635",
-        //   neutral: "#ffe4e6",
-        //   info: "#62c2d5",
-        //   success: "#25bbac",
-        //   warning: "#c88314",
-        //   error: "#e77982",
-        // },
-        // cupcake: {
-        //   ...require("daisyui/src/theming/themes")["[data-theme=cupcake]"],
-        //   primary: "#4f4530",
-        //   "primary-content": "#ffffff",
-        //   secondary: "#850a0a",
-        //   "secondary-content": "#ffffff",
-        // },
+        custom: {
+          ...require("daisyui/src/theming/themes")["cupcake"],
+          primary: "#433922",
+          secondary: "#34d399",
+          accent: "#a3e635",
+          neutral: "#ffe4e6",
+          info: "#62c2d5",
+          success: "#25bbac",
+          warning: "#c88314",
+          error: "#e77982",
+        },
+        cupcake: {
+          ...require("daisyui/src/theming/themes")["cupcake"],
+          primary: "#4f4530",
+          "primary-content": "#ffffff",
+          secondary: "#850a0a",
+          "secondary-content": "#ffffff",
+        },
       },
       "light",
       "dark",

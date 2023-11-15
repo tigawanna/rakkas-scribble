@@ -82,6 +82,7 @@ export type ScribblePostsResponse = {
 
   post_media?: Array<string>;
   main_post_image?: string;
+  main_post_image_url?: string;
   description?: string;
   series?: string;
   published_at?: string;
@@ -101,6 +102,7 @@ export type ScribblePostsCreate = {
 
   post_media?: MaybeArray<string>;
   main_post_image?: string;
+  main_post_image_url?: string;
   description?: string;
   series?: string;
   published_at?: string | Date;
@@ -120,6 +122,7 @@ export type ScribblePostsUpdate = {
   post_media?: MaybeArray<string>;
 
   main_post_image?: string;
+  main_post_image_url?: string;
   description?: string;
   series?: string;
   published_at?: string | Date;

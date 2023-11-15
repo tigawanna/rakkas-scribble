@@ -3,6 +3,7 @@ import { GithubOauthResponse } from "./types";
 import { TypedPocketBase } from "typed-pocketbase";
 import { Schema, ScribbleUserCreate, ScribbleUserUpdate } from "./db-types";
 import { tryCatchWrapper } from "@/utils/async";
+import { RequestContext } from "rakkasjs";
 
 export type PocketBaseClient = TypedPocketBase<Schema>;
 const pb_url = import.meta.env.RAKKAS_PB_URL;
@@ -90,4 +91,16 @@ export function getFileURL({
   }
   // http://127.0.0.1:8090/api/files/COLLECTION_ID_OR_NAME/RECORD_ID/FILENAME?thumb=100x300
   return `${pb_url}/api/files/${collection_id_or_name}/${record_id}/${file_name}`;
+}
+
+
+export async function serverSidePocketBaseInstance(ctx: RequestContext<unknown>) {
+  try {
+    const pb_cookie = ctx.request.headers.get("cookie") ?? ""
+    const pb = new PocketBase(import.meta.env.RAKKAS_PB_URL) as PocketBaseClient
+    pb.authStore.loadFromCookie(pb_cookie);
+    return pb
+  } catch (error) {
+    throw error
+  }
 }

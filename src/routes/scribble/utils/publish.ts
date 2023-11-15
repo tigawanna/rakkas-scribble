@@ -8,7 +8,7 @@ import { RequestContext } from "rakkasjs";
 import PocketBase from "pocketbase";
 import { PocketBaseClient } from "@/lib/pb/client";
 import { removeDuplicatesFromStringList } from "@/utils/helpers/others";
-import {  DevToArticleInput, DevToPublishResponse, publishScribbleToDevTo } from "@/lib/scribble/devto/devto-publish";
+import {  DevToArticleInput, DevToPublishResponse, publishScribbleToDevTo } from "@/lib/scribble/devto/publish-article";
 
 const targets = ["devto", "medium", "hashnode"] as const;
 
@@ -54,7 +54,7 @@ type ArticleRespoenses = DevToArticle["post"]["responses"];
 // }
 
 export async function publishToProviders({
-ctx,
+  ctx,
   keys,
   providers,
   input,

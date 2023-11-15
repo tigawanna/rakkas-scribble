@@ -16,18 +16,7 @@ export default function ScribblesPage({}: PageProps) {
     const { debouncedValue, isDebouncing, keyword, setKeyword } = useSearchWithQuery();
     const page_number = parseInt(page_ctx.url.searchParams.get("p") ?? "1") ?? 1;
 
-  // const query = useSSQ(async (ctx) => {
-  //   return tryCatchWrapper(
-  //     ctx.locals.pb?.collection("scribble_posts").getList(page_number, 12, {
-  //       sort: "-created",
-  //       filter: `title~"${debouncedValue}"`,
-  //     }),
-  //   );
-  // },{
-  //   refetchOnMount: true,
-  //   refetchOnWindowFocus: true,
-  //   refetchOnReconnect: true,
-  // });
+
   const query = useQuery({
     queryKey: ["scribbles", debouncedValue, page_number],
     queryFn: () => {
@@ -115,7 +104,7 @@ export default function ScribblesPage({}: PageProps) {
                   <div className="w-full flex justify-between">
                     <Link
                       target="_blank"
-                      href={post.devToBlogUrl}
+                      href={post.publishers?.devto?.url}
                       className="text-sm text-info hover:text-info/50"
                     >
                       <div className="flex gap-2 p-1">

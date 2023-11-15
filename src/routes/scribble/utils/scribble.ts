@@ -8,11 +8,9 @@ import { tryCatchWrapper } from "@/utils/async";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { publishToProviders } from "./publish";
-import { usePageContext, useSSM } from "rakkasjs";
-import {
-  DevToArticle,
-  DevToPublishResponse,
-} from "@/lib/scribble/client/articles";
+import {  useSSM } from "rakkasjs";
+
+
 
 interface UseScribbleBlogMutationProps {
   // onSuccess: (data: any, variables: any, context: any) => void;

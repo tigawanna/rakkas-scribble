@@ -17,7 +17,7 @@ export function ThemeToggle({}: ThemeToggleModalProps) {
     "cupcake",
     "light",
     "dark",
-    "cupcake",
+    "custom",
     "wireframe",
     "black",
     "acid",

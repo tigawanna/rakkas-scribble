@@ -19,7 +19,7 @@ import { Edit, Loader } from "lucide-react";
 
 interface ProvidresProps {}
 
-export function Providers({}: ProvidresProps) {
+export function Publisherss({}: ProvidresProps) {
   const { page_ctx, user } = useUser();
 
   const user_providers = [
@@ -58,14 +58,14 @@ export function Providers({}: ProvidresProps) {
       <h3 className="text-3xl font-bold">Publishing Platforms </h3>
       <div className="w-full h-full gap-5 p-5 flex flex-col md:flex-row items-center justify-center">
         {user_providers.map((item) => {
-          return <ProviderCard provider={item} />;
+          return <PublishersCard provider={item} />;
         })}
       </div>
     </div>
   );
 }
 
-interface ProviderCardProps {
+interface PublishersCardProps {
   provider:
     | {
         name: string;
@@ -88,7 +88,7 @@ interface ProviderCardProps {
       };
 }
 
-export function ProviderCard({ provider }: ProviderCardProps) {
+export function PublishersCard({ provider }: PublishersCardProps) {
   const { page_ctx, user } = useUser();
   const qc = useQueryClient();
   const [editing, setEditing] = useState(

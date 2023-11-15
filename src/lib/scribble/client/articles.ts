@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance } from "axios";
 import { paths } from "../types";
 import { OneDevtoPost } from "./types";
-import { DevToArticleInput } from "../devto/devto-publish";
+import { DevToArticleInput } from "../devto/publish-article";
 
 export type DevToArticle = paths["/api/articles"];
 export type OneDevToArticle = paths["/api/articles/{id}"];
