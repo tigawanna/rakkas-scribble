@@ -1,7 +1,8 @@
+import { getFileURL } from "@/lib/pb/client";
 import { ScribbleUserResponse } from "@/lib/pb/db-types";
 import { useMutation, useQueryClient } from "rakkasjs";
 import { usePageContext } from "rakkasjs";
-
+import usericon from "./user-icon.svg";
 export function useUser() {
   const page_ctx = usePageContext();
   const qc = useQueryClient();
@@ -36,5 +37,14 @@ export function useUser() {
   );
 
   const user = page_ctx.locals?.pb.authStore.model as ScribbleUserResponse;
-  return { user, user_mutation: mutation, page_ctx, loggout: mutation.mutate };
+
+  const user_avatar = user?.avatar
+    ? getFileURL({
+      collection_id_or_name: "scribble_user",
+      file_name: user.avatar,
+      record_id: user.id,
+    })
+    : usericon;
+
+  return { user, user_mutation: mutation, page_ctx, loggout: mutation.mutate, user_avatar };
 }
