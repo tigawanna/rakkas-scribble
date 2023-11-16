@@ -16,12 +16,12 @@ export async function publishScribbleToDevTo({ ctx, input }: PublishProps):
 Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
   try {
     const devtoInput: DevToArticleInput = {
-      body_markdown: input.contentMarkdown,
+      body_markdown: input.content,
       description: input.description,
       title: input.title,
-      main_image: input.main_post_image,
+      main_image: input.main_post_image_url,
       series: input.series,
-      tags: input.tags,
+      tags: input.tags?.split(",") ?? ["webdev"],
       published: false,
     };
     const { data: pb, error: pb_error } = await tryCatchWrapper(
@@ -35,16 +35,13 @@ Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
     const { data, error } = await tryCatchWrapper(
       devtoPublishArticle({ key, article: devtoInput }),
     );
-    console.log(" ============== DEVTO UPDATE OUTPUT ============= ", {
-      data, error
-    })
+
     if (error) {
       return { data: null, error: { message: error.message } };
     }
     if (data) {
       pb?.collection("scribble_posts").update(input?.id!, {
-        ...input,
-        tags: removeDuplicatesFromStringList(data.tags),
+      tags: removeDuplicatesFromStringList(data.tags),
         publishers: {
           ...input?.publishers,
           devto: {

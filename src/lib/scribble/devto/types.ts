@@ -6,7 +6,7 @@ export type DevToArticleInput = {
     main_image?: string | undefined;
     canonical_url?: string | undefined;
     description?: string | undefined;
-    tags?: string | undefined;
+    tags?: string[] | undefined;
     organization_id?: number | undefined;
 };
 export interface DevToPublishResponse {

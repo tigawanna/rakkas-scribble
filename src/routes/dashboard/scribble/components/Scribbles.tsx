@@ -1,17 +1,14 @@
 import { TheTextInput } from "@/components/form/inputs/TheTextInput";
-import { Spinner } from "@/components/navigation/loaders/Spinner";
-import { getFileURL } from "@/lib/pb/client";
-import { PBTimeStamp } from "@/lib/pb/components/PBTimestamp";
 import { tryCatchWrapper } from "@/utils/async";
 import { numberToArray } from "@/utils/helpers/others";
 import { useSearchWithQuery } from "@/utils/hooks/search";
-import { Search, ExternalLink } from "lucide-react";
-import { Link, navigate, usePageContext, useSSQ } from "rakkasjs";
+import { Search } from "lucide-react";
+import { ClientSuspense,navigate, usePageContext } from "rakkasjs";
 import { Suspense } from "react";
 import { NewScribbleModal } from "./NewScribbleModal";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
-
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ScribbleListCard } from "./ScribbleListCard";
+import { SkeletonLoader } from "@/components/navigation/loaders/SkeletonLoader";
 
 interface ScribbbleProps {}
 
@@ -60,11 +57,19 @@ export function Scribbles({}: ScribbbleProps) {
             field_name={<Search />}
             onChange={handleChange}
           />
-          {(query.isRefetching || isDebouncing) && (
-            <div className="absolute  flex w-full items-center justify-center gap-3 p-2">
-              <span className="loading loading-infinity loading-lg text-warning"></span>
-            </div>
-          )}
+          <ClientSuspense
+            fallback={
+              <div className="absolute  flex w-full items-center justify-center gap-3 p-2">
+                <span className="loading loading-infinity loading-lg text-warning"></span>
+              </div>
+            }
+          >
+            {(query.isRefetching || isDebouncing) && (
+              <div className="absolute  flex w-full items-center justify-center gap-3 p-2">
+                <span className="loading loading-infinity loading-lg text-warning"></span>
+              </div>
+            )}
+          </ClientSuspense>
         </div>
 
         <NewScribbleModal />
@@ -78,15 +83,13 @@ export function Scribbles({}: ScribbbleProps) {
       )}
       {/* posts list */}
       <div className="w-full h-full flex items-center md:justify-center">
-        {/* <Suspense fallback={<SkeletonLoader items={12}  />}> */}
-          <ul className="w-full h-full  flex flex-wrap  p-3 gap-5 md:gap-3">
-            {posts?.map((post) => {
-              return (
-            <ScribbleListCard post={post}/>
-              );
-            })}
-          </ul>
-        {/* </Suspense> */}
+        <Suspense fallback={<SkeletonLoader items={12}  />}>
+        <ul className="w-full h-full  flex flex-wrap  p-3 gap-5 md:gap-3">
+          {posts?.map((post) => {
+            return <ScribbleListCard post={post} key={post.id} />;
+          })}
+        </ul>
+        </Suspense>
       </div>
     </div>
   );

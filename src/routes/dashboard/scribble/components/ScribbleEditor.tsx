@@ -21,7 +21,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
   const page_ctx = usePageContext();
   const cherry = useRef<Cherry | null>(null);
   const query = useQuery({
-    queryKey: ["scribble", scribble_id],
+    queryKey: ["scribble_posts", scribble_id],
     queryFn: async () => {
       return tryCatchWrapper(
         page_ctx.locals.pb?.collection("scribble_posts").getOne(scribble_id),

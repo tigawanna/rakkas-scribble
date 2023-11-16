@@ -15,14 +15,15 @@ export async function updatePublishedScribbleToDevTo({
 }: PublishProps) {
   try {
     const devtoInput: DevToArticleInput = {
-      body_markdown: input.contentMarkdown,
+      body_markdown: input.content,
       description: input.description,
       title: input.title,
-      // main_image: input.main_post_image,
+      main_image: input.main_post_image,
       series: input.series,
-      tags: input.tags,
+      tags:input.tags?.split(",") ?? ["webdev"],
       published: false,
     };
+
     const { data: pb, error: pb_error } = await tryCatchWrapper(
       serverSidePocketBaseInstance(ctx),
     );
@@ -45,7 +46,7 @@ export async function updatePublishedScribbleToDevTo({
 
     if (data) {
       pb?.collection("scribble_posts").update(input?.id!, {
-        ...input,
+   
         tags: removeDuplicatesFromStringList(data.tags),
         publishers: {
           ...input?.publishers,

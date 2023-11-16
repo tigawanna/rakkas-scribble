@@ -103,7 +103,7 @@ export function PublishToDevto({
             field_key={"description"}
             field_name={"description"}
             label_classname="text-accent"
-            className="min-h-[200px]"
+            className="min-h-[150px]"
             value={input.description}
             onChange={(e) => {
               setInput((prev) => ({ ...prev, description: e.target.value }));
@@ -154,7 +154,7 @@ export function PublishToDevto({
           <div className="flex justify-center p-3">
             {scribble.publishers?.devto?.id ? (
               <button
-                className="btn btn-sm"
+                className="btn text-xl"
                 onClick={() =>
                   update_published_scribble_mutation.mutate({
                     data: input,
@@ -168,7 +168,7 @@ export function PublishToDevto({
               </button>
             ) : (
               <button
-                className="btn btn-sm"
+                className="btn text-xl"
                 onClick={() =>
                   publish_scribble_mutation.mutate({
                     data: input,
