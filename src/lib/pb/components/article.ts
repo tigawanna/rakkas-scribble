@@ -9,7 +9,6 @@ export type Json =
 export type PostStatus = "DRAFT" | "SCHEDULED" | "PUBLISHED";
 interface Post {
   content: string | null;
-  contentMarkdown: string | null;
   created_at: string;
   devToArticleCoverImagePath: string | null;
   devToArticleId: string | null;

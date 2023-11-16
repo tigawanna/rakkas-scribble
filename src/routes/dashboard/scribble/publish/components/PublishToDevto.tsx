@@ -6,10 +6,8 @@ import { PbTheTextInput } from "@/lib/pb/components/form/PBTheTextInput";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { publishScribbleToDevTo } from "@/lib/scribble/devto/publish-article";
 import { updatePublishedScribbleToDevTo } from "@/lib/scribble/devto/update-article";
-import { tryCatchWrapper } from "@/utils/async";
 import { Loader } from "lucide-react";
 import { usePageContext, useSSM } from "rakkasjs";
-
 import { toast } from "react-toastify";
 
 interface PublishToDevtoProps {
@@ -34,27 +32,23 @@ export function PublishToDevto({
         data: Partial<ScribblePostsResponse>;
       },
     ) => {
-        return updatePublishedScribbleToDevTo({
-          ctx,
-          input: vars.data,
-        })
-      
+      return updatePublishedScribbleToDevTo({
+        ctx,
+        input: vars.data,
+      });
     },
     {
       onSuccess(data) {
-        console.log(" Publishing data ======== ", data);
         if (data.data) {
           toast(`Scribble published successfully`, {
             type: "success",
           });
         }
         if (data.error) {
-          console.log(" Updating data.error ======== ", data.error?.message);
           toast(data.error?.message, { type: "error", autoClose: false });
         }
       },
       onError(error: any) {
-        // console.log(" Publishing data.error ======== ", error);
         toast(error.message, { type: "error", autoClose: false });
       },
     },
@@ -67,26 +61,22 @@ export function PublishToDevto({
       },
     ) => {
       return publishScribbleToDevTo({
-          ctx,
-          input: vars.data,
-        })
-  
+        ctx,
+        input: vars.data,
+      });
     },
     {
       onSuccess(data) {
-        // console.log(" Publishing data ======== ", data);
         if (data.data) {
           toast(`Scribble published successfully`, {
             type: "success",
           });
         }
         if (data.error) {
-          // console.log(" Publishing data.error ======== ", data.error?.message);
           toast(data.error?.message, { type: "error", autoClose: false });
         }
       },
       onError(error: any) {
-        // console.log(" Publishing data.error ======== ", error);
         toast(error.message, { type: "error", autoClose: false });
       },
     },
@@ -113,6 +103,7 @@ export function PublishToDevto({
             field_key={"description"}
             field_name={"description"}
             label_classname="text-accent"
+            className="min-h-[200px]"
             value={input.description}
             onChange={(e) => {
               setInput((prev) => ({ ...prev, description: e.target.value }));
@@ -128,16 +119,16 @@ export function PublishToDevto({
                 setInput((prev) => ({ ...prev, main_post_image: file }));
               }}
             /> */}
-          <ThePicUrlInput
-          img_url={input.main_post_image_url??""}
-          editing
-          setInputImage={(url) => {
-            if(url){
-              setInput((prev) => ({ ...prev, main_post_image_url: url }));
-
-            }
-          }}
-          />
+            <ThePicUrlInput
+              img_url={input.main_post_image_url ?? ""}
+              className="justify-center"
+              editing
+              setInputImage={(url) => {
+                if (url) {
+                  setInput((prev) => ({ ...prev, main_post_image_url: url }));
+                }
+              }}
+            />
           </div>
 
           <TheStringListInput

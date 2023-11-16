@@ -36,7 +36,6 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       id: data?.id!,
       content: data?.content,
       title: data?.title,
-      contentMarkdown: data?.contentMarkdown,
       publishers: data?.publishers,
       main_post_image: data?.main_post_image,
       description: data?.description,
@@ -68,7 +67,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
               <CherryMarkdownEditor
                 input={input}
                 cherry_instance={cherry}
-                input_string={input.contentMarkdown ?? ""}
+                input_string={input.content ?? ""}
               />
             </div>
           </div>

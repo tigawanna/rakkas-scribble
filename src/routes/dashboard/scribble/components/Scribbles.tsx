@@ -11,6 +11,8 @@ import { Suspense } from "react";
 import { NewScribbleModal } from "./NewScribbleModal";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
+import { ScribbleListCard } from "./ScribbleListCard";
+
 interface ScribbbleProps {}
 
 export function Scribbles({}: ScribbbleProps) {
@@ -76,59 +78,15 @@ export function Scribbles({}: ScribbbleProps) {
       )}
       {/* posts list */}
       <div className="w-full h-full flex items-center md:justify-center">
-        <Suspense fallback={<Spinner size="60px" />}>
+        {/* <Suspense fallback={<SkeletonLoader items={12}  />}> */}
           <ul className="w-full h-full  flex flex-wrap  p-3 gap-5 md:gap-3">
             {posts?.map((post) => {
               return (
-                <li
-                  key={post.id}
-                  className="border border-accent flex flex-col justify-between
-                   rounded-lg w-[90%] sm:w-[45%] lg:w-[30%]"
-                >
-                  <img
-                    className="w-full aspect-video object-cover"
-                    src={getFileURL({
-                      collection_id_or_name: "scribble_posts",
-                      file_name: post.main_post_image,
-                      record_id: post.id,
-                    })}
-                  />
-                  <div className="flex flex-col justify-between  p-3">
-                    <div className="flex flex-col">
-                      <div className="text-3xl font-bold">{post.title}</div>
-                      <p className="text-sm line-clamp-3">{post.description}</p>
-                      <div className="text-lg w-full ">{post.series}</div>
-                    </div>
-
-                    <div className="border-t border-t-accent ">
-                      <div className="flex justify-between">
-                        <Link
-                          target="_blank"
-                          href={post.publishers?.devto?.url}
-                          className="text-sm text-info hover:text-info/50"
-                        >
-                          <div className="flex gap-2 p-1">
-                            open post in devto{" "}
-                            <ExternalLink className="w-4 h-4" />
-                          </div>
-                        </Link>
-                        <Link
-                          href={"/dashboard/scribble/" + post.id}
-                          className="text-sm text-info hover:text-info/50"
-                        >
-                          <div className="flex gap-2 p-1">
-                            View post <ExternalLink className="w-4 h-4" />
-                          </div>
-                        </Link>
-                      </div>
-                      <PBTimeStamp timestamp={post.created} label="Created" />
-                    </div>
-                  </div>
-                </li>
+            <ScribbleListCard post={post}/>
               );
             })}
           </ul>
-        </Suspense>
+        {/* </Suspense> */}
       </div>
     </div>
   );

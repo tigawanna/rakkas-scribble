@@ -4,6 +4,7 @@ import { tryCatchWrapper } from "@/utils/async";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { PageProps, usePageContext } from "rakkasjs"
 import { PublishToDevto } from "./components/PublishToDevto";
+import { isStringaUrl } from "@/utils/helpers/others";
 export default function PublishScribblePage({params}:PageProps) {
 const page_ctx = usePageContext();
 const scribble_id = params.id;
@@ -21,19 +22,19 @@ const data = query.data?.data;
       id: data?.id!,
       content: data?.content,
       title: data?.title,
-      contentMarkdown: data?.contentMarkdown,
+
       publishers: data?.publishers,
-      main_post_image: data?.main_post_image ?? "https://picsum.photos/500/900",
+      main_post_image: isStringaUrl(data?.main_post_image) ?data?.main_post_image: "https://picsum.photos/900/300",
       description: data?.description,
       published_at: data?.published_at,
       series: data?.series,
-     last_published_at: data?.last_published_at,
-     post_media: data?.post_media,
+      last_published_at: data?.last_published_at,
+      post_media: data?.post_media,
       publishingDetails: data?.publishingDetails,
       status: data?.status,
       tags: data?.tags,
       user_id: data?.user_id,
-     main_post_image_url: data?.main_post_image_url,
+      main_post_image_url: data?.main_post_image_url,
     },
   });
 

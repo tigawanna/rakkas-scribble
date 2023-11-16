@@ -29,16 +29,16 @@ export function ThePicUrlInput({
   return (
     <div
       className={twMerge(
-        "flex flex-col items-center justify-center w-full rounded-lg gap-4",
+        "flex flex-col w-full rounded-lg gap-4",
         container_classname,
       )}
     >
       {typeof pic === "string" && pic.length > 0 ? (
         <div
-          className=""
+          className="w-full"
           onClick={() => ref.current?.className.replace("hidden", "")}
         >
-          <div className="  md:h-fit ">
+          <div className=" md:h-fit ">
             <Image
               className="aspect-square  w-aut0 max-w-[250px]  object-cover md:h-auto "
               // className='border-6 h-[100px]'

@@ -25,3 +25,14 @@ export function removeDuplicatesFromStringList(strings: string[]): string {
   if(uniqueStrings.size < 1) return "";
   return Array.from(uniqueStrings).join(",");
 }
+
+
+export function isStringaUrl(link: string|undefined) {
+  if (!link || !link.trim() || link.trim().length < 1) return false;
+  try {
+    new URL(link);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}

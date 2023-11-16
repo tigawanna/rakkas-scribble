@@ -71,7 +71,6 @@ type MaybeArray<T> = T | T[];
 export type ScribblePostsResponse = {
   title?: string;
   content?: string;
-  contentMarkdown?: string;
   user_id?: string;
   status?: "DRAFT" | "SCHEDULED" | "PUBLISHED" | "REPUBLISHED";
   tags?: string;
@@ -91,7 +90,6 @@ export type ScribblePostsResponse = {
 export type ScribblePostsCreate = {
   title?: string;
   content?: string;
-  contentMarkdown?: string;
   user_id?: string;
   status?: "DRAFT" | "SCHEDULED" | "PUBLISHED" | "REPUBLISHED";
   tags?: string;
@@ -111,7 +109,6 @@ export type ScribblePostsCreate = {
 export type ScribblePostsUpdate = {
   title?: string;
   content?: string;
-  contentMarkdown?: string;
   user_id?: string;
   status?: "DRAFT" | "SCHEDULED" | "PUBLISHED" | "REPUBLISHED";
   tags?: string;

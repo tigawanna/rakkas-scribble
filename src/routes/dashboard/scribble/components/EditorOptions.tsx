@@ -32,16 +32,7 @@ export function EditorOptions({
   setInput,
   update_post_mutation,
 }: EditOptionsProps) {
-    // useEffect(() => {
-    //   if (cherry) {
-    //     setInput((prev) => {
-    //       return { ...prev, contentMarkdown: cherry?.getMarkdown() };
-    //     });
-    //   }
-    // }, []);
-    console.log("============= cherry =========== ", cherry.current);
-    console.log("cherry?.getMarkdown() =========== ", cherry.current?.getMarkdown());
-    console.log("INPUT INSIDE Editor Options ====  ", input);
+
   return (
     <Popover>
       <PopoverTrigger>
@@ -61,7 +52,7 @@ export function EditorOptions({
               data: {
                 ...input,
                 content: cherry.current?.getMarkdown(),
-                contentMarkdown: cherry.current?.getMarkdown(),
+     
               },
             });
           }}
@@ -82,7 +73,7 @@ export function EditorOptions({
                 data: {
                   ...input,
                   content: cherry.current?.getMarkdown(),
-                  contentMarkdown: cherry.current?.getMarkdown(),
+ 
                 },
               },
               {
