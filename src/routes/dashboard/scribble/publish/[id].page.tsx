@@ -1,7 +1,7 @@
 import { useFormHook } from "@/components/form/useForm";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { PageProps, usePageContext } from "rakkasjs"
 import { PublishToDevto } from "./components/PublishToDevto";
 import { isStringaUrl } from "@/utils/helpers/others";
@@ -22,7 +22,6 @@ const data = query.data?.data;
       id: data?.id!,
       content: data?.content,
       title: data?.title,
-
       publishers: data?.publishers,
       main_post_image: isStringaUrl(data?.main_post_image) ?data?.main_post_image: "https://picsum.photos/900/300",
       description: data?.description,

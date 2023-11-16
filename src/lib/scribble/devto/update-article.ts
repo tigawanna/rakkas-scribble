@@ -18,7 +18,7 @@ export async function updatePublishedScribbleToDevTo({
       body_markdown: input.content,
       description: input.description,
       title: input.title,
-      main_image: input.main_post_image,
+      main_image: import.meta.env.DEV ? "https://picsum.photos/900/300" : input.main_post_image,
       series: input.series,
       tags:input.tags?.split(",") ?? ["webdev"],
       published: false,

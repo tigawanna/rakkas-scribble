@@ -19,7 +19,7 @@ Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
       body_markdown: input.content,
       description: input.description,
       title: input.title,
-      main_image: input.main_post_image_url,
+      main_image: import.meta.env.DEV ?"https://picsum.photos/900/300":input.main_post_image,
       series: input.series,
       tags: input.tags?.split(",") ?? ["webdev"],
       published: false,

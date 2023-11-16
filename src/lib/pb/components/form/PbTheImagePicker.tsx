@@ -4,6 +4,8 @@ import { Schema } from "../../db-types";
 import { ImagePlus } from "lucide-react";
 
 interface PbTheImagePickerProps {
+  show_preview?: boolean
+  label?:React.ReactNode
   collection_id_or_name?: keyof Schema;
   record_id?: string;
   file_name?: string;
@@ -11,6 +13,8 @@ interface PbTheImagePickerProps {
 }
 
 export function PbTheImagePicker({
+  label,
+  show_preview=true,
   collection_id_or_name,
   record_id,
   file_name,
@@ -35,9 +39,9 @@ export function PbTheImagePicker({
   }
   return (
     <div className="w-full h-full flex flex-col gap-1">
-      <h2 className="text-sm text-accent">image input</h2>
+      <h2 className="text-sm text-accent">{label}</h2>
       <div className="md:min-w-[200px]  bg-accent/20 flex flex-col items-center justify-center border">
-        {typeof pic === "string" && pic.length > 0 ? (
+        {typeof pic === "string" && pic.length > 0 && show_preview ? (
           <div className="avatar" onClick={() => ref.current?.click()}>
             <div className="">
               <img
