@@ -140,7 +140,7 @@ export function PublishToDevto({
                 <p className="text-accent ">add image URL </p>
                 <ThePicUrlInput
                   img_url={
-              (isStringaUrl(input.main_post_image_url)
+                    (isStringaUrl(input.main_post_image_url)
                       ? scribble.main_post_image_url
                       : "https://picsum.photos/900/300") ??
                         "https://picsum.photos/900/300"

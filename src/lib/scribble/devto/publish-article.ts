@@ -45,6 +45,7 @@ export async function publishScribbleToDevTo({
     }
     if (data) {
       pb?.collection("scribble_posts").update(input?.id!, {
+        main_post_image_url: data?.cover_image,
         tags: removeDuplicatesFromStringList(data.tags),
         publishers: {
           ...input?.publishers,
