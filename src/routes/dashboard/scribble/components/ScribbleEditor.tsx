@@ -42,7 +42,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       published_at: data?.published_at,
       series: data?.series,
       main_post_image_url:
-        data?.main_post_image_url ?? "https://picsum.photos/500/900",
+      data?.main_post_image_url ?? "https://picsum.photos/500/900",
       last_published_at: data?.last_published_at,
       post_media: data?.post_media,
       publishingDetails: data?.publishingDetails,

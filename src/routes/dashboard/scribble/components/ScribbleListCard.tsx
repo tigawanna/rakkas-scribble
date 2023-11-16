@@ -1,3 +1,4 @@
+import { getFileURL } from "@/lib/pb/client";
 import { PBTimeStamp } from "@/lib/pb/components/PBTimestamp";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { ExternalLink } from "lucide-react";
@@ -8,6 +9,13 @@ interface ScribbleListCardProps {
 }
 
 export function ScribbleListCard({ post }: ScribbleListCardProps) {
+  const img_url = import.meta.env.DEV
+    ? post.main_post_image_url
+    : getFileURL({
+        collection_id_or_name: "scribble_posts",
+        file_name: post.main_post_image,
+        record_id: post.id,
+      })
   return (
     <li
       key={post.id}
@@ -21,7 +29,7 @@ export function ScribbleListCard({ post }: ScribbleListCardProps) {
         //   file_name: post.main_post_image,
         //   record_id: post.id,
         // })}
-        src={post.main_post_image_url}
+        src={img_url}
       />
       <div className="flex flex-col justify-between  p-3">
         <div className="flex flex-col">

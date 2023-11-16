@@ -1,5 +1,4 @@
 import { TheStringListInput } from "@/components/form/inputs/StringListInput";
-import { ThePicUrlInput } from "@/components/form/inputs/ThePicUrlInput";
 import { Icons } from "@/components/icons/Iconts";
 import { getFileURL } from "@/lib/pb/client";
 import { PbTheTextAreaInput } from "@/lib/pb/components/form/PBTheTextAreaInput";
@@ -8,7 +7,7 @@ import { PbTheImagePicker } from "@/lib/pb/components/form/PbTheImagePicker";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { publishScribbleToDevTo } from "@/lib/scribble/devto/publish-article";
 import { updatePublishedScribbleToDevTo } from "@/lib/scribble/devto/update-article";
-import { isStringaUrl } from "@/utils/helpers/others";
+import { isStringaUrl } from "@/utils/helpers/urls";
 import { Loader } from "lucide-react";
 import { usePageContext, useSSM } from "rakkasjs";
 import { toast } from "react-toastify";

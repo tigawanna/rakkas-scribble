@@ -1,14 +1,14 @@
 import { TheStringListInput } from "@/components/form/inputs/StringListInput";
 import { ThePicUrlInput } from "@/components/form/inputs/ThePicUrlInput";
 import { Icons } from "@/components/icons/Iconts";
-import { getFileURL } from "@/lib/pb/client";
 import { PbTheTextAreaInput } from "@/lib/pb/components/form/PBTheTextAreaInput";
 import { PbTheTextInput } from "@/lib/pb/components/form/PBTheTextInput";
 import { PbTheImagePicker } from "@/lib/pb/components/form/PbTheImagePicker";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { publishScribbleToDevTo } from "@/lib/scribble/devto/publish-article";
 import { updatePublishedScribbleToDevTo } from "@/lib/scribble/devto/update-article";
-import { isStringaUrl } from "@/utils/helpers/others";
+import { isStringaUrl } from "@/utils/helpers/urls";
+
 import { Loader } from "lucide-react";
 import { usePageContext, useSSM } from "rakkasjs";
 import { toast } from "react-toastify";
@@ -84,15 +84,16 @@ export function PublishToDevto({
       },
     },
   );
-  const imageUrl = getFileURL({
-    collection_id_or_name: "scribble_posts",
-    file_name: scribble.main_post_image,
-    record_id: scribble.id,
-  });
-  const imageFileExists =
-    input.main_post_image && isStringaUrl(imageUrl) ? true : false;
-  const imageURLExists = isStringaUrl(input.main_post_image_url);
-  const bothImagesDontExist = !imageFileExists && !imageURLExists;
+  // const imageUrl = getFileURL({
+  //   collection_id_or_name: "scribble_posts",
+  //   file_name: scribble.main_post_image,
+  //   record_id: scribble.id,
+  // });
+  // const imageFileExists =
+  //   input.main_post_image && isStringaUrl(imageUrl) ? true : false;
+  // const imageURLExists = isStringaUrl(input.main_post_image_url);
+  // const bothImagesDontExist = !imageFileExists && !imageURLExists;
+  // console.log("==============FORM INPUT  ===========",input)
   return (
     <div
       className="w-full h-full flex flex-col  items-center justify-center p-3 
@@ -120,8 +121,8 @@ export function PublishToDevto({
               setInput((prev) => ({ ...prev, description: e.target.value }));
             }}
           />
-          <div className="w-full py-2 flex flex-col gap-2">
-            <div>
+          <div className="w-full py-2 flex flex-col items-center gap-2">
+           {import.meta.env.PROD&&<div>
               <PbTheImagePicker
                 label={"upload image"}
                 collection_id_or_name="scribble_posts"
@@ -132,24 +133,31 @@ export function PublishToDevto({
                   setInput((prev) => ({ ...prev, main_post_image: file }));
                 }}
               />
-            </div>
+            </div>}
 
-            {/* {(true) && (
-            <div>
-            <p className="text-accent ">add image URL </p>
-            <ThePicUrlInput
-
-              img_url={input.main_post_image_url ?? ""}
-              className="justify-center"
-              editing
-              setInputImage={(url) => {
-                if (url) {
-                  setInput((prev) => ({ ...prev, main_post_image_url: url }));
-                }
-              }}
-            />
-            </div>
-            )} */}
+            {import.meta.env.DEV && (
+              <div>
+                <p className="text-accent ">add image URL </p>
+                <ThePicUrlInput
+                  img_url={
+              (isStringaUrl(input.main_post_image_url)
+                      ? scribble.main_post_image_url
+                      : "https://picsum.photos/900/300") ??
+                        "https://picsum.photos/900/300"
+                  }
+                  className="justify-center"
+                  editing
+                  setInputImage={(url) => {
+                    if (url) {
+                      setInput((prev) => ({
+                        ...prev,
+                        main_post_image_url: url,
+                      }));
+                    }
+                  }}
+                />
+              </div>
+            )}
           </div>
 
           <TheStringListInput

@@ -84,12 +84,10 @@ export default function CherryMarkdownEditor({
         ?.collection("scribble_posts")
         .update(input.id!, {
           // @ts-expect-error
-          input_media: input.input_media
-            ? [...input.input_media, file]
-            : [file],
+          post_media: input.post_media ? [...input.post_media, file] : [file],
         })
         .then((res) => {
-          console.log("res url === ", res.post_media);
+          // console.log("res url === ", res.post_media);
           if (res.post_media) {
             const latest_file = res.post_media[res.post_media.length - 1];
             const input_media_url = getFileURL({
