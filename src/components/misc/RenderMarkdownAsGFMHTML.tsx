@@ -1,4 +1,4 @@
-import { readmeStringToHtml } from "@/lib/gfm/toHtml";
+import { readmeStringToHtml } from "@/utils/helpers/gfm-parse/mdToGFMhtml";
 
 interface RenderMarkdownAsGFMHTMLProps {
   markdown: string;

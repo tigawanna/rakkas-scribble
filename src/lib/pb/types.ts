@@ -1,8 +1,9 @@
-import { SherpaUserResponse } from "./db-types";
+import { ScribbleUserResponse } from "./db-types";
+
 
 export interface GithubOauthResponse {
   meta: OauthMetaResponse;
-  record: SherpaUserResponse;
+  record: ScribbleUserResponse;
   token: string;
 }
 

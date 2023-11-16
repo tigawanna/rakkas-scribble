@@ -4,10 +4,11 @@ import { tryCatchWrapper } from "@/utils/async";
 import Cherry from "cherry-markdown";
 import { ClientSuspense, usePageContext } from "rakkasjs";
 import { lazy, useRef } from "react";
-import { useUpdateScribbleMutation } from "../utils/scribble";
+
 import { EditorOptions } from "./EditorOptions";
 import { Spinner } from "@/components/navigation/loaders/Spinner";
 import { useQuery } from "@tanstack/react-query";
+import { useUpdateScribbleMutation } from "./hooks";
 
 const CherryMarkdownEditor = lazy(
   () => import("@/components/editor/CherryMarkdownEditor"),

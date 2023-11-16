@@ -8,9 +8,9 @@ import { useFormHook } from "@/components/form/useForm";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { tryCatchWrapper } from "@/utils/async";
-import { SherpaUserCreate } from "@/lib/pb/db-types";
 import { Loader } from "lucide-react";
 import { PbTheTextInput } from "@/lib/pb/components/form/PBTheTextInput";
+
 
 interface SignupFormProps {}
 
@@ -21,7 +21,7 @@ export function SignUpForm({}: SignupFormProps) {
   const qc = useQueryClient();
 
   const { handleChange, input, error, setError, setInput, validateInputs } =
-    useFormHook<TSignupformSchema & Partial<SherpaUserCreate>>({
+    useFormHook<TSignupformSchema>({
       initialValues: {
         email: "",
         username: "",
@@ -32,6 +32,7 @@ export function SignUpForm({}: SignupFormProps) {
   const mutation = useMutation({
     mutationFn: (vars: typeof input) => {
       return tryCatchWrapper(
+        // @ts-expect-error
         page_ctx.locals.pb?.collection("scribble_user").create(input),
       );
     },
