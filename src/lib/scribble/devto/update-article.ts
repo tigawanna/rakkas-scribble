@@ -18,9 +18,11 @@ export async function updatePublishedScribbleToDevTo({
       body_markdown: input.content,
       description: input.description,
       title: input.title,
-      main_image: import.meta.env.DEV ? "https://picsum.photos/900/300" : input.main_post_image,
+      main_image: import.meta.env.DEV
+        ? "https://picsum.photos/900/300"
+        : input.main_post_image,
       series: input.series,
-      tags:input.tags?.split(",") ?? ["webdev"],
+      tags: input.tags?.split(",") ?? ["webdev"],
       published: false,
     };
 
@@ -39,14 +41,13 @@ export async function updatePublishedScribbleToDevTo({
         article: devtoInput,
       }),
     );
- 
+
     if (error) {
       return { data: null, error: { message: error.message } };
     }
 
     if (data) {
       pb?.collection("scribble_posts").update(input?.id!, {
-   
         tags: removeDuplicatesFromStringList(data.tags),
         publishers: {
           ...input?.publishers,

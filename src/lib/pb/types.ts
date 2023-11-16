@@ -1,6 +1,5 @@
 import { ScribbleUserResponse } from "./db-types";
 
-
 export interface GithubOauthResponse {
   meta: OauthMetaResponse;
   record: ScribbleUserResponse;

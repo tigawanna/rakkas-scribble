@@ -14,7 +14,6 @@ import "./index.css";
 import React from "react";
 import { Toolbar } from "@/components/navigation/Toolbar";
 
-
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
   const page_ctx = usePageContext();

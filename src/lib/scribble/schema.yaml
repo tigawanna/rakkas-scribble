@@ -26,7 +26,7 @@ paths:
       operationId: createArticle
       parameters: []
       responses:
-        '201':
+        "201":
           description: An Article
           content:
             application/json:
@@ -42,7 +42,7 @@ paths:
                 comments_count: 0
                 public_reactions_count: 0
                 collection_id: 11
-                published_timestamp: '2023-04-14T14:45:32Z'
+                published_timestamp: "2023-04-14T14:45:32Z"
                 positive_reactions_count: 0
                 cover_image: >-
                   https://thepracticaldev.s3.amazonaws.com/i/5wfo25724gzgk5e5j50g.jpg
@@ -50,18 +50,18 @@ paths:
                   https://thepracticaldev.s3.amazonaws.com/i/5wfo25724gzgk5e5j50g.jpg
                 canonical_url: >-
                   https://dev.to/fdocr/headless-chrome-dual-mode-tests-for-ruby-on-rails-4p6g
-                created_at: '2023-04-14T14:45:32Z'
+                created_at: "2023-04-14T14:45:32Z"
                 edited_at: null
                 crossposted_at: null
-                published_at: '2023-04-14T14:45:32Z'
-                last_comment_at: '2023-04-14T14:45:32Z'
+                published_at: "2023-04-14T14:45:32Z"
+                last_comment_at: "2023-04-14T14:45:32Z"
                 reading_time_minutes: 1
-                tag_list: ''
+                tag_list: ""
                 tags: []
                 body_html: |+
                   <p><strong>New</strong> body for the article</p>
 
-                body_markdown: '**New** body for the article'
+                body_markdown: "**New** body for the article"
                 user:
                   name: Nu "Otis" \:/ Stehr
                   username: username383
@@ -73,25 +73,25 @@ paths:
                     /uploads/user/profile_image/1304/ceaf627b-1551-4771-8d35-a93b40989584.jpeg
                   profile_image_90: >-
                     /uploads/user/profile_image/1304/ceaf627b-1551-4771-8d35-a93b40989584.jpeg
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '422':
+        "422":
           description: Unprocessable Entity
           content:
             application/json:
               example:
-                error: 'param is missing or the value is empty: article'
+                error: "param is missing or the value is empty: article"
                 status: 422
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Article'
+              $ref: "#/components/schemas/Article"
     get:
       summary: Published articles
       security: []
@@ -110,8 +110,8 @@ paths:
         It supports pagination, each page will contain `30` articles by default.
       operationId: getArticles
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
         - name: tag
           in: query
           required: false
@@ -205,7 +205,7 @@ paths:
             format: int32
           example: 99
       responses:
-        '200':
+        "200":
           description: A List of Articles
           content:
             application/json:
@@ -223,18 +223,18 @@ paths:
                   comments_count: 0
                   public_reactions_count: 0
                   collection_id: null
-                  published_timestamp: '2023-04-14T14:45:32Z'
+                  published_timestamp: "2023-04-14T14:45:32Z"
                   positive_reactions_count: 0
                   cover_image: >-
                     http://localhost:3000/assets/36-83d24fbff858b9dd4035d1e7d2df14090946ae4fed631055fc1d5862e7018348.png
                   social_image: >-
                     http://localhost:3000/assets/36-83d24fbff858b9dd4035d1e7d2df14090946ae4fed631055fc1d5862e7018348.png
                   canonical_url: http://localhost:3000/username387/all-the-kings-men175-794
-                  created_at: '2023-04-14T14:45:32Z'
+                  created_at: "2023-04-14T14:45:32Z"
                   edited_at: null
                   crossposted_at: null
-                  published_at: '2023-04-14T14:45:32Z'
-                  last_comment_at: '2023-04-14T14:45:32Z'
+                  published_at: "2023-04-14T14:45:32Z"
+                  last_comment_at: "2023-04-14T14:45:32Z"
                   reading_time_minutes: 1
                   tag_list:
                     - discuss
@@ -260,12 +260,12 @@ paths:
                       /uploads/organization/profile_image/295/216d3fb5-bd3c-459a-a9d8-572e8332fd88.png
                   flare_tag:
                     name: discuss
-                    bg_color_hex: '#000000'
-                    text_color_hex: '#ffffff'
+                    bg_color_hex: "#000000"
+                    text_color_hex: "#ffffff"
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
+                  $ref: "#/components/schemas/ArticleIndex"
   /api/articles/latest:
     get:
       summary: Published articles sorted by published date
@@ -280,10 +280,10 @@ paths:
         It supports pagination, each page will contain 30 articles by default.
       operationId: getLatestArticles
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: A List of Articles
           content:
             application/json:
@@ -301,18 +301,18 @@ paths:
                   comments_count: 0
                   public_reactions_count: 0
                   collection_id: null
-                  published_timestamp: '2023-04-14T14:45:32Z'
+                  published_timestamp: "2023-04-14T14:45:32Z"
                   positive_reactions_count: 0
                   cover_image: >-
                     http://localhost:3000/assets/16-77521848e7b5fcc073ac3e0bb004826e97f737238194e4c79330f662cc946ab2.png
                   social_image: >-
                     http://localhost:3000/assets/16-77521848e7b5fcc073ac3e0bb004826e97f737238194e4c79330f662cc946ab2.png
                   canonical_url: http://localhost:3000/username390/east-of-eden178-3on4
-                  created_at: '2023-04-14T14:45:32Z'
+                  created_at: "2023-04-14T14:45:32Z"
                   edited_at: null
                   crossposted_at: null
-                  published_at: '2023-04-14T14:45:32Z'
-                  last_comment_at: '2023-04-14T14:45:32Z'
+                  published_at: "2023-04-14T14:45:32Z"
+                  last_comment_at: "2023-04-14T14:45:32Z"
                   reading_time_minutes: 1
                   tag_list:
                     - javascript
@@ -332,8 +332,8 @@ paths:
                       /uploads/user/profile_image/1311/11a4ee42-e02e-4b2f-87c1-6123579350b7.jpeg
                   flare_tag:
                     name: discuss
-                    bg_color_hex: '#000000'
-                    text_color_hex: '#ffffff'
+                    bg_color_hex: "#000000"
+                    text_color_hex: "#ffffff"
                 - type_of: article
                   id: 256
                   title: A Many-Splendoured Thing177
@@ -348,7 +348,7 @@ paths:
                   comments_count: 0
                   public_reactions_count: 0
                   collection_id: null
-                  published_timestamp: '2023-04-14T14:45:32Z'
+                  published_timestamp: "2023-04-14T14:45:32Z"
                   positive_reactions_count: 0
                   cover_image: >-
                     http://localhost:3000/assets/27-441873f471d98b5358beff7d47a211e58b9979c6453794f9a7abfd5709c33322.png
@@ -356,11 +356,11 @@ paths:
                     http://localhost:3000/assets/27-441873f471d98b5358beff7d47a211e58b9979c6453794f9a7abfd5709c33322.png
                   canonical_url: >-
                     http://localhost:3000/username389/a-many-splendoured-thing177-314b
-                  created_at: '2023-04-14T14:45:32Z'
+                  created_at: "2023-04-14T14:45:32Z"
                   edited_at: null
                   crossposted_at: null
-                  published_at: '2023-04-14T14:45:32Z'
-                  last_comment_at: '2023-04-14T14:45:32Z'
+                  published_at: "2023-04-14T14:45:32Z"
+                  last_comment_at: "2023-04-14T14:45:32Z"
                   reading_time_minutes: 1
                   tag_list:
                     - javascript
@@ -380,8 +380,8 @@ paths:
                       /uploads/user/profile_image/1310/67d345a8-f64b-407f-a802-6f5286b5c4a2.jpeg
                   flare_tag:
                     name: discuss
-                    bg_color_hex: '#000000'
-                    text_color_hex: '#ffffff'
+                    bg_color_hex: "#000000"
+                    text_color_hex: "#ffffff"
                 - type_of: article
                   id: 255
                   title: What's Become of Waring176
@@ -396,7 +396,7 @@ paths:
                   comments_count: 0
                   public_reactions_count: 0
                   collection_id: null
-                  published_timestamp: '2023-04-14T14:45:32Z'
+                  published_timestamp: "2023-04-14T14:45:32Z"
                   positive_reactions_count: 0
                   cover_image: >-
                     http://localhost:3000/assets/31-2a89a91581ce9080fed8d62dd9c70a3fd5f92472da8c023e7b29256e04811b2e.png
@@ -404,11 +404,11 @@ paths:
                     http://localhost:3000/assets/31-2a89a91581ce9080fed8d62dd9c70a3fd5f92472da8c023e7b29256e04811b2e.png
                   canonical_url: >-
                     http://localhost:3000/username388/whats-become-of-waring176-2lgk
-                  created_at: '2023-04-14T14:45:32Z'
+                  created_at: "2023-04-14T14:45:32Z"
                   edited_at: null
                   crossposted_at: null
-                  published_at: '2023-04-14T14:45:32Z'
-                  last_comment_at: '2023-04-14T14:45:32Z'
+                  published_at: "2023-04-14T14:45:32Z"
+                  last_comment_at: "2023-04-14T14:45:32Z"
                   reading_time_minutes: 1
                   tag_list:
                     - javascript
@@ -428,12 +428,12 @@ paths:
                       /uploads/user/profile_image/1309/eaae0231-0ff6-49da-960c-cd30e2486bed.jpeg
                   flare_tag:
                     name: discuss
-                    bg_color_hex: '#000000'
-                    text_color_hex: '#ffffff'
+                    bg_color_hex: "#000000"
+                    text_color_hex: "#ffffff"
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
+                  $ref: "#/components/schemas/ArticleIndex"
   /api/articles/{id}:
     get:
       summary: Published article by id
@@ -451,7 +451,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: An Article
           content:
             application/json:
@@ -470,7 +470,7 @@ paths:
                 comments_count: 0
                 public_reactions_count: 0
                 collection_id: null
-                published_timestamp: '2023-04-14T14:45:32Z'
+                published_timestamp: "2023-04-14T14:45:32Z"
                 positive_reactions_count: 0
                 cover_image: >-
                   http://localhost:3000/assets/19-ed58d3e8defcefc445020631589697a05e725243e834b5192aee4e6b91a3e927.png
@@ -478,11 +478,11 @@ paths:
                   http://localhost:3000/assets/19-ed58d3e8defcefc445020631589697a05e725243e834b5192aee4e6b91a3e927.png
                 canonical_url: >-
                   http://localhost:3000/username391/pale-kings-and-princes179-381c
-                created_at: '2023-04-14T14:45:32Z'
+                created_at: "2023-04-14T14:45:32Z"
                 edited_at: null
                 crossposted_at: null
-                published_at: '2023-04-14T14:45:32Z'
-                last_comment_at: '2023-04-14T14:45:32Z'
+                published_at: "2023-04-14T14:45:32Z"
+                last_comment_at: "2023-04-14T14:45:32Z"
                 reading_time_minutes: 1
                 tag_list: discuss
                 tags:
@@ -539,13 +539,13 @@ paths:
                     /uploads/user/profile_image/1312/2eec3cd5-e7fe-42ac-bbfa-27c84d847596.jpeg
                 flare_tag:
                   name: discuss
-                  bg_color_hex: '#000000'
-                  text_color_hex: '#ffffff'
+                  bg_color_hex: "#000000"
+                  text_color_hex: "#ffffff"
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '404':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "404":
           description: Article Not Found
           content:
             application/json:
@@ -575,7 +575,7 @@ paths:
             minimum: 1
           example: 123
       responses:
-        '200':
+        "200":
           description: An Article
           content:
             application/json:
@@ -593,25 +593,25 @@ paths:
                 comments_count: 0
                 public_reactions_count: 0
                 collection_id: null
-                published_timestamp: '2023-04-14T14:45:33Z'
+                published_timestamp: "2023-04-14T14:45:33Z"
                 positive_reactions_count: 0
                 cover_image: >-
                   http://localhost:3000/assets/3-93b6b57b5a6115cffe5d63d29a22825eb9e65f647bfef57a88244bc2b98186f0.png
                 social_image: >-
                   http://localhost:3000/assets/3-93b6b57b5a6115cffe5d63d29a22825eb9e65f647bfef57a88244bc2b98186f0.png
                 canonical_url: http://localhost:3000/username392/noli-me-tangere180-55bp
-                created_at: '2023-04-14T14:45:33Z'
-                edited_at: '2023-04-14T14:45:33Z'
+                created_at: "2023-04-14T14:45:33Z"
+                edited_at: "2023-04-14T14:45:33Z"
                 crossposted_at: null
-                published_at: '2023-04-14T14:45:33Z'
-                last_comment_at: '2023-04-14T14:45:33Z'
+                published_at: "2023-04-14T14:45:33Z"
+                last_comment_at: "2023-04-14T14:45:33Z"
                 reading_time_minutes: 1
-                tag_list: ''
+                tag_list: ""
                 tags: []
                 body_html: |+
                   <p><strong>New</strong> body for the article</p>
 
-                body_markdown: '**New** body for the article'
+                body_markdown: "**New** body for the article"
                 user:
                   name: Lai "Aide" \:/ Will
                   username: username392
@@ -623,32 +623,32 @@ paths:
                     /uploads/user/profile_image/1313/731805e8-95f2-4260-89f1-489df0c9e945.jpeg
                   profile_image_90: >-
                     /uploads/user/profile_image/1313/731805e8-95f2-4260-89f1-489df0c9e945.jpeg
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '404':
+        "404":
           description: Article Not Found
           content:
             application/json:
               example:
                 error: not found
                 status: 404
-        '422':
+        "422":
           description: Unprocessable Entity
           content:
             application/json:
               example:
-                error: 'param is missing or the value is empty: article'
+                error: "param is missing or the value is empty: article"
                 status: 422
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Article'
+              $ref: "#/components/schemas/Article"
   /api/articles/{username}/{slug}:
     get:
       summary: Published article by path
@@ -671,7 +671,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: An Article
           content:
             application/json:
@@ -689,18 +689,18 @@ paths:
                 comments_count: 0
                 public_reactions_count: 0
                 collection_id: null
-                published_timestamp: '2023-04-14T14:45:33Z'
+                published_timestamp: "2023-04-14T14:45:33Z"
                 positive_reactions_count: 0
                 cover_image: >-
                   http://localhost:3000/assets/37-94b286825ffd9f2b47c9842cf4f262b7c89e789797eba40196bc14b5c2359e75.png
                 social_image: >-
                   http://localhost:3000/assets/37-94b286825ffd9f2b47c9842cf4f262b7c89e789797eba40196bc14b5c2359e75.png
                 canonical_url: http://localhost:3000/username396/noli-me-tangere183-1lj5
-                created_at: '2023-04-14T14:45:33Z'
+                created_at: "2023-04-14T14:45:33Z"
                 edited_at: null
                 crossposted_at: null
-                published_at: '2023-04-14T14:45:33Z'
-                last_comment_at: '2023-04-14T14:45:33Z'
+                published_at: "2023-04-14T14:45:33Z"
+                last_comment_at: "2023-04-14T14:45:33Z"
                 reading_time_minutes: 1
                 tag_list: discuss
                 tags:
@@ -755,13 +755,13 @@ paths:
                     /uploads/user/profile_image/1317/e7282d93-954d-4b13-805e-9e5636ad9d63.jpeg
                 flare_tag:
                   name: discuss
-                  bg_color_hex: '#000000'
-                  text_color_hex: '#ffffff'
+                  bg_color_hex: "#000000"
+                  text_color_hex: "#ffffff"
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '404':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "404":
           description: Article Not Found
           content:
             application/json:
@@ -791,10 +791,10 @@ paths:
         will contain 30 articles.
       operationId: getUserArticles
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: A List of the authenticated user's Articles
           content:
             application/json:
@@ -802,8 +802,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '401':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -833,10 +833,10 @@ paths:
         will contain 30 articles.
       operationId: getUserPublishedArticles
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: A List of the authenticated user's Articles
           content:
             application/json:
@@ -844,8 +844,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '401':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -875,10 +875,10 @@ paths:
         will contain 30 articles.
       operationId: getUserUnpublishedArticles
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: A List of the authenticated user's Articles
           content:
             application/json:
@@ -886,8 +886,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '401':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -921,10 +921,10 @@ paths:
         By default a page will contain 30 articles.
       operationId: getUserAllArticles
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: A List of the authenticated user's Articles
           content:
             application/json:
@@ -932,8 +932,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '401':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -982,16 +982,16 @@ paths:
             type: string
           example: Admin requested unpublishing all articles via API
       responses:
-        '204':
+        "204":
           description: Article successfully unpublished
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '404':
+        "404":
           description: Article Not Found
           content:
             application/json:
@@ -1019,23 +1019,23 @@ paths:
           description: Article identifier.
           schema:
             type: string
-          example: '321'
+          example: "321"
         - name: p_id
           in: query
           required: false
           description: Podcast Episode identifier.
           schema:
             type: string
-          example: '321'
+          example: "321"
       responses:
-        '200':
+        "200":
           description: A List of Comments
           content:
             application/json:
               example:
                 - type_of: comment
-                  id_code: '52'
-                  created_at: '2023-04-14T14:45:34Z'
+                  id_code: "52"
+                  created_at: "2023-04-14T14:45:34Z"
                   body_html: >+
                     <p>Pop-up salvia vhs gluten-free tilde cleanse. Gastropub
                     offal next level. Gluten-free health stumptown kale chips
@@ -1056,8 +1056,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Comment'
-        '404':
+                  $ref: "#/components/schemas/Comment"
+        "404":
           description: Resource Not Found
           content:
             application/json:
@@ -1085,16 +1085,16 @@ paths:
           description: Comment identifier.
           schema:
             type: integer
-          example: '321'
+          example: "321"
       responses:
-        '200':
+        "200":
           description: A List of the Comments
           content:
             application/json:
               example:
                 type_of: comment
-                id_code: '54'
-                created_at: '2023-04-14T14:45:35Z'
+                id_code: "54"
+                created_at: "2023-04-14T14:45:35Z"
                 body_html: >+
                   <p>Ramps tacos jean shorts humblebrag street bicycle rights
                   paleo. Actually green juice chartreuse tattooed cliche. 8-bit
@@ -1112,7 +1112,7 @@ paths:
                   profile_image_90: >-
                     /uploads/user/profile_image/1339/08f5cd26-743e-4957-af23-540b7ded60d6.jpeg
                 children: []
-        '404':
+        "404":
           description: Comment Not Found
           content:
             application/json:
@@ -1126,7 +1126,7 @@ paths:
         - display ads
       description: This endpoint allows the client to retrieve a list of all display ads.
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1134,8 +1134,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DisplayAd'
-        '401':
+                  $ref: "#/components/schemas/DisplayAd"
+        "401":
           description: unauthorized
           content:
             application/json:
@@ -1149,7 +1149,7 @@ paths:
       description: This endpoint allows the client to create a new display ad.
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1159,12 +1159,12 @@ paths:
                 body_markdown: |-
                   # Hi, this is ad
                   Yep, it's an ad
-                cached_tag_list: ''
+                cached_tag_list: ""
                 clicks_count: 0
-                created_at: '2023-04-14T18:45:35.606+04:00'
+                created_at: "2023-04-14T18:45:35.606+04:00"
                 creator_id: null
                 display_to: all
-                exclude_article_ids: ''
+                exclude_article_ids: ""
                 impressions_count: 0
                 name: Example Ad
                 organization_id: null
@@ -1175,21 +1175,21 @@ paths:
                 published: true
                 success_rate: 0
                 type_of: in_house
-                updated_at: '2023-04-14T18:45:35.606+04:00'
+                updated_at: "2023-04-14T18:45:35.606+04:00"
                 audience_segment_type: null
-                tag_list: ''
+                tag_list: ""
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/DisplayAd'
-        '401':
+                  $ref: "#/components/schemas/DisplayAd"
+        "401":
           description: unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '422':
+        "422":
           description: unprocessable
           content:
             application/json:
@@ -1204,7 +1204,7 @@ paths:
                 created_at: null
                 creator_id: null
                 display_to: all
-                exclude_article_ids: ''
+                exclude_article_ids: ""
                 impressions_count: 0
                 name: Example Ad
                 organization_id: null
@@ -1222,7 +1222,7 @@ paths:
             schema:
               type: object
               items:
-                $ref: '#/components/schemas/DisplayAd'
+                $ref: "#/components/schemas/DisplayAd"
   /api/display_ads/{id}:
     get:
       summary: display ad
@@ -1242,7 +1242,7 @@ paths:
             minimum: 1
           example: 123
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1250,12 +1250,12 @@ paths:
                 id: 196
                 approved: false
                 body_markdown: Hello _hey_ Hey hey 9
-                cached_tag_list: ''
+                cached_tag_list: ""
                 clicks_count: 0
-                created_at: '2023-04-14T18:45:35.813+04:00'
+                created_at: "2023-04-14T18:45:35.813+04:00"
                 creator_id: null
                 display_to: all
-                exclude_article_ids: ''
+                exclude_article_ids: ""
                 impressions_count: 0
                 name: Display Ad 196
                 organization_id: 304
@@ -1264,17 +1264,17 @@ paths:
                 published: false
                 success_rate: 0
                 type_of: in_house
-                updated_at: '2023-04-14T18:45:35.817+04:00'
+                updated_at: "2023-04-14T18:45:35.817+04:00"
                 audience_segment_type: null
-                tag_list: ''
-        '401':
+                tag_list: ""
+        "401":
           description: unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '404':
+        "404":
           description: Unknown DisplayAd ID
           content:
             application/json:
@@ -1299,7 +1299,7 @@ paths:
             minimum: 1
           example: 123
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1313,29 +1313,29 @@ paths:
                 placement_area: sidebar_left
                 published: false
                 type_of: in_house
-                exclude_article_ids: ''
-                cached_tag_list: ''
+                exclude_article_ids: ""
+                cached_tag_list: ""
                 id: 198
                 clicks_count: 0
-                created_at: '2023-04-14T18:45:36.047+04:00'
+                created_at: "2023-04-14T18:45:36.047+04:00"
                 impressions_count: 0
                 processed_html: <p>Hello <em>hey</em> Hey hey 10</p>
                 success_rate: 0
-                updated_at: '2023-04-14T18:45:36.051+04:00'
+                updated_at: "2023-04-14T18:45:36.051+04:00"
                 audience_segment_type: null
-                tag_list: ''
+                tag_list: ""
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/DisplayAd'
-        '401':
+                  $ref: "#/components/schemas/DisplayAd"
+        "401":
           description: unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '404':
+        "404":
           description: not found
           content:
             application/json:
@@ -1348,7 +1348,7 @@ paths:
             schema:
               type: object
               items:
-                $ref: '#/components/schemas/DisplayAd'
+                $ref: "#/components/schemas/DisplayAd"
   /api/display_ads/{id}/unpublish:
     put:
       summary: unpublish
@@ -1368,16 +1368,16 @@ paths:
             minimum: 1
           example: 123
       responses:
-        '204':
+        "204":
           description: no content
-        '401':
+        "401":
           description: unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '404':
+        "404":
           description: not found
           content:
             application/json:
@@ -1395,7 +1395,7 @@ paths:
         follow.
       operationId: getFollowedTags
       responses:
-        '200':
+        "200":
           description: A List of followed tags
           content:
             application/json:
@@ -1409,8 +1409,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/FollowedTag'
-        '401':
+                  $ref: "#/components/schemas/FollowedTag"
+        "401":
           description: unauthorized
           content:
             application/json:
@@ -1429,8 +1429,8 @@ paths:
                 It supports pagination, each page will contain 80 followers by default.
       operationId: getFollowers
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
         - name: sort
           in: query
           required: false
@@ -1443,14 +1443,14 @@ paths:
             type: string
           example: created_at
       responses:
-        '200':
+        "200":
           description: A List of followers
           content:
             application/json:
               example:
                 - type_of: user_follower
                   id: 72
-                  created_at: '2023-04-14T14:45:36Z'
+                  created_at: "2023-04-14T14:45:36Z"
                   user_id: 1375
                   name: Taylor "Chrystal" \:/ Pfannerstill
                   path: /username435
@@ -1459,7 +1459,7 @@ paths:
                     /uploads/user/profile_image/1375/11fa0607-0d22-4c3c-b339-490ff1e25e8d.jpeg
                 - type_of: user_follower
                   id: 71
-                  created_at: '2023-04-14T14:45:36Z'
+                  created_at: "2023-04-14T14:45:36Z"
                   user_id: 1372
                   name: Carisa "Thurman" \:/ Senger
                   path: /username433
@@ -1491,7 +1491,7 @@ paths:
                     profile_image:
                       description: Profile image (640x640)
                       type: string
-        '401':
+        "401":
           description: unauthorized
           content:
             application/json:
@@ -1515,7 +1515,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: An Organization
           content:
             application/json:
@@ -1534,14 +1534,14 @@ paths:
                 tech_stack: null
                 tag_line: null
                 story: null
-                joined_at: '2023-04-14T14:45:37Z'
+                joined_at: "2023-04-14T14:45:37Z"
                 profile_image: >-
                   /uploads/organization/profile_image/323/d1677329-759a-44e1-866e-c5be50e9593b.png
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/Organization'
-        '404':
+                  $ref: "#/components/schemas/Organization"
+        "404":
           description: Not Found
           content:
             application/json:
@@ -1568,10 +1568,10 @@ paths:
           required: true
           schema:
             type: string
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: An Organization's users
           content:
             application/json:
@@ -1603,8 +1603,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
-        '404':
+                  $ref: "#/components/schemas/User"
+        "404":
           description: Not Found
           content:
             application/json:
@@ -1631,10 +1631,10 @@ paths:
           required: true
           schema:
             type: string
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: An Organization's Articles
           content:
             application/json:
@@ -1652,18 +1652,18 @@ paths:
                   comments_count: 0
                   public_reactions_count: 0
                   collection_id: null
-                  published_timestamp: '2023-04-14T14:45:38Z'
+                  published_timestamp: "2023-04-14T14:45:38Z"
                   positive_reactions_count: 0
                   cover_image: >-
                     http://localhost:3000/assets/38-3b0c46cc0d5367229799d282c99b2c42f33501201cac1ceb5c643f9ee11f06c6.png
                   social_image: >-
                     http://localhost:3000/assets/38-3b0c46cc0d5367229799d282c99b2c42f33501201cac1ceb5c643f9ee11f06c6.png
                   canonical_url: http://localhost:3000/org81/down-to-a-sunless-sea195-51d4
-                  created_at: '2023-04-14T14:45:38Z'
+                  created_at: "2023-04-14T14:45:38Z"
                   edited_at: null
                   crossposted_at: null
-                  published_at: '2023-04-14T14:45:38Z'
-                  last_comment_at: '2023-04-14T14:45:38Z'
+                  published_at: "2023-04-14T14:45:38Z"
+                  last_comment_at: "2023-04-14T14:45:38Z"
                   reading_time_minutes: 1
                   tag_list:
                     - javascript
@@ -1692,8 +1692,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '404':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "404":
           description: Not Found
           content:
             application/json:
@@ -1710,7 +1710,7 @@ paths:
         This endpoint allows the client to retrieve details for all Page
         objects.
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1733,7 +1733,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Page'
+                  $ref: "#/components/schemas/Page"
     post:
       summary: pages
       tags:
@@ -1741,7 +1741,7 @@ paths:
       description: This endpoint allows the client to create a new page.
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1769,14 +1769,14 @@ paths:
                 social_image:
                   url: null
                 template: contained
-        '401':
+        "401":
           description: unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '422':
+        "422":
           description: unprocessable
           content:
             application/json:
@@ -1853,7 +1853,7 @@ paths:
             minimum: 1
           example: 1
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1874,7 +1874,7 @@ paths:
                   url: null
                 template: contained
               schema:
-                $ref: '#/components/schemas/Page'
+                $ref: "#/components/schemas/Page"
     put:
       summary: update details for a page
       tags:
@@ -1893,7 +1893,7 @@ paths:
             minimum: 1
           example: 1
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1914,15 +1914,15 @@ paths:
                   url: null
                 template: contained
               schema:
-                $ref: '#/components/schemas/Page'
-        '401':
+                $ref: "#/components/schemas/Page"
+        "401":
           description: unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '422':
+        "422":
           description: unprocessable
           content:
             application/json:
@@ -1946,7 +1946,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Page'
+              $ref: "#/components/schemas/Page"
     delete:
       summary: remove a page
       tags:
@@ -1965,7 +1965,7 @@ paths:
             minimum: 1
           example: 1
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -1986,15 +1986,15 @@ paths:
                   url: null
                 template: contained
               schema:
-                $ref: '#/components/schemas/Page'
-        '401':
+                $ref: "#/components/schemas/Page"
+        "401":
           description: unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '422':
+        "422":
           description: unprocessable
           content:
             application/json:
@@ -2018,8 +2018,8 @@ paths:
                 It supports pagination, each page will contain 30 articles by default.
       operationId: getPodcastEpisodes
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
         - name: username
           in: query
           required: false
@@ -2030,7 +2030,7 @@ paths:
             type: string
           example: codenewbie
       responses:
-        '200':
+        "200":
           description: A List of Podcast episodes filtered by username
           content:
             application/json:
@@ -2039,7 +2039,7 @@ paths:
                   class_name: PodcastEpisode
                   id: 4
                   path: /codenewbie/slug-4
-                  title: '5'
+                  title: "5"
                   image_url: >-
                     /uploads/podcast/image/8/624a3c09-8036-43e4-9187-4cbf6d3c1fd6.jpeg
                   podcast:
@@ -2050,8 +2050,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PodcastEpisodeIndex'
-        '404':
+                  $ref: "#/components/schemas/PodcastEpisodeIndex"
+        "404":
           description: Unknown Podcast username
           content:
             application/json:
@@ -2079,7 +2079,7 @@ paths:
             type: string
           example: janedoe
       responses:
-        '200':
+        "200":
           description: An object containing profile image details
           content:
             application/json:
@@ -2093,8 +2093,8 @@ paths:
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/ProfileImage'
-        '404':
+                  $ref: "#/components/schemas/ProfileImage"
+        "404":
           description: Resource Not Found
           content:
             application/json:
@@ -2139,7 +2139,7 @@ paths:
               - Article
               - User
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -2149,7 +2149,7 @@ paths:
                 id: 13
                 reactable_id: 283
                 reactable_type: Article
-        '401':
+        "401":
           description: unauthorized
           content:
             application/json:
@@ -2194,7 +2194,7 @@ paths:
               - Article
               - User
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -2204,7 +2204,7 @@ paths:
                 id: 15
                 reactable_id: 285
                 reactable_type: Article
-        '401':
+        "401":
           description: unauthorized
           content:
             application/json:
@@ -2222,10 +2222,10 @@ paths:
                 It supports pagination, each page will contain `30` articles by default
       operationId: getReadinglist
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam30to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam30to1000"
       responses:
-        '200':
+        "200":
           description: A list of articles in the users readinglist
           content:
             application/json:
@@ -2233,8 +2233,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ArticleIndex'
-        '401':
+                  $ref: "#/components/schemas/ArticleIndex"
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -2258,10 +2258,10 @@ paths:
         It supports pagination, each page will contain 10 tags by default.
       operationId: getTags
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam10to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam10to1000"
       responses:
-        '200':
+        "200":
           description: A List of all tags
           content:
             application/json:
@@ -2281,7 +2281,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Tag'
+                  $ref: "#/components/schemas/Tag"
   /api/users/me:
     get:
       summary: The authenticated user
@@ -2292,7 +2292,7 @@ paths:
         authenticated user
       operationId: getUserMe
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -2312,8 +2312,8 @@ paths:
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/User'
-        '401':
+                  $ref: "#/components/schemas/User"
+        "401":
           description: Unauthorized
           content:
             application/json:
@@ -2341,14 +2341,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
               schema:
                 type: object
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: "#/components/schemas/User"
   /api/users/{id}/unpublish:
     put:
       summary: Unpublish a User's Articles and Comments
@@ -2395,16 +2395,16 @@ paths:
             minimum: 1
           example: 1
       responses:
-        '204':
+        "204":
           description: User's articles and comments successfully unpublished
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '404':
+        "404":
           description: Unknown User ID (still accepted for async processing)
           content:
             application/json:
@@ -2446,16 +2446,16 @@ paths:
             minimum: 1
           example: 1
       responses:
-        '204':
+        "204":
           description: User successfully unpublished
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '404':
+        "404":
           description: Unknown User ID
           content:
             application/json:
@@ -2475,27 +2475,27 @@ paths:
       operationId: postAdminUsersCreate
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful
-        '401':
+        "401":
           description: Unauthorized
           content:
             application/json:
               example:
                 error: unauthorized
                 status: 401
-        '422':
+        "422":
           description: Unprocessable Entity
           content:
             application/json:
               example:
-                error: 'param is missing or the value is empty: email'
+                error: "param is missing or the value is empty: email"
                 status: 422
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserInviteParam'
+              $ref: "#/components/schemas/UserInviteParam"
   /api/videos:
     get:
       summary: Articles with a video
@@ -2515,10 +2515,10 @@ paths:
         It supports pagination, each page will contain 24 articles by default.
       operationId: videos
       parameters:
-        - $ref: '#/components/parameters/pageParam'
-        - $ref: '#/components/parameters/perPageParam24to1000'
+        - $ref: "#/components/parameters/pageParam"
+        - $ref: "#/components/parameters/perPageParam24to1000"
       responses:
-        '200':
+        "200":
           description: A List of all articles with videos
           content:
             application/json:
@@ -2530,7 +2530,7 @@ paths:
                     https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/thumbs-video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f-00001.png
                   title: The Millstone201
                   user_id: 1452
-                  video_duration_in_minutes: '00:00'
+                  video_duration_in_minutes: "00:00"
                   video_source_url: >-
                     https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f.m3u8
                   user:
@@ -2542,7 +2542,7 @@ paths:
                     https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/thumbs-video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f-00001.png
                   title: A Many-Splendoured Thing202
                   user_id: 1453
-                  video_duration_in_minutes: '00:00'
+                  video_duration_in_minutes: "00:00"
                   video_source_url: >-
                     https://dw71fyauz7yz9.cloudfront.net/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f/video-upload__1e42eb0bab4abb3c63baeb5e8bdfe69f.m3u8
                   user:
@@ -2550,7 +2550,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/VideoArticle'
+                  $ref: "#/components/schemas/VideoArticle"
 servers:
   - url: https://dev.to/api
     description: Production server
@@ -2759,11 +2759,11 @@ components:
           type: integer
           format: int32
         user:
-          $ref: '#/components/schemas/SharedUser'
+          $ref: "#/components/schemas/SharedUser"
         flare_tag:
-          $ref: '#/components/schemas/ArticleFlareTag'
+          $ref: "#/components/schemas/ArticleFlareTag"
         organization:
-          $ref: '#/components/schemas/SharedOrganization'
+          $ref: "#/components/schemas/SharedOrganization"
       required:
         - type_of
         - id
@@ -2974,7 +2974,7 @@ components:
           type: string
           format: url
         podcast:
-          $ref: '#/components/schemas/SharedPodcast'
+          $ref: "#/components/schemas/SharedPodcast"
       required:
         - type_of
         - class_name

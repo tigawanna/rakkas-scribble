@@ -9,7 +9,6 @@ import { Loader, PencilRuler, Save } from "lucide-react";
 import Cherry from "cherry-markdown";
 import { navigate } from "rakkasjs";
 
-
 interface EditOptionsProps {
   cherry: React.MutableRefObject<Cherry | null>;
   scribble_id: string;
@@ -32,7 +31,6 @@ export function EditorOptions({
   setInput,
   update_post_mutation,
 }: EditOptionsProps) {
-
   return (
     <Popover>
       <PopoverTrigger>
@@ -46,13 +44,11 @@ export function EditorOptions({
           className="btn btn-sm md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
           // data-tip={"save content"}
           onClick={() => {
-
             update_post_mutation.mutate({
               id: scribble_id,
               data: {
                 ...input,
                 content: cherry.current?.getMarkdown(),
-     
               },
             });
           }}
@@ -73,7 +69,6 @@ export function EditorOptions({
                 data: {
                   ...input,
                   content: cherry.current?.getMarkdown(),
- 
                 },
               },
               {

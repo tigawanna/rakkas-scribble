@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Hide the default scroll bar */
 ::-webkit-scrollbar {
   width: 5px;
@@ -10,7 +9,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  @apply bg-base-content
+  @apply bg-base-content;
 }
 
 /* Handle */

@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { emailPasswordLogin } from "@/lib/pb/client";
 import { toast } from "react-toastify";
 import { useFormHook } from "@/components/form/useForm";
-import {  useState } from "react";
+import { useState } from "react";
 import { Loader, Unlock } from "lucide-react";
 import { tryCatchWrapper } from "@/utils/async";
 

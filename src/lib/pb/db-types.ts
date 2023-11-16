@@ -99,7 +99,7 @@ export type ScribblePostsCreate = {
   last_published_at?: string | Date;
 
   post_media?: MaybeArray<string>;
-  main_post_image?: string|File|null;
+  main_post_image?: string | File | null;
   main_post_image_url?: string;
   description?: string;
   series?: string;
@@ -118,7 +118,7 @@ export type ScribblePostsUpdate = {
   publishers?: ScribblePublishers;
   post_media?: MaybeArray<string>;
 
-  main_post_image?: string|File|null;
+  main_post_image?: string | File | null;
   main_post_image_url?: string;
   description?: string;
   series?: string;

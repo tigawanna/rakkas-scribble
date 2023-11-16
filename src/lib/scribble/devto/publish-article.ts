@@ -1,8 +1,5 @@
 import { serverSidePocketBaseInstance } from "@/lib/pb/client";
-import {
-  ScribblePostsResponse,
-  ScribbleUserResponse,
-} from "@/lib/pb/db-types";
+import { ScribblePostsResponse, ScribbleUserResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
 import { removeDuplicatesFromStringList } from "@/utils/helpers/others";
 import { RequestContext } from "rakkasjs";
@@ -12,14 +9,21 @@ interface PublishProps {
   ctx: RequestContext<unknown>;
   input: Partial<ScribblePostsResponse>;
 }
-export async function publishScribbleToDevTo({ ctx, input }: PublishProps): 
-Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
+export async function publishScribbleToDevTo({
+  ctx,
+  input,
+}: PublishProps): Promise<{
+  data: DevToPublishResponse | null;
+  error: null | { message: string };
+}> {
   try {
     const devtoInput: DevToArticleInput = {
       body_markdown: input.content,
       description: input.description,
       title: input.title,
-      main_image: import.meta.env.DEV ?"https://picsum.photos/900/300":input.main_post_image,
+      main_image: import.meta.env.DEV
+        ? "https://picsum.photos/900/300"
+        : input.main_post_image,
       series: input.series,
       tags: input.tags?.split(",") ?? ["webdev"],
       published: false,
@@ -27,9 +31,9 @@ Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
     const { data: pb, error: pb_error } = await tryCatchWrapper(
       serverSidePocketBaseInstance(ctx),
     );
-    if (pb_error) return { data: null,error:{ message: pb_error.message } };
+    if (pb_error) return { data: null, error: { message: pb_error.message } };
     const user = pb?.authStore?.model as ScribbleUserResponse | undefined;
-    if (!user) return { data: null, error:{ message: "user not found"} };
+    if (!user) return { data: null, error: { message: "user not found" } };
     const key = user?.keys?.devto?.key;
 
     const { data, error } = await tryCatchWrapper(
@@ -41,7 +45,7 @@ Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
     }
     if (data) {
       pb?.collection("scribble_posts").update(input?.id!, {
-      tags: removeDuplicatesFromStringList(data.tags),
+        tags: removeDuplicatesFromStringList(data.tags),
         publishers: {
           ...input?.publishers,
           devto: {
@@ -51,12 +55,15 @@ Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
           },
         },
       });
-  
+
       return { data, error: null };
     }
-    return { data: null, error: {message:"failed to publish to devto"} };
+    return { data: null, error: { message: "failed to publish to devto" } };
   } catch (error) {
-    return { data: null, error: {message:"failed to publish to devto " + error} };
+    return {
+      data: null,
+      error: { message: "failed to publish to devto " + error },
+    };
   }
 }
 
@@ -70,7 +77,8 @@ export async function devtoPublishArticle({
   article,
 }: PublishScribbleToDevToProps): Promise<DevToPublishResponse> {
   try {
-    if (!key) throw new Error("missing devto key , register one in the setiings");
+    if (!key)
+      throw new Error("missing devto key , register one in the setiings");
     if (!article) throw new Error("missing article");
     const response = await fetch("https://dev.to/api/articles", {
       method: "POST",
@@ -83,8 +91,13 @@ export async function devtoPublishArticle({
     });
 
     if (response.status !== 201) {
-      throw new Error("failed to update article :" + " ststus: " + response.status + " statusText: " + response.statusText);
-
+      throw new Error(
+        "failed to update article :" +
+          " ststus: " +
+          response.status +
+          " statusText: " +
+          response.statusText,
+      );
     }
     const data = await response.json();
     return data;
@@ -92,7 +105,3 @@ export async function devtoPublishArticle({
     throw error;
   }
 }
-
-
-
-

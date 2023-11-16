@@ -11,7 +11,6 @@ import { tryCatchWrapper } from "@/utils/async";
 import { Loader } from "lucide-react";
 import { PbTheTextInput } from "@/lib/pb/components/form/PBTheTextInput";
 
-
 interface SignupFormProps {}
 
 export function SignUpForm({}: SignupFormProps) {

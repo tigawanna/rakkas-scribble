@@ -4,55 +4,55 @@ import { ExternalLink } from "lucide-react";
 import { Link } from "rakkasjs";
 
 interface ScribbleListCardProps {
-post:ScribblePostsResponse
+  post: ScribblePostsResponse;
 }
 
-export function ScribbleListCard({post}:ScribbleListCardProps){
-return (
-  <li
-    key={post.id}
-    className="border border-accent flex flex-col justify-between
+export function ScribbleListCard({ post }: ScribbleListCardProps) {
+  return (
+    <li
+      key={post.id}
+      className="border border-accent flex flex-col justify-between
                    rounded-lg w-[90%] sm:w-[45%] lg:w-[30%]"
-  >
-    <img
-      className="w-full aspect-video object-cover"
-      // src={getFileURL({
-      //   collection_id_or_name: "scribble_posts",
-      //   file_name: post.main_post_image,
-      //   record_id: post.id,
-      // })}
-      src={post.main_post_image_url}
-    />
-    <div className="flex flex-col justify-between  p-3">
-      <div className="flex flex-col">
-        <div className="text-3xl font-bold">{post.title}</div>
-        <p className="text-sm line-clamp-3">{post.description}</p>
-        <div className="text-lg w-full ">{post.series}</div>
-      </div>
-
-      <div className="border-t border-t-accent ">
-        <div className="flex justify-between">
-          <Link
-            target="_blank"
-            href={post.publishers?.devto?.url}
-            className="text-sm text-info hover:text-info/50"
-          >
-            <div className="flex gap-2 p-1">
-              open post in devto <ExternalLink className="w-4 h-4" />
-            </div>
-          </Link>
-          <Link
-            href={"/dashboard/scribble/" + post.id}
-            className="text-sm text-info hover:text-info/50"
-          >
-            <div className="flex gap-2 p-1">
-              View post <ExternalLink className="w-4 h-4" />
-            </div>
-          </Link>
+    >
+      <img
+        className="w-full aspect-video object-cover"
+        // src={getFileURL({
+        //   collection_id_or_name: "scribble_posts",
+        //   file_name: post.main_post_image,
+        //   record_id: post.id,
+        // })}
+        src={post.main_post_image_url}
+      />
+      <div className="flex flex-col justify-between  p-3">
+        <div className="flex flex-col">
+          <div className="text-3xl font-bold">{post.title}</div>
+          <p className="text-sm line-clamp-3">{post.description}</p>
+          <div className="text-lg w-full ">{post.series}</div>
         </div>
-        <PBTimeStamp timestamp={post.created} label="Created" />
+
+        <div className="border-t border-t-accent ">
+          <div className="flex justify-between">
+            <Link
+              target="_blank"
+              href={post.publishers?.devto?.url}
+              className="text-sm text-info hover:text-info/50"
+            >
+              <div className="flex gap-2 p-1">
+                open post in devto <ExternalLink className="w-4 h-4" />
+              </div>
+            </Link>
+            <Link
+              href={"/dashboard/scribble/" + post.id}
+              className="text-sm text-info hover:text-info/50"
+            >
+              <div className="flex gap-2 p-1">
+                View post <ExternalLink className="w-4 h-4" />
+              </div>
+            </Link>
+          </div>
+          <PBTimeStamp timestamp={post.created} label="Created" />
+        </div>
       </div>
-    </div>
-  </li>
-);
+    </li>
+  );
 }

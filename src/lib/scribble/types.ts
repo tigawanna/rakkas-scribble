@@ -3,7 +3,6 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
   "/api/articles": {
     /**
@@ -392,7 +391,11 @@ export interface paths {
              * @default contained
              * @enum {string}
              */
-            template?: "contained" | "full_within_layout" | "nav_bar_included" | "json";
+            template?:
+              | "contained"
+              | "full_within_layout"
+              | "nav_bar_included"
+              | "json";
           };
         };
       };
@@ -546,7 +549,12 @@ export interface paths {
     post: {
       parameters: {
         query: {
-          category: "like" | "unicorn" | "exploding_head" | "raised_hands" | "fire";
+          category:
+            | "like"
+            | "unicorn"
+            | "exploding_head"
+            | "raised_hands"
+            | "fire";
           reactable_id: number;
           reactable_type: "Comment" | "Article" | "User";
         };
@@ -577,7 +585,12 @@ export interface paths {
     post: {
       parameters: {
         query: {
-          category: "like" | "unicorn" | "exploding_head" | "raised_hands" | "fire";
+          category:
+            | "like"
+            | "unicorn"
+            | "exploding_head"
+            | "raised_hands"
+            | "fire";
           reactable_id: number;
           reactable_type: "Comment" | "Article" | "User";
         };
@@ -839,7 +852,11 @@ export interface components {
        * @default contained
        * @enum {string}
        */
-      template: "contained" | "full_within_layout" | "nav_bar_included" | "json";
+      template:
+        | "contained"
+        | "full_within_layout"
+        | "nav_bar_included"
+        | "json";
     };
     /** @description Representation of a podcast episode returned in a list */
     PodcastEpisodeIndex: {
@@ -959,7 +976,15 @@ export interface components {
        * @description Identifies which area of site layout the ad can appear in
        * @enum {string}
        */
-      placement_area: "sidebar_left" | "sidebar_left_2" | "sidebar_right" | "feed_first" | "feed_second" | "feed_third" | "post_sidebar" | "post_comments";
+      placement_area:
+        | "sidebar_left"
+        | "sidebar_left_2"
+        | "sidebar_right"
+        | "feed_first"
+        | "feed_second"
+        | "feed_third"
+        | "post_sidebar"
+        | "post_comments";
       /** @description Tags on which this ad can be displayed (blank is all/any tags) */
       tag_list?: string;
       /** @description Articles this ad should *not* appear on (blank means no articles are disallowed, and this ad can appear next to any/all articles). Comma-separated list of integer Article IDs */
@@ -968,7 +993,19 @@ export interface components {
        * @description Specifies an group of users to show this ad to (only works with logged-in users)
        * @enum {string}
        */
-      audience_segment_type?: "testing" | "trusted" | "posted" | "no_posts_yet" | "dark_theme" | "light_theme" | "no_experience" | "experience1" | "experience2" | "experience3" | "experience4" | "experience5";
+      audience_segment_type?:
+        | "testing"
+        | "trusted"
+        | "posted"
+        | "no_posts_yet"
+        | "dark_theme"
+        | "light_theme"
+        | "no_experience"
+        | "experience1"
+        | "experience2"
+        | "experience3"
+        | "experience4"
+        | "experience5";
       /**
        * @description Potentially limits visitors to whom the ad is visible
        * @default all
@@ -1018,7 +1055,6 @@ export type $defs = Record<string, never>;
 export type external = Record<string, never>;
 
 export interface operations {
-
   /**
    * Published articles
    * @description This endpoint allows the client to retrieve a list of articles.
@@ -1541,22 +1577,22 @@ export interface operations {
       200: {
         content: {
           "application/json": {
-              /** @description user_follower by default */
-              type_of?: string;
-              /** Format: int32 */
-              id?: number;
-              /**
-               * Format: int32
-               * @description The follower's user id
-               */
-              user_id?: number;
-              /** @description The follower's name */
-              name?: string;
-              /** @description A path to the follower's profile */
-              path?: string;
-              /** @description Profile image (640x640) */
-              profile_image?: string;
-            }[];
+            /** @description user_follower by default */
+            type_of?: string;
+            /** Format: int32 */
+            id?: number;
+            /**
+             * Format: int32
+             * @description The follower's user id
+             */
+            user_id?: number;
+            /** @description The follower's name */
+            name?: string;
+            /** @description A path to the follower's profile */
+            path?: string;
+            /** @description Profile image (640x640) */
+            profile_image?: string;
+          }[];
         };
       };
       /** @description unauthorized */

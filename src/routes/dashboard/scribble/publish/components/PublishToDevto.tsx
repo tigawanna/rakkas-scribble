@@ -84,14 +84,15 @@ export function PublishToDevto({
       },
     },
   );
-const imageUrl = getFileURL({
-  collection_id_or_name: "scribble_posts",
-  file_name: scribble.main_post_image,
-  record_id: scribble.id,
-})
-const imageFileExists = (input.main_post_image && isStringaUrl(imageUrl)?true:false);
-const imageURLExists = isStringaUrl(input.main_post_image_url);
-const bothImagesDontExist = !imageFileExists && !imageURLExists
+  const imageUrl = getFileURL({
+    collection_id_or_name: "scribble_posts",
+    file_name: scribble.main_post_image,
+    record_id: scribble.id,
+  });
+  const imageFileExists =
+    input.main_post_image && isStringaUrl(imageUrl) ? true : false;
+  const imageURLExists = isStringaUrl(input.main_post_image_url);
+  const bothImagesDontExist = !imageFileExists && !imageURLExists;
   return (
     <div
       className="w-full h-full flex flex-col  items-center justify-center p-3 
@@ -120,7 +121,6 @@ const bothImagesDontExist = !imageFileExists && !imageURLExists
             }}
           />
           <div className="w-full py-2 flex flex-col gap-2">
-      
             <div>
               <PbTheImagePicker
                 label={"upload image"}
@@ -133,7 +133,7 @@ const bothImagesDontExist = !imageFileExists && !imageURLExists
                 }}
               />
             </div>
-          
+
             {/* {(true) && (
             <div>
             <p className="text-accent ">add image URL </p>
@@ -150,7 +150,6 @@ const bothImagesDontExist = !imageFileExists && !imageURLExists
             />
             </div>
             )} */}
-
           </div>
 
           <TheStringListInput

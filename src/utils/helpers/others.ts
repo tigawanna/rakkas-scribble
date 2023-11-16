@@ -13,7 +13,6 @@ export const dateToString = (date?: Date | string) => {
   return new Date(date).toISOString().slice(0, 10);
 };
 
-
 export function removeDuplicatesFromArray(strings: string[]): string[] {
   const uniqueStrings: Set<string> = new Set(strings);
   return Array.from(uniqueStrings);
@@ -22,12 +21,11 @@ export function removeDuplicatesFromArray(strings: string[]): string[] {
 export function removeDuplicatesFromStringList(strings: string[]): string {
   const uniqueStrings: Set<string> = new Set();
   strings.forEach((s) => uniqueStrings.add(s));
-  if(uniqueStrings.size < 1) return "";
+  if (uniqueStrings.size < 1) return "";
   return Array.from(uniqueStrings).join(",");
 }
 
-
-export function isStringaUrl(link: string|undefined) {
+export function isStringaUrl(link: string | undefined) {
   if (!link || !link.trim() || link.trim().length < 1) return false;
   try {
     new URL(link);

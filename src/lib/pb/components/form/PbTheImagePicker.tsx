@@ -4,8 +4,8 @@ import { Schema } from "../../db-types";
 import { ImagePlus } from "lucide-react";
 
 interface PbTheImagePickerProps {
-  show_preview?: boolean
-  label?:React.ReactNode
+  show_preview?: boolean;
+  label?: React.ReactNode;
   collection_id_or_name?: keyof Schema;
   record_id?: string;
   file_name?: string;
@@ -14,7 +14,7 @@ interface PbTheImagePickerProps {
 
 export function PbTheImagePicker({
   label,
-  show_preview=true,
+  show_preview = true,
   collection_id_or_name,
   record_id,
   file_name,

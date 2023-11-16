@@ -40,11 +40,17 @@ export function useUser() {
 
   const user_avatar = user?.avatar
     ? getFileURL({
-      collection_id_or_name: "scribble_user",
-      file_name: user.avatar,
-      record_id: user.id,
-    })
+        collection_id_or_name: "scribble_user",
+        file_name: user.avatar,
+        record_id: user.id,
+      })
     : usericon;
 
-  return { user, user_mutation: mutation, page_ctx, loggout: mutation.mutate, user_avatar };
+  return {
+    user,
+    user_mutation: mutation,
+    page_ctx,
+    loggout: mutation.mutate,
+    user_avatar,
+  };
 }

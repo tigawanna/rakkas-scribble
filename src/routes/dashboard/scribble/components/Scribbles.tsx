@@ -3,7 +3,7 @@ import { tryCatchWrapper } from "@/utils/async";
 import { numberToArray } from "@/utils/helpers/others";
 import { useSearchWithQuery } from "@/utils/hooks/search";
 import { Search } from "lucide-react";
-import { ClientSuspense,navigate, usePageContext } from "rakkasjs";
+import { ClientSuspense, navigate, usePageContext } from "rakkasjs";
 import { Suspense } from "react";
 import { NewScribbleModal } from "./NewScribbleModal";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -83,12 +83,12 @@ export function Scribbles({}: ScribbbleProps) {
       )}
       {/* posts list */}
       <div className="w-full h-full flex items-center md:justify-center">
-        <Suspense fallback={<SkeletonLoader items={12}  />}>
-        <ul className="w-full h-full  flex flex-wrap  p-3 gap-5 md:gap-3">
-          {posts?.map((post) => {
-            return <ScribbleListCard post={post} key={post.id} />;
-          })}
-        </ul>
+        <Suspense fallback={<SkeletonLoader items={12} />}>
+          <ul className="w-full h-full  flex flex-wrap  p-3 gap-5 md:gap-3">
+            {posts?.map((post) => {
+              return <ScribbleListCard post={post} key={post.id} />;
+            })}
+          </ul>
         </Suspense>
       </div>
     </div>

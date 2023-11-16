@@ -93,14 +93,17 @@ export function getFileURL({
   return `${pb_url}/api/files/${collection_id_or_name}/${record_id}/${file_name}`;
 }
 
-
-export async function serverSidePocketBaseInstance(ctx: RequestContext<unknown>) {
+export async function serverSidePocketBaseInstance(
+  ctx: RequestContext<unknown>,
+) {
   try {
-    const pb_cookie = ctx.request.headers.get("cookie") ?? ""
-    const pb = new PocketBase(import.meta.env.RAKKAS_PB_URL) as PocketBaseClient
+    const pb_cookie = ctx.request.headers.get("cookie") ?? "";
+    const pb = new PocketBase(
+      import.meta.env.RAKKAS_PB_URL,
+    ) as PocketBaseClient;
     pb.authStore.loadFromCookie(pb_cookie);
-    return pb
+    return pb;
   } catch (error) {
-    throw error
+    throw error;
   }
 }

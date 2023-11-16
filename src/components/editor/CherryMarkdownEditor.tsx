@@ -7,7 +7,6 @@ import { usePageContext } from "rakkasjs";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { getFileURL } from "@/lib/pb/client";
 
-
 interface CherryMarkdownEditorProps {
   input_string: string;
   input: Partial<ScribblePostsResponse>;
@@ -43,7 +42,6 @@ export default function CherryMarkdownEditor({
     toolbars: {
       theme: "dark",
 
-
       toolbar: [
         "bold",
         "italic",
@@ -76,7 +74,7 @@ export default function CherryMarkdownEditor({
         "settings",
       ],
 
-      sidebar: ["mobilePreview", "copy", "theme",],
+      sidebar: ["mobilePreview", "copy", "theme"],
       toolbarRight: ["fullScreen", "export"],
     },
 
@@ -86,7 +84,9 @@ export default function CherryMarkdownEditor({
         ?.collection("scribble_posts")
         .update(input.id!, {
           // @ts-expect-error
-          input_media: input.input_media ? [...input.input_media, file] : [file],
+          input_media: input.input_media
+            ? [...input.input_media, file]
+            : [file],
         })
         .then((res) => {
           console.log("res url === ", res.post_media);
