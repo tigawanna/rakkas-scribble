@@ -1,7 +1,5 @@
-import { ScribbleUserResponse } from "@/lib/pb/db-types";
 import { useUser } from "@/lib/rakkas/hooks/useUser";
-import { UserCircle2 } from "lucide-react";
-import { usePageContext, useSSQ } from "rakkasjs";
+
 
 interface ScribbleUserProps {}
 

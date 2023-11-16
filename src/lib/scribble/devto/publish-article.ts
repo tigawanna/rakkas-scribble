@@ -12,13 +12,14 @@ interface PublishProps {
   ctx: RequestContext<unknown>;
   input: Partial<ScribblePostsResponse>;
 }
-export async function publishScribbleToDevTo({ ctx, input }: PublishProps) {
+export async function publishScribbleToDevTo({ ctx, input }: PublishProps): 
+Promise<{ data: DevToPublishResponse | null,error:null|{message:string}}> {
   try {
     const devtoInput: DevToArticleInput = {
       body_markdown: input.contentMarkdown,
       description: input.description,
       title: input.title,
-      // main_image: input.main_post_image,
+      main_image: input.main_post_image,
       series: input.series,
       tags: input.tags,
       published: false,
@@ -34,6 +35,9 @@ export async function publishScribbleToDevTo({ ctx, input }: PublishProps) {
     const { data, error } = await tryCatchWrapper(
       devtoPublishArticle({ key, article: devtoInput }),
     );
+    console.log(" ============== DEVTO UPDATE OUTPUT ============= ", {
+      data, error
+    })
     if (error) {
       return { data: null, error: { message: error.message } };
     }
@@ -69,8 +73,8 @@ export async function devtoPublishArticle({
   article,
 }: PublishScribbleToDevToProps): Promise<DevToPublishResponse> {
   try {
-    if (!key) throw "missing devto key , register one in the setiings";
-    if (!article) throw "missing article";
+    if (!key) throw new Error("missing devto key , register one in the setiings");
+    if (!article) throw new Error("missing article");
     const response = await fetch("https://dev.to/api/articles", {
       method: "POST",
       headers: {
@@ -81,10 +85,11 @@ export async function devtoPublishArticle({
       body: JSON.stringify({ article }),
     });
 
-    const data = await response.json();
     if (response.status !== 201) {
-      throw "failed to publish article :" + data.error;
+      throw new Error("failed to update article :" + " ststus: " + response.status + " statusText: " + response.statusText);
+
     }
+    const data = await response.json();
     return data;
   } catch (error) {
     throw error;

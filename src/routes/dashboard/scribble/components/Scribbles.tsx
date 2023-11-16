@@ -9,7 +9,7 @@ import { Search, ExternalLink } from "lucide-react";
 import { Link, navigate, usePageContext, useSSQ } from "rakkasjs";
 import { Suspense } from "react";
 import { NewScribbleModal } from "./NewScribbleModal";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 interface ScribbbleProps {}
 
@@ -18,31 +18,20 @@ export function Scribbles({}: ScribbbleProps) {
   const { debouncedValue, isDebouncing, keyword, setKeyword } =
     useSearchWithQuery();
   const page_number = parseInt(page_ctx.url.searchParams.get("p") ?? "1") ?? 1;
-  // const query = useSSQ((ctx) => {
-  //   return tryCatchWrapper(
-  //     ctx.locals.pb?.collection("scribble_posts").getList(page_number, 12, {
-  //       sort: "-created",
-  //       filter: `title~"${debouncedValue}"`,
-  //     }),
-  //   );
-  // },{
-  //   refetchOnMount: true,
-  //   refetchOnWindowFocus: true,
-  //   refetchOnReconnect: true,
-  // });
-    const query = useQuery({
-      queryKey: ["scribbles", debouncedValue, page_number],
-      queryFn: () => {
-        return tryCatchWrapper(
-          page_ctx.locals.pb
-            ?.collection("scribble_posts")
-            .getList(page_number, 12, {
-              sort: "-created",
-              filter: `title~"${debouncedValue}"`,
-            }),
-        );
-      },
-    });
+
+  const query = useSuspenseQuery({
+    queryKey: ["scribble_posts", debouncedValue, page_number],
+    queryFn: () => {
+      return tryCatchWrapper(
+        page_ctx.locals.pb
+          ?.collection("scribble_posts")
+          .getList(page_number, 12, {
+            sort: "-created",
+            filter: `title~"${debouncedValue}"`,
+          }),
+      );
+    },
+  });
   function handleChange(e: any) {
     setKeyword(e.target.value);
   }
@@ -76,9 +65,6 @@ export function Scribbles({}: ScribbbleProps) {
           )}
         </div>
 
-        {/* <Link href={`/scribble/new`} className="btn btn-sm btn-outline">
-          <Plus className="h-7 w-7" />
-        </Link> */}
         <NewScribbleModal />
       </div>
       {!posts && (
@@ -89,15 +75,15 @@ export function Scribbles({}: ScribbbleProps) {
         </div>
       )}
       {/* posts list */}
-      <div className="w-full h-full flex items-center ">
+      <div className="w-full h-full flex items-center md:justify-center">
         <Suspense fallback={<Spinner size="60px" />}>
-          <ul className="w-full h-full flex flex-wrap p-3 gap-3">
+          <ul className="w-full h-full  flex flex-wrap  p-3 gap-5 md:gap-3">
             {posts?.map((post) => {
               return (
                 <li
                   key={post.id}
-                  className="whitespace-nowrap border border-accent 
-               p-1 rounded-lg w-[90%] sm:w-[45%] lg:w-[30%]"
+                  className="border border-accent flex flex-col justify-between
+                   rounded-lg w-[90%] sm:w-[45%] lg:w-[30%]"
                 >
                   <img
                     className="w-full aspect-video object-cover"
@@ -107,30 +93,36 @@ export function Scribbles({}: ScribbbleProps) {
                       record_id: post.id,
                     })}
                   />
-                  <div className="text-3xl font-bold">{post.title}</div>
-                  <div className="text-lg">{post.description}</div>
-                  <div className="text-lg">{post.series}</div>
-                  <div className="w-full flex justify-between">
-                    <Link
-                      target="_blank"
-                      href={post.publishers?.devto?.url}
-                      className="text-sm text-info hover:text-info/50"
-                    >
-                      <div className="flex gap-2 p-1">
-                        open post in devto <ExternalLink className="w-4 h-4" />
+                  <div className="flex flex-col justify-between  p-3">
+                    <div className="flex flex-col">
+                      <div className="text-3xl font-bold">{post.title}</div>
+                      <p className="text-sm line-clamp-3">{post.description}</p>
+                      <div className="text-lg w-full ">{post.series}</div>
+                    </div>
+
+                    <div className="border-t border-t-accent ">
+                      <div className="flex justify-between">
+                        <Link
+                          target="_blank"
+                          href={post.publishers?.devto?.url}
+                          className="text-sm text-info hover:text-info/50"
+                        >
+                          <div className="flex gap-2 p-1">
+                            open post in devto{" "}
+                            <ExternalLink className="w-4 h-4" />
+                          </div>
+                        </Link>
+                        <Link
+                          href={"/dashboard/scribble/" + post.id}
+                          className="text-sm text-info hover:text-info/50"
+                        >
+                          <div className="flex gap-2 p-1">
+                            View post <ExternalLink className="w-4 h-4" />
+                          </div>
+                        </Link>
                       </div>
-                    </Link>
-                    <Link
-                      href={"scribble/" + post.id}
-                      className="text-sm text-info hover:text-info/50"
-                    >
-                      <div className="flex gap-2 p-1">
-                        View post <ExternalLink className="w-4 h-4" />
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="text-sm ">
-                    <PBTimeStamp timestamp={post.created} label="Created" />
+                      <PBTimeStamp timestamp={post.created} label="Created" />
+                    </div>
                   </div>
                 </li>
               );

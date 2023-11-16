@@ -28,7 +28,7 @@ export function NewScribbleModal({}: NewScribbleModalProps) {
     {
       onSuccess(data) {
         if (data.data) {
-          const navigate_to = `/dashboard/blog/${data.data.id!}`;
+          const navigate_to = `/dashboard/scribble/${data.data.id!}`;
           navigate(navigate_to);
         }
         if (data.error) {

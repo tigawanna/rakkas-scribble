@@ -6,7 +6,7 @@ import { CherryTypes } from "./utils/types";
 import { usePageContext } from "rakkasjs";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { getFileURL } from "@/lib/pb/client";
-import { extraOptions } from "@/routes/dashboard/blog/components/editor-menus/Toobarmenus";
+
 
 interface CherryMarkdownEditorProps {
   input_string: string;
@@ -42,9 +42,7 @@ export default function CherryMarkdownEditor({
 
     toolbars: {
       theme: "dark",
-      customMenu: {
-        extra: extraOptions,
-      },
+
 
       toolbar: [
         "bold",
@@ -78,7 +76,7 @@ export default function CherryMarkdownEditor({
         "settings",
       ],
 
-      sidebar: ["mobilePreview", "copy", "theme", "extra"],
+      sidebar: ["mobilePreview", "copy", "theme",],
       toolbarRight: ["fullScreen", "export"],
     },
 

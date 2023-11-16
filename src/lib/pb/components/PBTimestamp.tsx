@@ -7,7 +7,7 @@ interface PbTimesProps {
 
 export function PBTimeStamp({ timestamp, label }: PbTimesProps) {
   return (
-    <div className=" flex w-[90%] items-center justify-between border-t border-t-accent text-sm gap-2">
+    <div className=" flex items-center justify-between  text-sm gap-2">
       {label && label}
       <h3>{dateToString(timestamp)}</h3>
     </div>

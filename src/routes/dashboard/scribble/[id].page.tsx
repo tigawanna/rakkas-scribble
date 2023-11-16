@@ -1,7 +1,8 @@
 import { PageProps } from "rakkasjs"
-export default function OneScribblePage({}:PageProps) {
+import { ScribbleEditor } from "./components/ScribbleEditor";
+export default function OneScribblePage({params}:PageProps) {
 return (
-<div className="w-full h-full min-h-screen flex items-center justify-center">
-    OneScribble Page
-</div>
-)}
+  <div className="w-full h-full min-h-screen flex items-center justify-center">
+    <ScribbleEditor scribble_id={params.id} />
+  </div>
+);}

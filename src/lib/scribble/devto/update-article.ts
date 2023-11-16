@@ -9,7 +9,10 @@ interface PublishProps {
   ctx: RequestContext<unknown>;
   input: Partial<ScribblePostsResponse>;
 }
-export async function updatePublishedScribbleToDevTo({ ctx, input }: PublishProps) {
+export async function updatePublishedScribbleToDevTo({
+  ctx,
+  input,
+}: PublishProps) {
   try {
     const devtoInput: DevToArticleInput = {
       body_markdown: input.contentMarkdown,
@@ -23,20 +26,23 @@ export async function updatePublishedScribbleToDevTo({ ctx, input }: PublishProp
     const { data: pb, error: pb_error } = await tryCatchWrapper(
       serverSidePocketBaseInstance(ctx),
     );
-    if (pb_error) return { data: null, error:{message:pb_error.message} };
+    if (pb_error) return { data: null, error: { message: pb_error.message } };
     const user = pb?.authStore?.model as ScribbleUserResponse | undefined;
-    if (!user) return { data: null, error:{message: "user not found"} };
+    if (!user) return { data: null, error: { message: "unauthorized" } };
     const key = user?.keys?.devto?.key;
-    //   console.log("========= Input ===========", input);
-    //   console.log("========= DEBUG devtoInput ===========", devtoInput);
-    const { data, error } = await tryCatchWrapper(updateDevToArticleByID
-      ({ id:input?.publishers?.devto?.id!,key, article: devtoInput }),
-    );
 
+    const { data, error } = await tryCatchWrapper(
+      updateDevToArticleByID({
+        id: input?.publishers?.devto?.id!,
+        key,
+        article: devtoInput,
+      }),
+    );
+ 
     if (error) {
-      return { data: null, error:{message:error.message} };
+      return { data: null, error: { message: error.message } };
     }
-  
+
     if (data) {
       pb?.collection("scribble_posts").update(input?.id!, {
         ...input,
@@ -50,12 +56,15 @@ export async function updatePublishedScribbleToDevTo({ ctx, input }: PublishProp
           },
         },
       });
-      
-      return { data, error: null, };
+
+      return { data, error: null };
     }
-    return { data: null, error: {message:"failed to publish to devto"} };
-  } catch (error:any) {
-    return { data: null, error: {message:"failed to publish to devto " + error?.message} };
+    return { data: null, error: { message: "failed to publish to devto" } };
+  } catch (error: any) {
+    return {
+      data: null,
+      error: { message: "failed to publish to devto " + error?.message },
+    };
   }
 }
 
@@ -70,10 +79,12 @@ export async function updateDevToArticleByID({
   article,
 }: UpdateDevToScribbleByIDProps): Promise<DevToPublishResponse> {
   try {
-    if (!key) throw new Error("missing devto key , register one in the setiings");
+    if (!key)
+      throw new Error("missing devto key , register one in the setiings");
     if (!article) throw new Error("missing article");
-    const response = await fetch("https://dev.to/api/articles/" + id + "", {
-      method: "POST",
+
+    const response = await fetch(`https://dev.to/api/articles/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "api-key": key,
@@ -82,10 +93,12 @@ export async function updateDevToArticleByID({
       body: JSON.stringify({ article }),
     });
 
-    const data = await response.json();
-    if (response.status !== 201) {
-      throw new Error("failed to update article :" + data.error)
+    if (response.status !== 200) {
+      throw new Error(
+        "failed to update article :" + " statusText: " + response.statusText,
+      );
     }
+    const data = await response.json();
     return data;
   } catch (error) {
     throw error;
