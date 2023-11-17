@@ -4,7 +4,6 @@ import { tryCatchWrapper } from "@/utils/async";
 import Cherry from "cherry-markdown";
 import { ClientSuspense, usePageContext } from "rakkasjs";
 import { lazy, useRef } from "react";
-
 import { EditorOptions } from "./EditorOptions";
 import { Spinner } from "@/components/navigation/loaders/Spinner";
 import { useQuery } from "@tanstack/react-query";
@@ -42,7 +41,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       published_at: data?.published_at,
       series: data?.series,
       main_post_image_url:
-      data?.main_post_image_url ?? "https://picsum.photos/500/900",
+        data?.main_post_image_url ?? "https://picsum.photos/500/900",
       last_published_at: data?.last_published_at,
       post_media: data?.post_media,
       publishingDetails: data?.publishingDetails,
@@ -56,14 +55,16 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
     <div className="w-full h-full flex justify-center items-center">
       <ClientSuspense fallback={<Spinner size="100px" />}>
         <div
-          className="w-full min-h-screen h-full flex flex-col justify-between 
-        gap-3 relative"
-        >
-          <div className="absolute top-[2%] left-[2%] right-[2%] flex flex-col md:flex-row md:justify-between md:items-center">
+          className="w-full min-h-screen h-full flex flex-col justify-between gap-3 relative">
+          <div
+            className="absolute top-[1%] left-[2%] right-[2%] 
+          flex flex-col gap-3"
+          >
             <h2 className="text-2xl md:text-5xl font-bold ">{input?.title}</h2>
+            <p className="text-sm line-clamp-2 font-sans text-accent-content">{input.description}</p>
           </div>
 
-          <div className="absolute top-[7%] w-full h-full">
+          <div className="absolute top-[15%] w-full h-full">
             <div className="w-full h-full flex r">
               <CherryMarkdownEditor
                 input={input}
@@ -74,7 +75,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
           </div>
           <div className="flex flex-col  gap-1  fixed bottom-[10%] right-[7%] z-50">
             <EditorOptions
-              scribble_id={data?.id!}
+              scribble={data}
               update_post_mutation={update_post_mutation}
               cherry={cherry}
               input={input}

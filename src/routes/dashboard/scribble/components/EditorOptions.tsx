@@ -5,13 +5,16 @@ import {
 } from "@/components/shadcn/ui/popover";
 import { UseMutationResult } from "@tanstack/react-query";
 import { ScribblePostsResponse, ScribblePostsUpdate } from "@/lib/pb/db-types";
-import { Loader, PencilRuler, Save } from "lucide-react";
+import { Loader, PencilRuler} from "lucide-react";
 import Cherry from "cherry-markdown";
 import { navigate } from "rakkasjs";
+import { ScribbleImagesModal } from "./ScribbleImagesModal";
+import { toast } from "react-toastify";
+import { ScribbleDetailsModal } from "./ScribbleDetailsModal";
 
 interface EditOptionsProps {
   cherry: React.MutableRefObject<Cherry | null>;
-  scribble_id: string;
+  scribble?: ScribblePostsResponse | null;
   input: Partial<ScribblePostsResponse>;
   setInput: React.Dispatch<
     React.SetStateAction<Partial<ScribblePostsResponse>>
@@ -25,7 +28,7 @@ interface EditOptionsProps {
 }
 
 export function EditorOptions({
-  scribble_id,
+  scribble,
   cherry,
   input,
   setInput,
@@ -40,12 +43,26 @@ export function EditorOptions({
         className="w-fit flex flex-col 
       gap-2 py-2 md:px-3 items-center justify-center rounded-lg"
       >
+        <ScribbleImagesModal input={input} />
+        {scribble && (
+          <ScribbleDetailsModal
+            scribble={scribble}
+            input={input}
+            setInput={setInput}
+          />
+        )}
         <button
-          className="btn btn-sm md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
+          className="btn btn-sm  flex gap-2"
           // data-tip={"save content"}
           onClick={() => {
+            if (!scribble) {
+              toast("No Scribble present", {
+                type: "error",
+              });
+              return;
+            }
             update_post_mutation.mutate({
-              id: scribble_id,
+              id: scribble?.id!,
               data: {
                 ...input,
                 content: cherry.current?.getMarkdown(),
@@ -60,12 +77,18 @@ export function EditorOptions({
           )}
         </button>
         <button
-          className="btn btn-sm md:tooltip hover:md:tooltip-open md:tooltip-top flex gap-2"
+          className="btn btn-sm  flex gap-2"
           // data-tip={"save content"}
           onClick={() => {
+            if (!scribble) {
+              toast("No Scribble present", {
+                type: "error",
+              });
+              return;
+            }
             update_post_mutation.mutate(
               {
-                id: scribble_id,
+                id: scribble?.id!,
                 data: {
                   ...input,
                   content: cherry.current?.getMarkdown(),
@@ -73,16 +96,13 @@ export function EditorOptions({
               },
               {
                 onSuccess(data, variables, context) {
-                  navigate("/dashboard/scribble/publish/" + scribble_id);
+                  navigate("/dashboard/scribble/publish/" + scribble?.id!);
                 },
               },
             );
           }}
         >
           Save and Publish
-          {update_post_mutation.isPending && (
-            <Loader className="animate-spin" />
-          )}
         </button>
       </PopoverContent>
     </Popover>
