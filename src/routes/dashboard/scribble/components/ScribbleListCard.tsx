@@ -19,17 +19,12 @@ export function ScribbleListCard({ post }: ScribbleListCardProps) {
   return (
     <li
       key={post.id}
-      className="border border-accent flex flex-col justify-between
-                   rounded-lg w-[90%] sm:w-[45%] lg:w-[30%]"
+      className="border border-accent flex flex-col justify-between shadow-accent shadow hover:shadow-sm
+      rounded-lg h-[400px] w-[90%] sm:w-[45%] lg:w-[30%] "
     >
       <img
-        className="w-full aspect-video object-cover"
-        // src={getFileURL({
-        //   collection_id_or_name: "scribble_posts",
-        //   file_name: post.main_post_image,
-        //   record_id: post.id,
-        // })}
-        src={img_url}
+        className="w-full aspect-video object-cover h-[200px]"
+          src={img_url}
       />
       <div className="flex flex-col justify-between  p-3">
         <div className="flex flex-col">
