@@ -139,6 +139,8 @@ export type ScribblePostsCollection = {
 
 export type ScribbleUserResponse = {
   github_username?: string;
+  username?: string;
+  email?: string;
   linkedin_username?: string;
   country?: string;
   city?: string;
@@ -152,6 +154,8 @@ export type ScribbleUserResponse = {
 
 export type ScribbleUserCreate = {
   github_username?: string;
+  username?: string;
+  email?: string;
   linkedin_username?: string;
   country?: string;
   city?: string;
@@ -165,6 +169,8 @@ export type ScribbleUserCreate = {
 
 export type ScribbleUserUpdate = {
   github_username?: string;
+  username?: string;
+  email?: string;
   linkedin_username?: string;
   country?: string;
   city?: string;

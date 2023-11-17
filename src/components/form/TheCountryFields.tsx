@@ -88,8 +88,8 @@ export function TheCountryFields({
   }
 
   return (
-    <div className="min-h-sm flex cursor-pointer flex-col lg:flex-row items-center  gap-2 ">
-      <div className="w-full  flex  cursor-pointer flex-wrap items-center  gap-1 sm:pl-2">
+    <div className="min-h-sm flex cursor-pointer flex-col lg:flex-row lg:items-center  gap-2 ">
+      <div className="flex  cursor-pointer flex-wrap items-center  gap-1 sm:pl-2 ">
         {editing && (
           <div className="flex ">
             <div className="flex flex-col gap-[1px]">
@@ -122,7 +122,7 @@ export function TheCountryFields({
         ) : null}
         {/* {!editing&&<div className="flex ">{country.country}</div>} */}
 
-        <div className=" flex flex-wrap items-center justify-center rounded-lg duration-500 animate-in fade-in">
+        <div className=" flex flex-wrap  rounded-lg duration-500 animate-in fade-in ">
           {data?.slice(0, 10).map((item, idx: number) => {
             return (
               <div
@@ -166,7 +166,7 @@ export function TheCountryCityPhoneFields({
     setCountry({ ...country, [e.target.id]: value });
   }
   return (
-    <div className="flex  w-fit flex-wrap items-center justify-start gap-2 ">
+    <div className="flex  w-fit flex-wrap lg:items-center justify-start gap-2 ">
       {editing ? (
         <TheTextInput
           val={country.city}

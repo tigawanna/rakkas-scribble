@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useDebouncedValue } from "./debounce";
 import { navigate, useLocation } from "rakkasjs";
 
 export function useSearchWithQuery() {
   const { current } = useLocation();
+  const [_, startTransition] = useTransition()
   const url = current;
   const [keyword, setKeyword] = useState(url?.searchParams?.get("q") ?? "");
   const { debouncedValue, isDebouncing } = useDebouncedValue(keyword, 2000);
@@ -13,10 +14,13 @@ export function useSearchWithQuery() {
   //   }
   // },[])
   useEffect(() => {
-    if (current) {
-      url?.searchParams?.set("q", debouncedValue);
-      navigate(url);
-    }
+    if (current && debouncedValue) {
+      startTransition(() => {
+        url?.searchParams?.set("q", debouncedValue);
+        navigate(url);
+        
+})
+}
   }, [debouncedValue]);
   return { debouncedValue, isDebouncing, keyword, setKeyword };
 }

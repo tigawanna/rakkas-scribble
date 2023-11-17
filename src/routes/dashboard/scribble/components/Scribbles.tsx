@@ -10,12 +10,15 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ScribbleListCard } from "./ScribbleListCard";
 import { SkeletonLoader } from "@/components/navigation/loaders/SkeletonLoader";
 
-interface ScribbbleProps {}
+interface ScribbbleProps {
+  page_size?: number;
+  show_search?: boolean;
+}
 
-export function Scribbles({}: ScribbbleProps) {
+export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
   const page_ctx = usePageContext();
   const { debouncedValue, isDebouncing, keyword, setKeyword } =
-    useSearchWithQuery();
+   useSearchWithQuery();
   const page_number = parseInt(page_ctx.url.searchParams.get("p") ?? "1") ?? 1;
 
   const query = useSuspenseQuery({
@@ -24,7 +27,7 @@ export function Scribbles({}: ScribbbleProps) {
       return tryCatchWrapper(
         page_ctx.locals.pb
           ?.collection("scribble_posts")
-          .getList(page_number, 12, {
+          .getList(page_number, page_size, {
             sort: "-created",
             filter: `title~"${debouncedValue}"`,
           }),
@@ -42,9 +45,9 @@ export function Scribbles({}: ScribbbleProps) {
   }
   const posts = query.data?.data?.items;
   return (
-    <div className="w-full h-full min-h-screen flex  flex-col p-2 gap-3">
+    <div className="w-full h-full  flex  flex-col p-2 gap-3">
       {/* header + search bar + add new link */}
-      <div className="sticky top-[5%]   flex w-full flex-wrap items-center justify-center gap-3 p-2">
+   {show_search && <div className="sticky top-[5%]   flex w-full flex-wrap items-center justify-center gap-3 p-2">
         {/* <h3 className="text-2xl font-bold hidden md:flex">Education</h3> */}
         <div className=" relative flex min-w-[70%] items-center  justify-center gap-1 md:min-w-[50%]">
           <TheTextInput
@@ -73,7 +76,7 @@ export function Scribbles({}: ScribbbleProps) {
         </div>
 
         <NewScribbleModal />
-      </div>
+      </div>}
       {!posts && (
         <div className="flex h-full min-h-[70vh] w-full items-center justify-center p-2">
           <div className="rounded-lg border p-2 text-info">
@@ -82,7 +85,7 @@ export function Scribbles({}: ScribbbleProps) {
         </div>
       )}
       {/* posts list */}
-      <div className="w-full h-full flex items-center md:justify-center">
+      <div className="w-full h-full flex flex-col items-center md:justify-center">
         <Suspense fallback={<SkeletonLoader items={12} />}>
           <ul className="w-full h-full  flex flex-wrap  p-3 gap-5 md:gap-3">
             {posts?.map((post) => {
@@ -90,6 +93,23 @@ export function Scribbles({}: ScribbbleProps) {
             })}
           </ul>
         </Suspense>
+          {show_search &&<div className="join absolute bottom-2">
+          {pages_arr.map((item) => {
+            return (
+              <button
+                key={item}
+                onClick={() => goToPage(item)}
+                className={
+                  item === page_number
+                    ? "join-item btn btn-sm btn-active bg-accent"
+                    : "join-item btn btn-sm"
+                }
+              >
+                {item}
+              </button>
+            );
+          })}
+        </div>}
       </div>
     </div>
   );

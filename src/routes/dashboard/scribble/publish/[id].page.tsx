@@ -2,12 +2,17 @@ import { useFormHook } from "@/components/form/useForm";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { PageProps, usePageContext } from "rakkasjs";
+import { PageProps, navigate, usePageContext } from "rakkasjs";
 import { PublishToDevto } from "./components/PublishToDevto";
+import { isString } from "@/utils/helpers/string";
 
 export default function PublishScribblePage({ params }: PageProps) {
   const page_ctx = usePageContext();
   const scribble_id = params.id;
+
+  if(!isString(scribble_id)){
+    navigate("/dashboard/scribble")
+  }
   const query = useSuspenseQuery({
     queryKey: ["scribble_posts", scribble_id],
     queryFn: async () => {
