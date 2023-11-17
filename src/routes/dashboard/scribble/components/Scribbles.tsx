@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 import { ClientSuspense, navigate, usePageContext } from "rakkasjs";
 import { Suspense } from "react";
 import { NewScribbleModal } from "./NewScribbleModal";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { ScribbleListCard } from "./ScribbleListCard";
 import { SkeletonLoader } from "@/components/navigation/loaders/SkeletonLoader";
 
@@ -21,7 +21,7 @@ export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
    useSearchWithQuery();
   const page_number = parseInt(page_ctx.url.searchParams.get("p") ?? "1") ?? 1;
 
-  const query = useSuspenseQuery({
+  const query = useQuery({
     queryKey: ["scribble_posts", debouncedValue, page_number],
     queryFn: () => {
       return tryCatchWrapper(
@@ -88,13 +88,13 @@ export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
       )}
       {/* posts list */}
       <div className="w-full h-full flex flex-col items-center md:justify-center">
-        <Suspense fallback={<SkeletonLoader items={12} />}>
-          <ul className="w-full h-full  flex flex-wrap items-center justify-center p-3 gap-5 md:gap-3">
+        {/* <Suspense fallback={<SkeletonLoader items={12} />}> */}
+          <ul className="w-full h-full  flex flex-wrap items-center  p-3 gap-5 md:gap-3">
             {posts?.map((post) => {
               return <ScribbleListCard post={post} key={post.id} />;
             })}
           </ul>
-        </Suspense>
+        {/* </Suspense> */}
         {show_search && (
           <div className="join absolute bottom-2">
             {pages_arr.map((item) => {

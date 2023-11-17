@@ -9,17 +9,12 @@ interface ScribbleListCardProps {
 }
 
 export function ScribbleListCard({ post }: ScribbleListCardProps) {
-  const img_url = import.meta.env.DEV
-    ? post.main_post_image_url
-    : getFileURL({
-        collection_id_or_name: "scribble_posts",
-        file_name: post.main_post_image,
-        record_id: post.id,
-      })
+  const img_url = post.main_post_image_url
+
   return (
     <li
       key={post.id}
-      className="border border-accent flex flex-col justify-between shadow-accent shadow hover:shadow-sm
+      className="border border-accent flex flex-col justify-between  shadow hover:brightness-95
       rounded-lg h-[400px] w-[90%] sm:w-[45%] lg:w-[30%] "
     >
       <img

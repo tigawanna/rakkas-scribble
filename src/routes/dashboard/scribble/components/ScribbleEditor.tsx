@@ -11,6 +11,7 @@ import { useUpdateScribbleMutation } from "./hooks";
 import { Tags } from "lucide-react";
 import { isString } from "@/utils/helpers/string";
 import { ScribbleDetailsModal } from "./ScribbleDetailsModal";
+import { randomImageURL } from "@/utils/helpers/others";
 
 const CherryMarkdownEditor = lazy(
   () => import("@/components/editor/CherryMarkdownEditor"),
@@ -43,8 +44,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       description: data?.description,
       published_at: data?.published_at,
       series: data?.series,
-      main_post_image_url:
-        data?.main_post_image_url ?? "https://picsum.photos/500/900",
+      main_post_image_url:randomImageURL(data?.main_post_image_url),
       last_published_at: data?.last_published_at,
       post_media: data?.post_media,
       publishingDetails: data?.publishingDetails,
@@ -73,20 +73,20 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
                 <img src={input?.main_post_image_url} alt="Shoes" />
               </figure>
 
-              <div className="absolute  flex flex-col z-40 gap-2">
+              <div className="absolute  flex flex-col z-40 gap-5">
                 <h2 className="text-4xl md:text-7xl font-bold">
                   {input?.title}
                 </h2>
-                <p className="text-sm line-clamp-2 md:max-w-[90%] font-sans text-accent-content">
+                {/* <p className="text-sm line-clamp-2 md:max-w-[90%] font-sans text-accent-content">
                   {input.description}
-                </p>
+                </p> */}
 
                 <div className="w-full flex  gap-2">
                   <Tags />
                   <div className="w-full flex flex-wrap gap-2">
                     {input?.tags?.split(",").map((tag) => (
                       <div
-                        className="text-sm text-accent-content rounded-lg px-2 py-1 m-1"
+                        className="text-sm text-accent-content  bg-base-200 rounded-lg px-2 py-1 m-1"
                         key={tag}
                       >
                         {tag}

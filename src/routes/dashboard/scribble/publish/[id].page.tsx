@@ -5,6 +5,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { PageProps, navigate, usePageContext } from "rakkasjs";
 import { PublishToDevto } from "./components/PublishToDevto";
 import { isString } from "@/utils/helpers/string";
+import { isStringaUrl } from "@/utils/helpers/urls";
+import { randomImageURL } from "@/utils/helpers/others";
 
 export default function PublishScribblePage({ params }: PageProps) {
   const page_ctx = usePageContext();
@@ -38,7 +40,7 @@ export default function PublishScribblePage({ params }: PageProps) {
       status: data?.status,
       tags: data?.tags,
       user_id: data?.user_id,
-      main_post_image_url: data?.main_post_image_url,
+      main_post_image_url: randomImageURL(data?.main_post_image_url),
     },
   });
 

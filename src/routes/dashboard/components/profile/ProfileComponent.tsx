@@ -13,6 +13,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { TheTextAreaInput } from "@/components/form/inputs/TheTextArea";
 import { TheStringListInput } from "@/components/form/inputs/StringListInput";
 import { useUser } from "@/lib/rakkas/hooks/useUser";
+import { isString } from "@/utils/helpers/string";
 
 interface ProfileComponentProps {}
 
@@ -145,7 +146,8 @@ export function ProfileComponenst({}: ProfileComponentProps) {
               />
             </div>
           </div>
-          {/* skills */}
+          {/* langiages soken */}
+          {isString(input.langauges) &&
           <div className="w-full flex flex-wrap gap-5  ">
             <TheStringListInput
               editing={editing}
@@ -156,12 +158,15 @@ export function ProfileComponenst({}: ProfileComponentProps) {
             />
           </div>
 
+          }
+
           {/* about_me */}
           <div className="w-full h-full flex flex-col  md:flex-row items-center 
            p-1  gap-5">
             <TheTextAreaInput
-              container_classname="lg:max-w-[70%] lg:max-w-[60%] gap-2"
-              className="min-h-[180px] "
+              container_classname="lg:max-w-[70%] lg:max-w-[60%] gap-2 text-base font-serfif"
+              
+              className="min-h-[180px]"
               field_key={"about_me"}
               value={input["about_me"]}
               // input={input}
@@ -174,7 +179,7 @@ export function ProfileComponenst({}: ProfileComponentProps) {
                   };
                 });
               }}
-              label_classname=""
+              label_classname="hidden"
               editing={editing}
             />
             {editing && (

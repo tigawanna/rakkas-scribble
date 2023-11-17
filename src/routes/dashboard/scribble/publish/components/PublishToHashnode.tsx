@@ -7,7 +7,6 @@ import { PbTheImagePicker } from "@/lib/pb/components/form/PbTheImagePicker";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { publishScribbleToDevTo } from "@/lib/scribble/devto/publish-article";
 import { updatePublishedScribbleToDevTo } from "@/lib/scribble/devto/update-article";
-import { isStringaUrl } from "@/utils/helpers/urls";
 import { Loader } from "lucide-react";
 import { usePageContext, useSSM } from "rakkasjs";
 import { toast } from "react-toastify";
@@ -83,15 +82,8 @@ export function PublishToDevto({
       },
     },
   );
-  const imageUrl = getFileURL({
-    collection_id_or_name: "scribble_posts",
-    file_name: scribble.main_post_image,
-    record_id: scribble.id,
-  });
-  const imageFileExists =
-    input.main_post_image && isStringaUrl(imageUrl) ? true : false;
-  const imageURLExists = isStringaUrl(input.main_post_image_url);
-  const bothImagesDontExist = !imageFileExists && !imageURLExists;
+
+
   return (
     <div
       className="w-full h-full flex flex-col  items-center justify-center p-3 

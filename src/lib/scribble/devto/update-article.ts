@@ -1,7 +1,7 @@
 import { serverSidePocketBaseInstance } from "@/lib/pb/client";
 import { ScribblePostsResponse, ScribbleUserResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
-import { removeDuplicatesFromStringList } from "@/utils/helpers/others";
+import { randomImageURL, removeDuplicatesFromStringList } from "@/utils/helpers/others";
 import { RequestContext } from "rakkasjs";
 import { DevToArticleInput, DevToPublishResponse } from "./types";
 
@@ -18,9 +18,7 @@ export async function updatePublishedScribbleToDevTo({
       body_markdown: input.content,
       description: input.description,
       title: input.title,
-      main_image: import.meta.env.DEV
-        ? "https://picsum.photos/900/300"
-        : input.main_post_image,
+      main_image: randomImageURL(input.main_post_image_url),
       series: input.series,
       tags: input.tags?.split(",") ?? ["webdev"],
       published: false,

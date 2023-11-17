@@ -1,16 +1,17 @@
-import { PageProps } from "rakkasjs";
+import { Link, PageProps } from "rakkasjs";
 import { Scribbles } from "./scribble/components/Scribbles";
-
-import { ProfileComponenst } from "./components/profile/ProfileComponent";
+import { ScribbleProfile } from "./components/profile/ScribbleProfile";
 
 export default function DashboardPage({}: PageProps) {
-
-  return (
+ return (
     <div className="w-full h-full min-h-screen flex flex-col justify-between">
-      <ProfileComponenst/>
-      <div className="flex flex-col p-5">
-        </div>
+   <ScribbleProfile/>
+      <div className="flex p-5">
       <Scribbles page_size={4} show_search={false}/>
+        <Link href="/dashboard/scribble" className="w-fit btn btn-sm hover-:text-accent">
+          load more 
+          </Link>
+      S</div>
     </div>
   );
 }

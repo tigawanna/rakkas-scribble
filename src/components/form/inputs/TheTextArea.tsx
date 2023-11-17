@@ -58,7 +58,7 @@ export function TheTextAreaInput<T>({
           />
           {props.description && (
             <p
-              className={twMerge("text-xs italic", props.description_classname)}
+              className={twMerge("font-serif", props.description_classname)}
             >
               {props.description}
             </p>
@@ -67,7 +67,7 @@ export function TheTextAreaInput<T>({
       ) : (
         <div
           className={twMerge(
-            "w-full border-b px-2 py-1 text-sm",
+            "w-full border-b px-2 py-1 ",
             props.output_classname,
           )}
         >
