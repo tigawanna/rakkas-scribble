@@ -26,10 +26,9 @@ export function ProfileComponenst({}: ProfileComponentProps) {
     queryKey: ["scribble_user", id],
     queryFn: () =>
       tryCatchWrapper(pb.collection("scribble_user").getOne(id ?? "")),
-      refetchOnMount:true,
-      refetchOnWindowFocus:true,
-     },
-  );
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+  });
   const profile = query.data?.data;
 
   const [input, setInput] = useState<ScribbleUserUpdate>({
@@ -43,7 +42,6 @@ export function ProfileComponenst({}: ProfileComponentProps) {
     city: profile?.city ?? "",
     langauges: profile?.langauges ?? "",
     phone: profile?.phone ?? "",
-   
   });
   const mutation = useMutation({
     mutationFn: async (vars: ScribbleUserUpdate) => {
@@ -70,13 +68,17 @@ export function ProfileComponenst({}: ProfileComponentProps) {
   });
 
   const response = query.data;
-  const avatar_url =getFileURL({collection_id_or_name:"scribble_user",file_name:profile?.avatar,record_id:id})
+  const avatar_url = getFileURL({
+    collection_id_or_name: "scribble_user",
+    file_name: profile?.avatar,
+    record_id: id,
+  });
   return (
     <div className="w-full h-full flex flex-col items-center  px-4 ">
       {response?.error && <PBReturnedUseQueryError error={response.error} />}
       {!response?.data?.verified && (
         <div className="text-sm bg-error/20 text-error sticky top-10 p-1">
-          ⚠ unverified emails have read-only access 
+          ⚠ unverified emails have read-only access
         </div>
       )}
       <div className="flex items-center justify-end gap-1  p-1 w-full sticky top-10">
@@ -145,7 +147,6 @@ export function ProfileComponenst({}: ProfileComponentProps) {
           </div>
           {/* skills */}
           <div className="w-full flex flex-wrap gap-5  ">
-     
             <TheStringListInput
               editing={editing}
               field_name="Languages Spoken"
@@ -156,7 +157,8 @@ export function ProfileComponenst({}: ProfileComponentProps) {
           </div>
 
           {/* about_me */}
-          <div className="w-full h-full flex flex-col  md:flex-row  p-1  gap-2">
+          <div className="w-full h-full flex flex-col  md:flex-row items-center 
+           p-1  gap-5">
             <TheTextAreaInput
               container_classname="lg:max-w-[70%] lg:max-w-[60%] gap-2"
               className="min-h-[180px] "
@@ -175,23 +177,17 @@ export function ProfileComponenst({}: ProfileComponentProps) {
               label_classname=""
               editing={editing}
             />
+            {editing && (
+              <button
+                title="save changes"
+                className="btn p-1 px-3  w-fit"
+              >
+                <Save onClick={() => mutation.mutate(input)} className="" />
+                Save Changes
+                {mutation.isPending && <Loader className="animate-spin" />}
+              </button>
+            )}
           </div>
-
-          {editing && (
-            <button
-              title="save changes"
-              className="btn btn-sm h-auto p-1 px-3 btn-outline w-fit"
-            >
-              {mutation.isPending ? (
-                <Loader className="animate-spin" />
-              ) : (
-                <>
-                  Save Changes
-                  <Save onClick={() => mutation.mutate(input)} className="" />
-                </>
-              )}
-            </button>
-          )}
         </div>
       )}
     </div>
