@@ -4,7 +4,7 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/shadcn/ui/dialog";
-import { ImageIcon, Loader } from "lucide-react";
+import { Edit3, ImageIcon, Loader } from "lucide-react";
 import { useState } from "react";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { useUpdateScribbleMutation } from "./hooks";
@@ -25,20 +25,20 @@ export function ScribbleDetailsModal({
   setInput,
 }: ScribbleDetailsModalProps) {
   const [open,setOpen]=useState(false)
-  const { update_post_mutation } = useUpdateScribbleMutation(input?.id!);
+  const { update_post_mutation } = useUpdateScribbleMutation();
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         {/* <Button className="btn h btn-sm"> </Button> */}
         <button
-          className="btn btn-sm"
+          className="btn btn-sm flex gap-2"
           // data-tip="sort images"
-        >
+        ><Edit3/>
           Edit details
         </button>
       </DialogTrigger>
       <DialogContent className="h-[90%] overflow-y-scroll">
-        <div className="w-full  h-full flex  items-center justify-center gap-3">
+        <div className="w-full  h-full flex  items-center justify-center gap-3 z-50">
           <ScribbleDetailsForm
             input={input}
             setInput={setInput}

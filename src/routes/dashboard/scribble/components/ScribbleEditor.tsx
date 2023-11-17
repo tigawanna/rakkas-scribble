@@ -8,6 +8,9 @@ import { EditorOptions } from "./EditorOptions";
 import { Spinner } from "@/components/navigation/loaders/Spinner";
 import { useQuery } from "@tanstack/react-query";
 import { useUpdateScribbleMutation } from "./hooks";
+import { Tags } from "lucide-react";
+import { isString } from "@/utils/helpers/string";
+import { ScribbleDetailsModal } from "./ScribbleDetailsModal";
 
 const CherryMarkdownEditor = lazy(
   () => import("@/components/editor/CherryMarkdownEditor"),
@@ -50,21 +53,57 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       user_id: data?.user_id,
     },
   });
-  const { update_post_mutation } = useUpdateScribbleMutation(data?.id!);
+
   return (
     <div className="w-full h-full flex justify-center items-center">
       <ClientSuspense fallback={<Spinner size="100px" />}>
-        <div
-          className="w-full min-h-screen h-full flex flex-col justify-between gap-3 relative">
-          <div
-            className="absolute top-[1%] left-[2%] right-[2%] 
-          flex flex-col gap-3"
-          >
-            <h2 className="text-2xl md:text-5xl font-bold ">{input?.title}</h2>
-            <p className="text-sm line-clamp-2 font-sans text-accent-content">{input.description}</p>
+        <div className="w-full min-h-screen h-full flex flex-col justify-between gap-2 relative">
+          <div className="absolute top-[1%] left-[2%] right-[2%] flex flex-col ">
+            <div className="relative  flex flex-col h-full card w-full bg-base-100 shadow-xl image-full ">
+              <div className="absolute z-50 top-[5%] right-[5%]">
+                {data && (
+                  <ScribbleDetailsModal
+                    scribble={data}
+                    input={input}
+                    setInput={setInput}
+                  />
+                )}
+              </div>
+              <figure>
+                <img src={input?.main_post_image_url} alt="Shoes" />
+              </figure>
+
+              <div className="absolute  flex flex-col z-40 gap-2">
+                <h2 className="text-4xl md:text-7xl font-bold">
+                  {input?.title}
+                </h2>
+                <p className="text-sm line-clamp-2 md:max-w-[90%] font-sans text-accent-content">
+                  {input.description}
+                </p>
+
+                <div className="w-full flex  gap-2">
+                  <Tags />
+                  <div className="w-full flex flex-wrap gap-2">
+                    {input?.tags?.split(",").map((tag) => (
+                      <div
+                        className="text-sm text-accent-content rounded-lg px-2 py-1 m-1"
+                        key={tag}
+                      >
+                        {tag}
+                      </div>
+                    ))}
+                  </div>
+                  {isString(input?.series) && (
+                    <div className="w-full flex  gap-2">
+                      Series {input?.series}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="absolute top-[15%] w-full h-full">
+          <div className="absolute top-[20%] w-full h-full">
             <div className="w-full h-full flex r">
               <CherryMarkdownEditor
                 input={input}
@@ -76,7 +115,6 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
           <div className="flex flex-col  gap-1  fixed bottom-[10%] right-[7%] z-50">
             <EditorOptions
               scribble={data}
-              update_post_mutation={update_post_mutation}
               cherry={cherry}
               input={input}
               setInput={setInput}

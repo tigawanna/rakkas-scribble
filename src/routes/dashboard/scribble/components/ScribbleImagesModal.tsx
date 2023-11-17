@@ -19,15 +19,15 @@ interface ScribbleImagesModalProps {
 
 export function ScribbleImagesModal({ input }: ScribbleImagesModalProps) {
   const [imgs, setImgs] = useState(input.post_media);
-  const { update_post_mutation } = useUpdateScribbleMutation(input?.id!);
+  const { update_post_mutation } = useUpdateScribbleMutation();
   return (
     <Dialog>
       <DialogTrigger asChild>
         {/* <Button className="btn h btn-sm"> </Button> */}
         <button
-          className="btn btn-sm"
+          className="btn btn-sm flex gap-2"
           // data-tip="sort images"
-        > manage images
+        ><ImageIcon/> manage images
         </button>
       </DialogTrigger>
       <DialogContent className="">

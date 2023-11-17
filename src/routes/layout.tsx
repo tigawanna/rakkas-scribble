@@ -1,11 +1,10 @@
 import { Nprogress } from "@/components/navigation/nprogress/Nprogress";
 import {
   ClientSuspense,
-  Head,
   LayoutProps,
   PageContext,
   useLocation,
-  usePageContext,
+
 } from "rakkasjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,9 +13,10 @@ import "./index.css";
 import React from "react";
 import { Toolbar } from "@/components/navigation/Toolbar";
 
+
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
-  const page_ctx = usePageContext();
+
   // console.log(" page ctx ==== ",page_ctx.locals.pb)
   return (
     <div className="w-full min-h-screen h-full flex flex-col items-center ">
@@ -25,6 +25,8 @@ function Layout({ children }: LayoutProps) {
         <Nprogress isAnimating={location && location?.pending ? true : false} />
       </ClientSuspense>
       <Toolbar />
+
+
       {children}
       <ToastContainer
         position="bottom-right"

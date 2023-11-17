@@ -14,8 +14,8 @@ interface UseScribbleBlogMutationProps {
   // onSuccess: (data: any, variables: any, context: any) => void;
   // onError: (error: any, variables: any, context: any) => void;
 }
-export function useUpdateScribbleMutation(scribble_id: string) {
-  const targets = ["devto", "medium", "hashnode"] as const;
+export function useUpdateScribbleMutation(show_toast=true) {
+
   const qc = useQueryClient();
 
   const update_post_mutation = useMutation({
@@ -33,13 +33,17 @@ export function useUpdateScribbleMutation(scribble_id: string) {
       }
       if (data.data) {
         qc.invalidateQueries({ queryKey: ["scribble_posts"] });
-        toast(`Updated post ${data.data.title} successfully`, {
-          type: "success",
-        });
+        if(show_toast){
+          toast(`Updated post ${data.data.title} successfully`, {
+            type: "success",
+          });
+
+        }
+          
       }
     },
     onError(error, variables, context) {
-      toast(error.message, { type: "error", autoClose: false });
+        toast(error.message, { type: "error", autoClose: false });
     },
   });
 

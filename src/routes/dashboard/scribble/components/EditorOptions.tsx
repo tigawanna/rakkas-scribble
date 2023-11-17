@@ -5,12 +5,13 @@ import {
 } from "@/components/shadcn/ui/popover";
 import { UseMutationResult } from "@tanstack/react-query";
 import { ScribblePostsResponse, ScribblePostsUpdate } from "@/lib/pb/db-types";
-import { Loader, PencilRuler} from "lucide-react";
+import { BookOpenCheck, Loader, PencilRuler, Save } from "lucide-react";
 import Cherry from "cherry-markdown";
 import { navigate } from "rakkasjs";
 import { ScribbleImagesModal } from "./ScribbleImagesModal";
 import { toast } from "react-toastify";
 import { ScribbleDetailsModal } from "./ScribbleDetailsModal";
+import { useUpdateScribbleMutation } from "./hooks";
 
 interface EditOptionsProps {
   cherry: React.MutableRefObject<Cherry | null>;
@@ -19,12 +20,6 @@ interface EditOptionsProps {
   setInput: React.Dispatch<
     React.SetStateAction<Partial<ScribblePostsResponse>>
   >;
-  update_post_mutation: UseMutationResult<
-    any,
-    Error,
-    { id: string; data: ScribblePostsUpdate },
-    any
-  >;
 }
 
 export function EditorOptions({
@@ -32,8 +27,8 @@ export function EditorOptions({
   cherry,
   input,
   setInput,
-  update_post_mutation,
 }: EditOptionsProps) {
+  const { update_post_mutation } = useUpdateScribbleMutation(false);
   return (
     <Popover>
       <PopoverTrigger>
@@ -61,16 +56,25 @@ export function EditorOptions({
               });
               return;
             }
-            update_post_mutation.mutate({
-              id: scribble?.id!,
-              data: {
-                ...input,
-                content: cherry.current?.getMarkdown(),
+            update_post_mutation.mutate(
+              {
+                id: scribble?.id!,
+                data: {
+                  ...input,
+                  content: cherry.current?.getMarkdown(),
+                },
               },
-            });
+              {
+                onSuccess(data, variables, context) {
+                  toast(`Saved post ${data?.data?.title} successfully`, {
+                    type: "success",
+                  });
+                },
+              },
+            );
           }}
         >
-          {/* <Save className="w-7 h-7" /> */}
+          <Save />
           Save
           {update_post_mutation.isPending && (
             <Loader className="animate-spin" />
@@ -102,7 +106,8 @@ export function EditorOptions({
             );
           }}
         >
-          Save and Publish
+          <BookOpenCheck />
+          Publish
         </button>
       </PopoverContent>
     </Popover>
