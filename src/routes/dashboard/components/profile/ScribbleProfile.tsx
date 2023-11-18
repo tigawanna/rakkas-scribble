@@ -1,34 +1,16 @@
 import { useUser } from "@/lib/rakkas/hooks/useUser";
 import { Mail } from "lucide-react";
 import { dateToString } from "@/utils/helpers/others";
-import { useQuery } from "@tanstack/react-query";
-import { tryCatchWrapper } from "@/utils/async";
-import { useSSM } from "rakkasjs";
-import { useSSQ } from "rakkasjs";
-import { Suspense } from "react";
+import { Link } from "rakkasjs";
 
-interface ScribbleProfileProps {}
 
-export function ScribbleProfile({}: ScribbleProfileProps) {
+interface ScribbleProfileProps {
+  scribble_count:number
+}
+
+export function ScribbleProfile({scribble_count}: ScribbleProfileProps) {
   const { user, user_avatar, page_ctx } = useUser();
-
-  // const query = useQuery({
-  //   queryKey: ["all_scribble_posts", "all"],
-  //   queryFn: () => {
-  //     return tryCatchWrapper(
-  //       page_ctx.locals.pb.collection("scribble_posts").getList(1, 1),
-  //     );
-  //   },
-  // });
-const query = useSSQ((ctx)=>{
-return tryCatchWrapper(
-  ctx.locals.pb?.collection("scribble_posts").getList(1, 1),
-)
-  })
-
-  const scribble_count = query.data?.data?.totalItems;
-console.log("scribble_count === ",query)
-  return (
+ return (
     <div className="w-full flex p-5 justify-between items-center">
       <div className="flex p-5 ">
         <img
@@ -43,20 +25,19 @@ console.log("scribble_count === ",query)
             <Mail /> {user.email}
           </h4>
           <h4>Since {dateToString(user.created)}</h4>
-          <p>{user.about_me}</p>
+          <p className="line-clamp-2">{user.about_me}</p>
+          <Link className="text-sm text-info hover:underline" href="/dashboard/profile">
+            go to profile
+          </Link>
         </div>
       </div>
-      <Suspense fallback={
-      <div className="h-full flex flex-col justify-center items-center border rounded-xl p-5">
-        <h1 className="text-6xl font-bold animate-pulse">...</h1> Posts and
-        counting
-      </div>}>
+
 
       <div className="h-full flex flex-col justify-center items-center border rounded-xl p-5">
         <h1 className="text-6xl font-bold">{scribble_count}</h1> Posts and
         counting
       </div>
-      </Suspense>
+  
     </div>
   );
 }

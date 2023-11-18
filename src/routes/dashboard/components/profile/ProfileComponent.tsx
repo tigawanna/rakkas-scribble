@@ -147,25 +147,25 @@ export function ProfileComponenst({}: ProfileComponentProps) {
             </div>
           </div>
           {/* langiages soken */}
-          {isString(input.langauges) &&
-          <div className="w-full flex flex-wrap gap-5  ">
-            <TheStringListInput
-              editing={editing}
-              field_name="Languages Spoken"
-              field_key="langauges"
-              input={input}
-              setInput={setInput}
-            />
-          </div>
-
-          }
+          {isString(input.langauges) && (
+            <div className="w-full flex flex-wrap gap-5  ">
+              <TheStringListInput
+                editing={editing}
+                field_name="Languages Spoken"
+                field_key="langauges"
+                input={input}
+                setInput={setInput}
+              />
+            </div>
+          )}
 
           {/* about_me */}
-          <div className="w-full h-full flex flex-col  md:flex-row items-center 
-           p-1  gap-5">
+          <div
+            className="w-full h-full flex flex-col  md:flex-row items-center 
+           p-1  gap-5"
+          >
             <TheTextAreaInput
               container_classname="lg:max-w-[70%] lg:max-w-[60%] gap-2 text-base font-serfif"
-              
               className="min-h-[180px]"
               field_key={"about_me"}
               value={input["about_me"]}
@@ -186,8 +186,10 @@ export function ProfileComponenst({}: ProfileComponentProps) {
               <button
                 title="save changes"
                 className="btn p-1 px-3  w-fit"
+                disabled={mutation.isPending}
+                onClick={() => mutation.mutate(input)}
               >
-                <Save onClick={() => mutation.mutate(input)} className="" />
+                <Save className="" />
                 Save Changes
                 {mutation.isPending && <Loader className="animate-spin" />}
               </button>

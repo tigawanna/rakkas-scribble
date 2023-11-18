@@ -80,12 +80,12 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
                   {input.description}
                 </p> */}
 
-                <div className="w-full flex  gap-2">
+                <div className="w-fit flex  gap-2 bg-base-300 rounded-lg">
                   <Tags />
                   <div className="w-full flex flex-wrap gap-2">
                     {input?.tags?.split(",").map((tag) => (
                       <div
-                        className="text-sm text-accent-content  bg-base-200 rounded-lg px-2 py-1 m-1"
+                        className="text-sm border-b-4 border-accent  px-2  m-1"
                         key={tag}
                       >
                         {tag}

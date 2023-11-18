@@ -7,14 +7,16 @@ import { ClientSuspense, navigate, usePageContext } from "rakkasjs";
 import { NewScribbleModal } from "./modals/NewScribbleModal";
 import { useQuery} from "@tanstack/react-query";
 import { ScribbleListCard } from "./card/ScribbleListCard";
+import { ScribbleProfile } from "../../components/profile/ScribbleProfile";
 
 
 interface ScribbbleProps {
   page_size?: number;
   show_search?: boolean;
+  show_profile?: boolean;
 }
 
-export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
+export function Scribbles({page_size=12, show_search=true,show_profile=false}: ScribbbleProps) {
   const page_ctx = usePageContext();
   const { debouncedValue, isDebouncing, keyword, setKeyword } =
    useSearchWithQuery();
@@ -45,7 +47,9 @@ export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
   const posts = query.data?.data?.items;
   return (
     <div className="w-full h-full  flex  flex-col  p-2 gap-3">
-
+      {!show_profile && query.data?.data?.totalItems && (
+        <ScribbleProfile scribble_count={query.data?.data?.totalItems} />
+      )}
       {/* header + search bar + add new link */}
       {show_search && (
         <div className="sticky top-[5%]   flex w-full flex-wrap items-center justify-center gap-3 p-2">
@@ -89,7 +93,7 @@ export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
       {/* posts list */}
       <div className="w-full h-full flex flex-col items-center md:justify-center">
         {/* <Suspense fallback={<SkeletonLoader items={12} />}> */}
-        <ul className="w-full h-full  flex flex-wrap items-center  p-3 gap-5 md:gap-3">
+        <ul className="w-full h-full flex flex-wrap items-center  justify-center p-3 gap-5 md:gap-3 ">
           {posts?.map((post) => {
             return <ScribbleListCard post={post} key={post.id} />;
           })}
