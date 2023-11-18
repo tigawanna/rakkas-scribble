@@ -7,10 +7,9 @@ import { lazy, useRef } from "react";
 import { EditorOptions } from "./EditorOptions";
 import { Spinner } from "@/components/navigation/loaders/Spinner";
 import { useQuery } from "@tanstack/react-query";
-import { useUpdateScribbleMutation } from "./hooks";
 import { Tags } from "lucide-react";
 import { isString } from "@/utils/helpers/string";
-import { ScribbleDetailsModal } from "./ScribbleDetailsModal";
+import { ScribbleDetailsModal } from "./modals/ScribbleDetailsModal";
 import { randomImageURL } from "@/utils/helpers/others";
 
 const CherryMarkdownEditor = lazy(
@@ -60,7 +59,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
         <div className="w-full min-h-screen h-full flex flex-col justify-between gap-2 relative">
           <div className="absolute top-[1%] left-[2%] right-[2%] flex flex-col ">
             <div className="relative  flex flex-col h-full card w-full bg-base-100 shadow-xl image-full ">
-              <div className="absolute z-50 top-[5%] right-[5%]">
+              <div className="absolute z-40 top-[5%] right-[5%]">
                 {data && (
                   <ScribbleDetailsModal
                     scribble={data}
@@ -70,7 +69,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
                 )}
               </div>
               <figure>
-                <img src={input?.main_post_image_url} alt="Shoes" />
+                <img src={input?.main_post_image_url} alt={input?.title} />
               </figure>
 
               <div className="absolute  flex flex-col z-40 gap-5">
@@ -104,7 +103,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
           </div>
 
           <div className="absolute top-[20%] w-full h-full">
-            <div className="w-full h-full flex r">
+            <div className="w-full h-full flex ">
               <CherryMarkdownEditor
                 input={input}
                 cherry_instance={cherry}

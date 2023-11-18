@@ -10,7 +10,7 @@ import { ImageIcon, Loader, X } from "lucide-react";
 import { useState } from "react";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { Image } from "@unpic/react";
-import { useUpdateScribbleMutation } from "./hooks";
+import { useScribblePostsMutation } from "../hooks";
 
 
 interface ScribbleImagesModalProps {
@@ -19,7 +19,7 @@ interface ScribbleImagesModalProps {
 
 export function ScribbleImagesModal({ input }: ScribbleImagesModalProps) {
   const [imgs, setImgs] = useState(input.post_media);
-  const { update_post_mutation } = useUpdateScribbleMutation();
+  const { update_post_mutation } = useScribblePostsMutation();
   return (
     <Dialog>
       <DialogTrigger asChild>

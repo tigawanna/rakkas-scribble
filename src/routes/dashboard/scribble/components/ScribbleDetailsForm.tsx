@@ -4,10 +4,13 @@ import { PbTheTextAreaInput } from "@/lib/pb/components/form/PBTheTextAreaInput"
 import { PbTheTextInput } from "@/lib/pb/components/form/PBTheTextInput";
 import { PbTheImagePicker } from "@/lib/pb/components/form/PbTheImagePicker";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
-import { isStringaUrl } from "@/utils/helpers/urls";
+import { randomImageURL } from "@/utils/helpers/others";
+import { ClientResponseError } from "pocketbase";
+
 
 interface ScribbleDetailsFormProps {
-  scribble: ScribblePostsResponse;
+  scribble?: ScribblePostsResponse;
+  pb_error?: ClientResponseError | null;
   input: Partial<ScribblePostsResponse>;
   setInput: React.Dispatch<
     React.SetStateAction<Partial<ScribblePostsResponse>>
@@ -15,13 +18,14 @@ interface ScribbleDetailsFormProps {
 }
 
 
-export function ScribbleDetailsForm({input,scribble,setInput}:ScribbleDetailsFormProps){
+export default function ScribbleDetailsForm({input,scribble,setInput,pb_error}:ScribbleDetailsFormProps){
 return (
   <div className="w-full h-full flex flex-col  gap-2 p-2">
     <PbTheTextInput
       field_key={"title"}
       field_name={"title"}
       label_classname="text-accent"
+      pb_error={pb_error}
       value={input.title}
       onChange={(e) => {
         setInput((prev) => ({ ...prev, title: e.target.value }));
@@ -31,6 +35,7 @@ return (
       field_key={"description"}
       field_name={"description"}
       label_classname="text-accent"
+      pb_error={pb_error}
       className="min-h-[150px]"
       value={input.description}
       onChange={(e) => {
@@ -53,29 +58,22 @@ return (
         </div>
       )}
 
-      {import.meta.env.DEV && (
-        <div className="w-full">
-          <p className="text-accent ">add image URL </p>
-          <ThePicUrlInput
-            img_url={
-              (isStringaUrl(input.main_post_image_url)
-                ? scribble.main_post_image_url
-                : "https://picsum.photos/900/300") ??
-              "https://picsum.photos/900/300"
+      <div className="w-full">
+        <p className="text-accent ">add image URL </p>
+        <ThePicUrlInput
+          img_url={randomImageURL(input.main_post_image_url)}
+          className="justify-center"
+          editing
+          setInputImage={(url) => {
+            if (url) {
+              setInput((prev) => ({
+                ...prev,
+                main_post_image_url: url,
+              }));
             }
-            className="justify-center"
-            editing
-            setInputImage={(url) => {
-              if (url) {
-                setInput((prev) => ({
-                  ...prev,
-                  main_post_image_url: url,
-                }));
-              }
-            }}
-          />
-        </div>
-      )}
+          }}
+        />
+      </div>
     </div>
 
     <TheStringListInput
@@ -91,6 +89,7 @@ return (
     <PbTheTextInput
       field_key={"series"}
       field_name={"series"}
+      pb_error={pb_error}
       label_classname="text-accent"
       value={input.series}
       onChange={(e) => {

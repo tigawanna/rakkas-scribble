@@ -4,9 +4,9 @@ import { numberToArray } from "@/utils/helpers/others";
 import { useSearchWithQuery } from "@/utils/hooks/search";
 import { Search } from "lucide-react";
 import { ClientSuspense, navigate, usePageContext } from "rakkasjs";
-import { NewScribbleModal } from "./NewScribbleModal";
+import { NewScribbleModal } from "./modals/NewScribbleModal";
 import { useQuery} from "@tanstack/react-query";
-import { ScribbleListCard } from "./ScribbleListCard";
+import { ScribbleListCard } from "./card/ScribbleListCard";
 
 
 interface ScribbbleProps {

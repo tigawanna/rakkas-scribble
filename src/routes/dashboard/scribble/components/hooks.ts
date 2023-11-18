@@ -1,5 +1,6 @@
 import { pb } from "@/lib/pb/client";
 import {
+  ScribblePostsCreate,
 ScribblePostsUpdate,
 } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
@@ -12,14 +13,15 @@ interface UseScribbleBlogMutationProps {
   // onSuccess: (data: any, variables: any, context: any) => void;
   // onError: (error: any, variables: any, context: any) => void;
 }
-export function useUpdateScribbleMutation(show_toast=true) {
+export function useScribblePostsMutation(show_toast=true) {
 
   const qc = useQueryClient();
+  const posts_collection ="scribble_posts"
 
   const update_post_mutation = useMutation({
     mutationFn: (vars: { id: string; data: ScribblePostsUpdate }) => {
       return tryCatchWrapper(
-        pb?.collection("scribble_posts").update(vars.id, vars.data),
+        pb?.collection(posts_collection).update(vars.id, vars.data),
       );
     },
     onSuccess(data, variables, context) {
@@ -30,7 +32,7 @@ export function useUpdateScribbleMutation(show_toast=true) {
         return;
       }
       if (data.data) {
-        qc.invalidateQueries({ queryKey: ["scribble_posts"] });
+        qc.invalidateQueries({ queryKey: [posts_collection ] });
         if(show_toast){
           toast(`Updated post ${data.data.title} successfully`, {
             type: "success",
@@ -44,6 +46,34 @@ export function useUpdateScribbleMutation(show_toast=true) {
         toast(error.message, { type: "error", autoClose: false });
     },
   });
+  const create_post_mutation = useMutation({
+    mutationFn: (vars: {data: ScribblePostsCreate }) => {
+      return tryCatchWrapper(
+        pb?.collection(posts_collection ).create(vars.data),
+      );
+    },
+    onSuccess(data, variables, context) {
+      if (data.error) {
+        toast(`creating post failed`, {
+          type: "error",
+        });
+        return;
+      }
+      if (data.data) {
+        qc.invalidateQueries({ queryKey: [posts_collection ] });
+        if(show_toast){
+          toast(`new scribble created ${data.data.title} successfully`, {
+            type: "success",
+          });
 
-  return { update_post_mutation, qc };
+        }
+          
+      }
+    },
+    onError(error, variables, context) {
+        toast(error.message, { type: "error", autoClose: false });
+    },
+  });
+
+  return { create_post_mutation,update_post_mutation, qc };
 }

@@ -49,6 +49,6 @@ export function randownNumber(min: number, max: number) {
  * @return {string} The generated image URL
  */
 export function randomImageURL(img_url?:string) {
-  if(isStringaUrl(img_url)) return img_url
-  return `https://picsum.photos/id/${randownNumberBasedOnDate(1,1000)}/500/900`
+  if(img_url&&isStringaUrl(img_url)) return img_url
+  return `https://picsum.photos/id/${randownNumber(1,1000)}/900/300`
 }

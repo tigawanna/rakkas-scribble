@@ -96,14 +96,14 @@ export type ScribblePostsCreate = {
   publishingDetails?: any;
 
   publishers?: ScribblePublishers;
-  last_published_at?: string | Date;
+  last_published_at?: string;
 
   post_media?: MaybeArray<string>;
   main_post_image?: string | File | null;
   main_post_image_url?: string;
   description?: string;
   series?: string;
-  published_at?: string | Date;
+  published_at?: string;
 };
 
 export type ScribblePostsUpdate = {
@@ -114,7 +114,7 @@ export type ScribblePostsUpdate = {
   tags?: string;
   publishingDetails?: any;
 
-  last_published_at?: string | Date;
+  last_published_at?: string;
   publishers?: ScribblePublishers;
   post_media?: MaybeArray<string>;
 
@@ -122,7 +122,7 @@ export type ScribblePostsUpdate = {
   main_post_image_url?: string;
   description?: string;
   series?: string;
-  published_at?: string | Date;
+  published_at?: string;
 };
 
 export type ScribblePostsCollection = {

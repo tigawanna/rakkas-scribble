@@ -3,15 +3,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/shadcn/ui/popover";
-import { UseMutationResult } from "@tanstack/react-query";
-import { ScribblePostsResponse, ScribblePostsUpdate } from "@/lib/pb/db-types";
+import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { BookOpenCheck, Loader, PencilRuler, Save } from "lucide-react";
 import Cherry from "cherry-markdown";
 import { navigate } from "rakkasjs";
-import { ScribbleImagesModal } from "./ScribbleImagesModal";
+import { ScribbleImagesModal } from "./modals/ScribbleImagesModal";
 import { toast } from "react-toastify";
-import { ScribbleDetailsModal } from "./ScribbleDetailsModal";
-import { useUpdateScribbleMutation } from "./hooks";
+import { ScribbleDetailsModal } from "./modals/ScribbleDetailsModal";
+import { useScribblePostsMutation } from "./hooks";
 
 interface EditOptionsProps {
   cherry: React.MutableRefObject<Cherry | null>;
@@ -28,7 +27,7 @@ export function EditorOptions({
   input,
   setInput,
 }: EditOptionsProps) {
-  const { update_post_mutation } = useUpdateScribbleMutation(false);
+  const { update_post_mutation } = useScribblePostsMutation(false);
   return (
     <Popover>
       <PopoverTrigger>
@@ -38,7 +37,9 @@ export function EditorOptions({
         className="w-fit flex flex-col 
       gap-2 py-2 md:px-3 items-center justify-center rounded-lg"
       >
+        {/* edit images */}
         <ScribbleImagesModal input={input} />
+
         {scribble && (
           <ScribbleDetailsModal
             scribble={scribble}
@@ -46,6 +47,8 @@ export function EditorOptions({
             setInput={setInput}
           />
         )}
+        {/* 
+{save edits} */}
         <button
           className="btn btn-sm  flex gap-2"
           // data-tip={"save content"}
@@ -75,7 +78,7 @@ export function EditorOptions({
           }}
         >
           <Save />
-          Save
+          Save edits
           {update_post_mutation.isPending && (
             <Loader className="animate-spin" />
           )}
