@@ -4,11 +4,10 @@ import { numberToArray } from "@/utils/helpers/others";
 import { useSearchWithQuery } from "@/utils/hooks/search";
 import { Search } from "lucide-react";
 import { ClientSuspense, navigate, usePageContext } from "rakkasjs";
-import { Suspense } from "react";
 import { NewScribbleModal } from "./NewScribbleModal";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery} from "@tanstack/react-query";
 import { ScribbleListCard } from "./ScribbleListCard";
-import { SkeletonLoader } from "@/components/navigation/loaders/SkeletonLoader";
+
 
 interface ScribbbleProps {
   page_size?: number;
@@ -46,6 +45,7 @@ export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
   const posts = query.data?.data?.items;
   return (
     <div className="w-full h-full  flex  flex-col  p-2 gap-3">
+
       {/* header + search bar + add new link */}
       {show_search && (
         <div className="sticky top-[5%]   flex w-full flex-wrap items-center justify-center gap-3 p-2">
@@ -89,14 +89,14 @@ export function Scribbles({page_size=12, show_search=true}: ScribbbleProps) {
       {/* posts list */}
       <div className="w-full h-full flex flex-col items-center md:justify-center">
         {/* <Suspense fallback={<SkeletonLoader items={12} />}> */}
-          <ul className="w-full h-full  flex flex-wrap items-center  p-3 gap-5 md:gap-3">
-            {posts?.map((post) => {
-              return <ScribbleListCard post={post} key={post.id} />;
-            })}
-          </ul>
+        <ul className="w-full h-full  flex flex-wrap items-center  p-3 gap-5 md:gap-3">
+          {posts?.map((post) => {
+            return <ScribbleListCard post={post} key={post.id} />;
+          })}
+        </ul>
         {/* </Suspense> */}
         {show_search && (
-          <div className="join absolute bottom-2">
+          <div className="join ">
             {pages_arr.map((item) => {
               return (
                 <button
