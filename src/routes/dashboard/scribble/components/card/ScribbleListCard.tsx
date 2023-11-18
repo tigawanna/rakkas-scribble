@@ -1,9 +1,7 @@
-import { getFileURL } from "@/lib/pb/client";
 import { PBTimeStamp } from "@/lib/pb/components/PBTimestamp";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
-import { ExternalLink } from "lucide-react";
-import { Link } from "rakkasjs";
 import { ScribbleCardOptions } from "./ScribbleCardOptions";
+import { statusColor } from "../utils/helpers";
 
 interface ScribbleListCardProps {
   post: ScribblePostsResponse;
@@ -11,20 +9,7 @@ interface ScribbleListCardProps {
 
 export function ScribbleListCard({ post }: ScribbleListCardProps) {
   const img_url = post.main_post_image_url
-function statusColor(status:typeof post.status){
-switch(status){
-  case "DRAFT":
-    return "text-sm text-accent";
-  case "PUBLISHED":
-    return "text-sm text-success";
-  case "REPUBLISHED":
-    return "text-sm text-info";
-  case "SCHEDULED":
-    return "text-sm text-warning"; 
-  default :
-    return "text-sm";     
-}
-}
+
   return (
     <li
       key={post.id}

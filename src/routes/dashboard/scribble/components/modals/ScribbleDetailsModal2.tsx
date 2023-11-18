@@ -1,7 +1,7 @@
 import { Loader, X } from "lucide-react";
 import { useState } from "react";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
-import { useScribblePostsMutation } from "../hooks";
+import { useScribblePostsMutation } from "../utils/mutation";
 import  ScribbleDetailsForm  from "../ScribbleDetailsForm";
 import { Button } from "@/components/shadcn/ui/button";
 

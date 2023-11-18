@@ -5,7 +5,7 @@ import { updatePublishedScribbleToDevTo } from "@/lib/scribble/devto/update-arti
 import { Loader } from "lucide-react";
 import { usePageContext, useSSM } from "rakkasjs";
 import { toast } from "react-toastify";
-import { ScribbleDetailsForm } from "../../components/ScribbleDetailsForm";
+import ScribbleDetailsForm  from "../../components/ScribbleDetailsForm";
 
 interface PublishToDevtoProps {
   scribble: ScribblePostsResponse;

@@ -10,7 +10,7 @@ import { ImageIcon, Loader, X } from "lucide-react";
 import { useState } from "react";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { Image } from "@unpic/react";
-import { useScribblePostsMutation } from "../hooks";
+import { useScribblePostsMutation } from "../utils/mutation";
 
 
 interface ScribbleImagesModalProps {

@@ -10,7 +10,7 @@ import { navigate } from "rakkasjs";
 import { ScribbleImagesModal } from "./modals/ScribbleImagesModal";
 import { toast } from "react-toastify";
 import { ScribbleDetailsModal } from "./modals/ScribbleDetailsModal";
-import { useScribblePostsMutation } from "./hooks";
+import { useScribblePostsMutation } from "./utils/mutation";
 
 interface EditOptionsProps {
   cherry: React.MutableRefObject<Cherry | null>;

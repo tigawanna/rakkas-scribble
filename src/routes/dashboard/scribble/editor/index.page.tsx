@@ -2,7 +2,7 @@ import { useFormHook } from "@/components/form/useForm";
 import { ScribblePostsCreate } from "@/lib/pb/db-types";
 import { randomImageURL } from "@/utils/helpers/others";
 import { ClientSuspense, PageProps, navigate } from "rakkasjs";
-import { useScribblePostsMutation } from "../components/hooks";
+import { useScribblePostsMutation } from "../components/utils/mutation";
 
 import { Button } from "@/components/shadcn/ui/button";
 import { Loader } from "lucide-react";
