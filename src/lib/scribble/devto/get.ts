@@ -9,10 +9,6 @@ type GetOneDevtoPost200Response = OneArticle["responses"]["200"]["content"]["app
 
 
 
-
-
-
-
 type GetDevtoPostByIdProps = {
 key?: string;
 } & GetOneDevtoPostParameters
