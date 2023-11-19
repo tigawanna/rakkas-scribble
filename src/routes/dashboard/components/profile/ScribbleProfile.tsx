@@ -11,13 +11,13 @@ interface ScribbleProfileProps {
 export function ScribbleProfile({scribble_count}: ScribbleProfileProps) {
   const { user, user_avatar, page_ctx } = useUser();
  return (
-    <div className="w-full flex p-5 justify-between items-center">
-      <div className="flex p-5 ">
+    <div className="w-full flex p-5 flex-wrap justify-center sm:justify-between items-center">
+      <div className="flex p-5 flex-wrap justify-center items-center">
         <img
           src={user_avatar}
           height={`200`}
           width={`200`}
-          className="w-[15%%] h-auto object-cover rounded-full aspect-square"
+          className="w-[60%] sm:w-[30%] lg:w-[25%] h-auto object-cover rounded-full aspect-square"
         />
         <div className="flex flex-col justify-center p-5 h-full gap-2">
           <h1 className="text-6xl font-bold">{user.username}</h1>
