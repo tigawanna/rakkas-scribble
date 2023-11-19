@@ -1,34 +1,22 @@
 import { Icons } from "@/components/icons/Iconts";
 import { ScribblePostsResponse, ScribbleUserResponse } from "@/lib/pb/db-types";
-import { getDevtoPostById} from "@/lib/scribble/devto/get";
+import { getDevtoPostById } from "@/lib/scribble/devto/get";
 import { useDevtoScribble } from "@/lib/scribble/devto/useDevTo";
 import { dateToString } from "@/utils/helpers/others";
-import { ExternalLink, Heart,  Loader,  MessageSquare, Tags } from "lucide-react";
-import { Link,  useSSQ } from "rakkasjs";
+import { ExternalLink, Heart, Loader, MessageSquare, Tags } from "lucide-react";
+import { Link, useSSQ } from "rakkasjs";
 import { Suspense } from "react";
 
 interface DevToPostProps {
   id: string;
   user: ScribbleUserResponse;
-  scribble?:ScribblePostsResponse;
+  scribble?: ScribblePostsResponse;
 }
 
-export function OneDevToPost({ id, user,scribble }: DevToPostProps) {
-//   const unpublish_mutation = useSSM(async (ctx) => {
-//     console.log({ key: user?.keys?.devto?.key, id });
-//     return devtoUnpublishArticle({
-//       key: user?.keys?.devto?.key,
-//       path: { id: parseInt(id) },
-//     });
-//   },{onSuccess(data) {
-//     console.log(" UNPULISH MUTATION RESPONSE  === ", { data });
-//   },})   
-  
-  const { publish_scribble_mutation, update_published_scribble_mutation } =
-    useDevtoScribble();
+export function OneDevToPost({ id, user, scribble }: DevToPostProps) {
 
-
-const query = useSSQ(async (ctx) => {
+  const { update_published_scribble_mutation } = useDevtoScribble();
+ const query = useSSQ(async (ctx) => {
     console.log({ key: user?.keys?.devto?.key, id });
     //    return getDevtoPublishedPosts({key:user?.keys?.devto?.key,query:{page:1,per_page:30}})
     return getDevtoPostById({
@@ -156,7 +144,7 @@ const query = useSSQ(async (ctx) => {
                 disabled={update_published_scribble_mutation.isLoading}
                 className="btn btn-sm"
               >
-                Unpublish{" "}
+                Unpublish from devto{" "}
                 {update_published_scribble_mutation.isLoading && (
                   <Loader className="animate-spin h-4 w-4" />
                 )}
@@ -180,8 +168,9 @@ const query = useSSQ(async (ctx) => {
                   })
               }
               disabled={update_published_scribble_mutation.isLoading}
-              className="btn btn-sm">
-              Republish to devto{" "}
+              className="btn btn-sm"
+            >
+              Publish to devto{" "}
               {update_published_scribble_mutation.isLoading && (
                 <Loader className="animate-spin h-4 w-4" />
               )}
