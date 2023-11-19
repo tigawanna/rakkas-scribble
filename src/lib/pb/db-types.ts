@@ -149,6 +149,7 @@ export type ScribbleUserResponse = {
   avatar?: string;
   about_me?: string;
   github_access_token?: string;
+  last_proompted_at?: string;
   keys?: ScribbleApiKeys;
 } & AuthCollectionRecord;
 
@@ -164,6 +165,7 @@ export type ScribbleUserCreate = {
   avatar?: string;
   about_me?: string;
   github_access_token?: string;
+  last_proompted_at?: string;
   keys?: ScribbleApiKeys;
 };
 
@@ -179,6 +181,7 @@ export type ScribbleUserUpdate = {
   avatar?: string;
   about_me?: string;
   github_access_token?: string;
+  last_proompted_at?: string;
   keys?: ScribbleApiKeys;
 };
 

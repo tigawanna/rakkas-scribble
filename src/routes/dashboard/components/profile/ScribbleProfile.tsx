@@ -9,7 +9,7 @@ interface ScribbleProfileProps {
 }
 
 export function ScribbleProfile({scribble_count}: ScribbleProfileProps) {
-  const { user, user_avatar, page_ctx } = useUser();
+  const { user, user_avatar} = useUser();
  return (
     <div className="w-full flex p-5 flex-wrap justify-center sm:justify-between items-center">
       <div className="flex p-5 flex-wrap justify-center items-center">

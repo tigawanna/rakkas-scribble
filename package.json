@@ -16,7 +16,6 @@
     "test:unit": "vitest run"
   },
   "devDependencies": {
-    "rakkasjs": "0.7.0-next.23",
     "@rakkasjs/eslint-config": "0.7.0-next.23",
     "@tanstack/react-query-devtools": "^5.4.2",
     "@types/react": "^18.2.34",
@@ -29,6 +28,7 @@
     "postcss": "8.4.31",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.6",
+    "rakkasjs": "0.7.0-next.23",
     "tailwindcss": "3.3.5",
     "tailwindcss-animate": "1.0.7",
     "tsx": "^4.0.0",
@@ -38,6 +38,7 @@
     "vitest": "^0.34.6"
   },
   "dependencies": {
+    "@google-ai/generativelanguage": "^1.1.0",
     "@hattip/cookie": "^0.0.35",
     "@hattip/response": "^0.0.35",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -54,7 +55,6 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tanem/react-nprogress": "^5.0.51",
     "@tanstack/react-query": "^5.0.5",
-
     "@unpic/react": "^0.0.39",
     "axios": "^1.6.0",
     "cherry-markdown": "^0.8.26",
