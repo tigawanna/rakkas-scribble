@@ -5,13 +5,18 @@ import { randomImageURL, removeDuplicatesFromStringList } from "@/utils/helpers/
 import { RequestContext } from "rakkasjs";
 import { DevToArticleInput, DevToPublishResponse } from "./types";
 
+
+
 interface PublishProps {
   ctx: RequestContext<unknown>;
   input: Partial<ScribblePostsResponse>;
+  publish?:boolean;
+
 }
 export async function publishScribbleToDevTo({
   ctx,
   input,
+  publish=false
 }: PublishProps): Promise<{
   data: DevToPublishResponse | null;
   error: null | { message: string };
@@ -24,7 +29,7 @@ export async function publishScribbleToDevTo({
       main_image:randomImageURL(input.main_post_image_url),
       series: input.series,
       tags: input.tags?.split(",") ?? ["webdev"],
-      published: false,
+      published:publish,
     };
     const { data: pb, error: pb_error } = await tryCatchWrapper(
       serverSidePocketBaseInstance(ctx),

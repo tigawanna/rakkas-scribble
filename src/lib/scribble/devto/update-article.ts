@@ -8,10 +8,12 @@ import { DevToArticleInput, DevToPublishResponse } from "./types";
 interface PublishProps {
   ctx: RequestContext<unknown>;
   input: Partial<ScribblePostsResponse>;
+  publish?: boolean;
 }
 export async function updatePublishedScribbleToDevTo({
   ctx,
   input,
+  publish = false,
 }: PublishProps) {
   try {
     const devtoInput: DevToArticleInput = {
@@ -21,7 +23,7 @@ export async function updatePublishedScribbleToDevTo({
       main_image: randomImageURL(input.main_post_image_url),
       series: input.series,
       tags: input.tags?.split(",") ?? ["webdev"],
-      published: false,
+      published: publish,
     };
 
     const { data: pb, error: pb_error } = await tryCatchWrapper(

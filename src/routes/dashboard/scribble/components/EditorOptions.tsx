@@ -98,7 +98,7 @@ export function EditorOptions({
                 id: scribble?.id!,
                 data: {
                   ...input,
-                  content: cherry.current?.getMarkdown(),
+                content: cherry.current?.getMarkdown(),
                 },
               },
               {

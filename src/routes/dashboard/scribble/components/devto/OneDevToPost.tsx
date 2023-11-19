@@ -1,17 +1,19 @@
 import { Icons } from "@/components/icons/Iconts";
-import { ScribbleUserResponse } from "@/lib/pb/db-types";
+import { ScribblePostsResponse, ScribbleUserResponse } from "@/lib/pb/db-types";
 import { getDevtoPostById} from "@/lib/scribble/devto/get";
+import { useDevtoScribble } from "@/lib/scribble/devto/useDevTo";
 import { dateToString } from "@/utils/helpers/others";
-import { ExternalLink, Heart, Loader, MessageSquare, Tags } from "lucide-react";
-import { Link, useSSM, useSSQ } from "rakkasjs";
+import { ExternalLink, Heart,  Loader,  MessageSquare, Tags } from "lucide-react";
+import { Link,  useSSQ } from "rakkasjs";
 import { Suspense } from "react";
 
 interface DevToPostProps {
   id: string;
   user: ScribbleUserResponse;
+  scribble?:ScribblePostsResponse;
 }
 
-export function OneDevToPost({ id, user }: DevToPostProps) {
+export function OneDevToPost({ id, user,scribble }: DevToPostProps) {
 //   const unpublish_mutation = useSSM(async (ctx) => {
 //     console.log({ key: user?.keys?.devto?.key, id });
 //     return devtoUnpublishArticle({
@@ -21,7 +23,12 @@ export function OneDevToPost({ id, user }: DevToPostProps) {
 //   },{onSuccess(data) {
 //     console.log(" UNPULISH MUTATION RESPONSE  === ", { data });
 //   },})   
-  const query = useSSQ(async (ctx) => {
+  
+  const { publish_scribble_mutation, update_published_scribble_mutation } =
+    useDevtoScribble();
+
+
+const query = useSSQ(async (ctx) => {
     console.log({ key: user?.keys?.devto?.key, id });
     //    return getDevtoPublishedPosts({key:user?.keys?.devto?.key,query:{page:1,per_page:30}})
     return getDevtoPostById({
@@ -50,96 +57,137 @@ export function OneDevToPost({ id, user }: DevToPostProps) {
           </div>
         }
       >
-        <div className="w-full flex flex-col  items-center gap-2 border border-accent rounded-lg p-3">
-          <div className="w-full flex justify-between flex-wrap">
-            <div className="text-4xl font-bold">{data?.title}</div>
-            <div className="">
-              {data?.reading_time_minutes} {" minute read"}
+        {data ? (
+          <div className="w-full flex flex-col  items-center gap-2 border border-accent rounded-lg p-3">
+            <div className="w-full flex justify-between flex-wrap">
+              <div className="text-4xl font-bold">{data?.title}</div>
+              <div className="">
+                {data?.reading_time_minutes} {" minute read"}
+              </div>
             </div>
-          </div>
-          {/* start of row 1 */}
-          <div className="w-full flex items-center justify-between">
-            <div className="flex gap-1">
-              positive reactions
-              <Heart className="text-red-500" />
-              {data?.positive_reactions_count}
+            {/* start of row 1 */}
+            <div className="w-full flex items-center justify-between">
+              <div className="flex gap-1">
+                positive reactions
+                <Heart className="text-red-500" />
+                {data?.positive_reactions_count}
+              </div>
+              <div className="flex gap-1">
+                total reactions
+                <Heart />
+                {data?.public_reactions_count}
+              </div>
+              <div className="flex gap-1">
+                replies
+                <MessageSquare />
+                {data?.comments_count}
+              </div>
             </div>
-            <div className="flex gap-1">
-              total reactions
-              <Heart />
-              {data?.public_reactions_count}
-            </div>
-            <div className="flex gap-1">
-              replies
-              <MessageSquare />
-              {data?.comments_count}
-            </div>
-          </div>
-          {/* end of row 1 */}
+            {/* end of row 1 */}
 
-          {/* start of row 2 */}
-          <div className="w-full flex flex-wrap justify-between gap-2">
-            <div className="flex gap-2">
-              Published
-              <div>{dateToString(data?.published_at)}</div>
+            {/* start of row 2 */}
+            <div className="w-full flex flex-wrap justify-between gap-2">
+              <div className="flex gap-2">
+                Published
+                <div>{dateToString(data?.published_at)}</div>
+              </div>
+              <div className="flex gap-2">
+                Created
+                <div>{dateToString(data?.created_at)}</div>
+              </div>
             </div>
-            <div className="flex gap-2">
-              Created
-              <div>{dateToString(data?.created_at)}</div>
-            </div>
-          </div>
-          {/* end of row 2 */}
+            {/* end of row 2 */}
 
-          {/* start of row 3 */}
-          <div className="w-full flex items-center gap-2 ">
-            <Tags />
-            <div className="w-full flex flex-wrap items-center gap-2 ">
-              {data?.tags?.map((tag) => (
+            {/* start of row 3 */}
+            <div className="w-full flex items-center gap-2 ">
+              <Tags />
+              <div className="w-full flex flex-wrap items-center gap-2 ">
+                {data?.tags?.map((tag) => (
+                  <div
+                    className="badge badge-outline badge-lg border-accent"
+                    key={tag}
+                  >
+                    {tag}
+                  </div>
+                ))}
+              </div>
+            </div>
+            {/* end of row 3 */}
+
+            {/* start of row 4 */}
+            <div className="w-full flex items-center gap-2 ">
+              {data?.flare_tag && (
                 <div
-                  className="badge badge-outline badge-lg border-accent"
-                  key={tag}
+                  style={{
+                    backgroundColor: data?.flare_tag.bg_color_hex,
+                    color: data?.flare_tag.text_color_hex,
+                  }}
                 >
-                  {tag}
+                  {data?.flare_tag.name}
                 </div>
-              ))}
+              )}
             </div>
-          </div>
-          {/* end of row 3 */}
-
-          {/* start of row 4 */}
-          <div className="w-full flex items-center gap-2 ">
-            {data?.flare_tag && (
-              <div
-                style={{
-                  backgroundColor: data?.flare_tag.bg_color_hex,
-                  color: data?.flare_tag.text_color_hex,
-                }}
+            {/* end of row-4 */}
+            {/* start of row 5 */}
+            <div className="w-full flex items-center justify-between gap-2 ">
+              <Link
+                href={data?.url}
+                target="_blank"
+                className="text-sky-300 hover:underline flex gap-3"
               >
-                {data?.flare_tag.name}
-              </div>
-            )}
+                <div className="w-full flex items-center gap-2 ">
+                  Read on devTo
+                </div>
+                <ExternalLink className="w-6 h-6" />
+              </Link>
+              <button
+                onClick={() =>
+                  update_published_scribble_mutation
+                    .mutateAsync({
+                      data: scribble!,
+                      publish: false,
+                    })
+                    .then((res) => {
+                      if (res.data) {
+                        query.refetch();
+                      }
+                    })
+                }
+                disabled={update_published_scribble_mutation.isLoading}
+                className="btn btn-sm"
+              >
+                Unpublish{" "}
+                {update_published_scribble_mutation.isLoading && (
+                  <Loader className="animate-spin h-4 w-4" />
+                )}
+              </button>
+            </div>
+            {/* end of row 5 */}
           </div>
-          {/* end of row-4 */}
-          {/* start of row 5 */}
-          <div className="w-full flex items-center justify-between gap-2 ">
-            <Link
-              href={data?.url}
-              target="_blank"
-              className="text-sky-300 hover:underline flex gap-3"
-            >
-              <div className="w-full flex items-center gap-2 ">
-                Read on devTo
-              </div>
-              <ExternalLink className="w-6 h-6" />
-            </Link>
-            {/* <button onClick={() => unpublish_mutation.mutate()} 
-            disabled={unpublish_mutation.isLoading}
-             className="btn btn-sm">
-                Unpublish {unpublish_mutation.isLoading && <Loader className="animate-spin h-4 w-4"/>}
-            </button> */}
+        ) : (
+          <div className="w-full min-h-[200px] flex items-center justify-center  p-2 gap-2">
+            <button
+              onClick={() =>
+                update_published_scribble_mutation
+                  .mutateAsync({
+                    data: scribble!,
+                    publish: true,
+                  })
+                  .then((res) => {
+                    if (res.data) {
+                      query.refetch();
+                    }
+                  })
+              }
+              disabled={update_published_scribble_mutation.isLoading}
+              className="btn btn-sm">
+              Republish to devto{" "}
+              {update_published_scribble_mutation.isLoading && (
+                <Loader className="animate-spin h-4 w-4" />
+              )}
+            </button>
           </div>
-          {/* end of row 5 */}
-        </div>
+        )}
       </Suspense>
     </div>
   );
