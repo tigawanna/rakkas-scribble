@@ -9,17 +9,20 @@ interface ToolbarProps {}
 export function Toolbar({}: ToolbarProps) {
   return (
     <header
-      className="w-full flex gap-4 justify-between  text-primary-content bg-primary
-      px-2 py-1 sticky top-0 z-30"
+      className="w-full flex flex-col  justify-between items-center  
+      sticky top-0 z-30 gap-1"
     >
-      <Link href="/" className="text-2xl font-bold">
-        <Home/>
-      </Link>
-      <div className="flex gap-4">
-        <ClientSuspense fallback={<div></div>}>
-        <BreadCrumbs />
-        </ClientSuspense>
+      <div className="w-full flex justify-between  bg-primary py-2 px-3">
+        <Link href="/" className="text-2xl font-bold">
+          <Home />
+        </Link>
         <MiniSettingsModal />
+      </div>
+
+      <div className="w-fit flex bg-primary rounded-xl p-auto">
+        <ClientSuspense fallback={<div></div>}>
+          <BreadCrumbs />
+        </ClientSuspense>
       </div>
     </header>
   );

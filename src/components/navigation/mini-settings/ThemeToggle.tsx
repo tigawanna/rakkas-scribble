@@ -14,18 +14,18 @@ interface ThemeToggleModalProps {}
 
 export function ThemeToggle({}: ThemeToggleModalProps) {
   const theme_list = [
-    "cupcake",
     "light",
     "dark",
-    "custom",
-    "wireframe",
-    "black",
-    "acid",
-    "night",
-    "coffee",
-    "dim",
-    "nord",
-    "sunset",
+    // "cupcake",
+    // "custom",
+    // "wireframe",
+    // "black",
+    // "acid",
+    // "night",
+    // "coffee",
+    // "dim",
+    // "nord",
+    // "sunset",
   ];
   const [theme, setTheme] = useState<string>(""); // Step 1: Create state variable for theme
   useEffect(() => {

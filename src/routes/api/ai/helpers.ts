@@ -1,8 +1,6 @@
 import {
   serverSideAdminPocketBaseInstance,
-  serverSidePocketBaseInstance,
 } from "@/lib/pb/client";
-import { ScribbleUserResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
 import { RequestContext } from "rakkasjs";
 
