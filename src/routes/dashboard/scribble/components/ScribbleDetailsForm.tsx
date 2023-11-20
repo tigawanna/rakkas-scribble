@@ -9,7 +9,7 @@ import { ClientResponseError } from "pocketbase";
 
 
 interface ScribbleDetailsFormProps {
-  scribble?: ScribblePostsResponse;
+  scribble?: ScribblePostsResponse|null;
   pb_error?: ClientResponseError | null;
   input: Partial<ScribblePostsResponse>;
   setInput: React.Dispatch<

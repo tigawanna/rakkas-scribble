@@ -31,9 +31,10 @@ export function ScribbleDetailsModal({
       <DialogTrigger asChild>
         {/* <Button className="btn h btn-sm"> </Button> */}
         <button
-          className="btn btn-sm flex gap-2"
+          className="btn btn-sm flex gap-2 hover:text-accent"
           // data-tip="sort images"
-        ><Edit3/>
+        >
+          <Edit3 />
           Edit details
         </button>
       </DialogTrigger>
@@ -48,10 +49,14 @@ export function ScribbleDetailsModal({
         <DialogFooter>
           <Button
             onClick={() =>
-              update_post_mutation.mutate({ id: scribble?.id, data: input },{
-                onSuccess(data, variables, context) {
-                setOpen(false)
-              },})
+              update_post_mutation.mutate(
+                { id: scribble?.id, data: input },
+                {
+                  onSuccess(data, variables, context) {
+                    setOpen(false);
+                  },
+                },
+              )
             }
           >
             {update_post_mutation.isPending ? (

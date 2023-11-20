@@ -25,9 +25,10 @@ export function ScribbleImagesModal({ input }: ScribbleImagesModalProps) {
       <DialogTrigger asChild>
         {/* <Button className="btn h btn-sm"> </Button> */}
         <button
-          className="btn btn-sm flex gap-2"
+          className="btn btn-sm flex gap-2 hover:text-accent"
           // data-tip="sort images"
-        ><ImageIcon/> manage images
+        >
+          <ImageIcon /> manage images
         </button>
       </DialogTrigger>
       <DialogContent className="">

@@ -53,7 +53,7 @@ export function NewScribbleModal({}: NewScribbleModalProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="btn btn-outline btn-sm">
+        <button className="btn btn-sm flex gap-2 hover:text-accent">
           {" "}
           New Scribble
           <Plus />

@@ -11,6 +11,7 @@ import { ScribbleImagesModal } from "./modals/ScribbleImagesModal";
 import { toast } from "react-toastify";
 import { ScribbleDetailsModal } from "./modals/ScribbleDetailsModal";
 import { useScribblePostsMutation } from "./utils/mutation";
+import { ScribbleAIModal } from "./modals/ScribbleAIModal";
 
 interface EditOptionsProps {
   cherry: React.MutableRefObject<Cherry | null>;
@@ -35,11 +36,18 @@ export function EditorOptions({
       </PopoverTrigger>
       <PopoverContent
         className="w-fit flex flex-col 
-      gap-2 py-2 md:px-3 items-center justify-center rounded-lg"
+          gap-2 py-2 md:px-3 items-center justify-center rounded-lg"
       >
+        {/* AI edit */}
+        {scribble && (
+          <ScribbleAIModal
+            scribble={scribble}
+            input={input}
+            setInput={setInput}
+          />
+        )}
         {/* edit images */}
         <ScribbleImagesModal input={input} />
-
         {scribble && (
           <ScribbleDetailsModal
             scribble={scribble}
@@ -50,7 +58,7 @@ export function EditorOptions({
         {/* 
 {save edits} */}
         <button
-          className="btn btn-sm  flex gap-2"
+          className="btn btn-sm flex gap-2 hover:text-accent"
           // data-tip={"save content"}
           onClick={() => {
             if (!scribble) {
@@ -84,7 +92,7 @@ export function EditorOptions({
           )}
         </button>
         <button
-          className="btn btn-sm  flex gap-2"
+          className="btn btn-sm flex gap-2 hover:text-accent"
           // data-tip={"save content"}
           onClick={() => {
             if (!scribble) {
@@ -98,7 +106,7 @@ export function EditorOptions({
                 id: scribble?.id!,
                 data: {
                   ...input,
-                content: cherry.current?.getMarkdown(),
+                  content: cherry.current?.getMarkdown(),
                 },
               },
               {

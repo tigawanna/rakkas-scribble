@@ -1,10 +1,20 @@
 import { TextServiceClient } from "@google-ai/generativelanguage";
-import { json } from "@hattip/response";
 import { GoogleAuth } from "google-auth-library";
+import { json } from "@hattip/response";
 import { RequestContext } from "rakkasjs";
 import { canProompt } from "./helpers";
 
+
+export interface AiGeneratorInput {
+  text_input: string;
+  prompt: string;
+}
+export interface AiGeneratorResponse {
+  output: string;
+  original_response: any;
+}
 export async function post(ctx: RequestContext) {
+
   try {
     const MODEL_NAME = "models/text-bison-001";
     const API_KEY = import.meta.env.RAKKAS_PALM_API_KEY;
@@ -57,10 +67,7 @@ export async function post(ctx: RequestContext) {
       );
     }
 
-    const user_promot = `Restructue the following ${text_input} , 
-        to remove all gramatical errors and rewrite to 
-        reflect while usimg proper sentence structure ,the final putput should be in markdown 
-        and comply with the following prompt ${prompt}`;
+    const user_promot = `Restructue the following blog post  ${text_input} , and adhere to the following ${prompt}`;
 
     const promptString = user_promot;
     const stopSequences: string[] = [];
