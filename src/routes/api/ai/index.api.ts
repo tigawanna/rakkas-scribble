@@ -4,7 +4,6 @@ import { json } from "@hattip/response";
 import { RequestContext } from "rakkasjs";
 import { canProompt } from "./helpers";
 
-
 export interface AiGeneratorInput {
   text_input: string;
   prompt: string;
@@ -14,7 +13,6 @@ export interface AiGeneratorResponse {
   original_response: any;
 }
 export async function post(ctx: RequestContext) {
-
   try {
     const MODEL_NAME = "models/text-bison-001";
     const API_KEY = import.meta.env.RAKKAS_PALM_API_KEY;

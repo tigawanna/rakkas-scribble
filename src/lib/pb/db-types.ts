@@ -213,15 +213,14 @@ export type RateLimitterUpdate = {
 };
 
 export type RateLimitterCollection = {
-  type: 'base';
-  collectionId: 'ocr07zxiuigx4qh';
-  collectionName: 'rate_limitter';
+  type: "base";
+  collectionId: "ocr07zxiuigx4qh";
+  collectionName: "rate_limitter";
   response: RateLimitterResponse;
   create: RateLimitterCreate;
   update: RateLimitterUpdate;
   relations: {};
 };
-
 
 // ===== Schema =====
 

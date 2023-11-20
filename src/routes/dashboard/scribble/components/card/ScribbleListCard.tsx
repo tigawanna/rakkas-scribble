@@ -8,7 +8,7 @@ interface ScribbleListCardProps {
 }
 
 export function ScribbleListCard({ post }: ScribbleListCardProps) {
-  const img_url = post.main_post_image_url
+  const img_url = post.main_post_image_url;
 
   return (
     <li
@@ -18,7 +18,7 @@ export function ScribbleListCard({ post }: ScribbleListCardProps) {
     >
       <img
         className="w-full aspect-video object-cover h-[200px]"
-          src={img_url}
+        src={img_url}
       />
       <div className="flex flex-col justify-between  p-3">
         <div className="flex flex-col p-1 gap-1">
@@ -30,7 +30,7 @@ export function ScribbleListCard({ post }: ScribbleListCardProps) {
         <div className="border-t border-t-accent ">
           <div className="w-full flex justify-between p-1">
             <div className={statusColor(post.status)}>{post.status}</div>
-            <ScribbleCardOptions post={post}/>
+            <ScribbleCardOptions post={post} />
           </div>
           <PBTimeStamp timestamp={post.created} label="Created" />
         </div>

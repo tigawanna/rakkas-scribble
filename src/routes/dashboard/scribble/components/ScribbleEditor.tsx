@@ -43,7 +43,7 @@ export function ScribbleEditor({ scribble_id }: ScribbleEditorProps) {
       description: data?.description,
       published_at: data?.published_at,
       series: data?.series,
-      main_post_image_url:randomImageURL(data?.main_post_image_url),
+      main_post_image_url: randomImageURL(data?.main_post_image_url),
       last_published_at: data?.last_published_at,
       post_media: data?.post_media,
       publishingDetails: data?.publishingDetails,

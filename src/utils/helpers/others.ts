@@ -27,12 +27,22 @@ export function removeDuplicatesFromStringList(strings: string[]): string {
   return Array.from(uniqueStrings).join(",");
 }
 
-
 export function randownNumberBasedOnDate(min: number, max: number) {
   const currentDate = new Date();
-  // @ts-expect-error
-  const dayOfYear = Math.floor((currentDate - new Date(currentDate.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-  const randomSeed = dayOfYear + currentDate.getHours() + currentDate.getMinutes() + currentDate.getSeconds();
+
+  const dayOfYear = Math.floor(
+    // @ts-expect-error
+    (currentDate - new Date(currentDate.getFullYear(), 0, 0)) /
+      1000 /
+      60 /
+      60 /
+      24,
+  );
+  const randomSeed =
+    dayOfYear +
+    currentDate.getHours() +
+    currentDate.getMinutes() +
+    currentDate.getSeconds();
   const randomNumber = Math.floor(randomSeed * Math.random() * max) + min;
   return randomNumber;
 }
@@ -41,14 +51,13 @@ export function randownNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-
 /**
  * Generates a random image URL or return the passed in url
  *
  * @param {string} img_url - Optional image URL to be returned if it exist
  * @return {string} The generated image URL
  */
-export function randomImageURL(img_url?:string) {
-  if(img_url&&isStringaUrl(img_url)) return img_url
-  return `https://picsum.photos/id/${randownNumber(1,1000)}/900/300`
+export function randomImageURL(img_url?: string) {
+  if (img_url && isStringaUrl(img_url)) return img_url;
+  return `https://picsum.photos/id/${randownNumber(1, 1000)}/900/300`;
 }

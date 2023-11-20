@@ -66,7 +66,6 @@ export function ProfileRequestEmailChange({}: ProfileRequestEmailChangeProps) {
         <Button variant="outline">
           {" "}
           <Mail className="text-accent w-4 h-4" />
-       
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

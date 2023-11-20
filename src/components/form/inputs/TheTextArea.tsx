@@ -57,9 +57,7 @@ export function TheTextAreaInput<T>({
             className={twMerge(default_textarea_tw, props.className)}
           />
           {props.description && (
-            <p
-              className={twMerge("font-serif", props.description_classname)}
-            >
+            <p className={twMerge("font-serif", props.description_classname)}>
               {props.description}
             </p>
           )}

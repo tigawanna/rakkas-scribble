@@ -31,7 +31,6 @@ export function SignUpForm({}: SignupFormProps) {
   const mutation = useMutation({
     mutationFn: (vars: typeof input) => {
       return tryCatchWrapper(
-        // @ts-expect-error
         page_ctx.locals.pb?.collection("scribble_user").create(input),
       );
     },

@@ -1,20 +1,20 @@
 import { paths } from "../types";
 import { DevToPublishResponse } from "./types";
 
-
-type OneArticle = paths["/api/articles/{id}"]["get"]
-type GetOneDevtoPostParameters = OneArticle["parameters"]
-type GetOneDevtoPost200Response = OneArticle["responses"]["200"]["content"]["application/json"]
-
-
-
+type OneArticle = paths["/api/articles/{id}"]["get"];
+type GetOneDevtoPostParameters = OneArticle["parameters"];
+type GetOneDevtoPost200Response =
+  OneArticle["responses"]["200"]["content"]["application/json"];
 
 type GetDevtoPostByIdProps = {
-key?: string;
-} & GetOneDevtoPostParameters
+  key?: string;
+} & GetOneDevtoPostParameters;
 
-export async function getDevtoPostById({path:{id},key}:GetDevtoPostByIdProps ): Promise<{
-  data:DevToPublishResponse | null;
+export async function getDevtoPostById({
+  path: { id },
+  key,
+}: GetDevtoPostByIdProps): Promise<{
+  data: DevToPublishResponse | null;
   error: null | { message: string };
 }> {
   try {
@@ -24,7 +24,7 @@ export async function getDevtoPostById({path:{id},key}:GetDevtoPostByIdProps ): 
         error: { message: "missing devto key , register one in the setiings" },
       };
     const url = `https://dev.to/api/articles/${id}`;
-console.log("======= DEVTO ONE POST URL =======",url)
+    console.log("======= DEVTO ONE POST URL =======", url);
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,11 @@ console.log("======= DEVTO ONE POST URL =======",url)
         accept: "application/vnd.forem.api-v1+json",
       },
     });
-    console.log("===== DEVTO ONE POST RESPONSE =====", response.status, response.statusText);
+    console.log(
+      "===== DEVTO ONE POST RESPONSE =====",
+      response.status,
+      response.statusText,
+    );
     if (response.status !== 200) {
       return {
         data: null,
@@ -56,17 +60,18 @@ console.log("======= DEVTO ONE POST URL =======",url)
   }
 }
 
-
-type MeArticles = paths["/api/articles/me"]["get"]
-type GetDevtoPostsParameters = MeArticles["parameters"]
-type GetDevtoPosts200Response = MeArticles["responses"]["200"]["content"]["application/json"]
+type MeArticles = paths["/api/articles/me"]["get"];
+type GetDevtoPostsParameters = MeArticles["parameters"];
+type GetDevtoPosts200Response =
+  MeArticles["responses"]["200"]["content"]["application/json"];
 
 type GetDevtoPostsProps = {
   key?: string;
-} & GetDevtoPostsParameters
-export async function getDevtoPublishedPosts(
-  { key, query }: GetDevtoPostsProps
-): Promise<{
+} & GetDevtoPostsParameters;
+export async function getDevtoPublishedPosts({
+  key,
+  query,
+}: GetDevtoPostsProps): Promise<{
   data: GetDevtoPosts200Response | null;
   error: null | { message: string };
 }> {
@@ -77,21 +82,24 @@ export async function getDevtoPublishedPosts(
         error: { message: "missing devto key , register one in the setiings" },
       };
     const posts_url = new URL("https://dev.to/api/articles/me/unpublished");
-    if(query?.page){
-      posts_url.searchParams.set("page",query?.page?.toString());
+    if (query?.page) {
+      posts_url.searchParams.set("page", query?.page?.toString());
     }
-    if(query?.per_page){
-      posts_url.searchParams.set("per_page",query?.per_page?.toString());
-
+    if (query?.per_page) {
+      posts_url.searchParams.set("per_page", query?.per_page?.toString());
     }
     const response = await fetch(posts_url, {
       headers: {
         "Content-Type": "application/json",
         "api-key": key,
-         accept: "application/vnd.forem.api-v1+json",
+        accept: "application/vnd.forem.api-v1+json",
       },
     });
-    console.log("===== DEVTO POSTS RESPOENE =====", response.status, response.statusText);
+    console.log(
+      "===== DEVTO POSTS RESPOENE =====",
+      response.status,
+      response.statusText,
+    );
     if (response.status !== 200) {
       return {
         data: null,
@@ -106,7 +114,7 @@ export async function getDevtoPublishedPosts(
       };
     }
     const data = await response.json();
-console.log("===== DEVTO POSTS DATA =====", data);
+    console.log("===== DEVTO POSTS DATA =====", data);
     return { data, error: null };
   } catch (error: any) {
     return {
@@ -115,5 +123,3 @@ console.log("===== DEVTO POSTS DATA =====", data);
     };
   }
 }
-
-

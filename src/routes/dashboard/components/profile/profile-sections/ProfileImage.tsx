@@ -4,7 +4,6 @@ import { Image } from "@unpic/react";
 import { ImagePlus, Save } from "lucide-react";
 import { useRef, useState } from "react";
 
-
 interface ProfileImageProps {
   record_id: string;
   file_name?: string;
@@ -23,12 +22,15 @@ export function ProfileImage({
   setInput,
 }: ProfileImageProps) {
   const pb_avatar_file_url = file_name
-    ? getFileURL({ collection_id_or_name: "scribble_user", file_name, record_id })
+    ? getFileURL({
+        collection_id_or_name: "scribble_user",
+        file_name,
+        record_id,
+      })
     : avatar_url;
 
   const [pic, setPic] = useState(pb_avatar_file_url);
   const ref = useRef<HTMLInputElement>(null);
-
 
   // console.log("update image mutation  ==== ",mutation)
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -83,8 +85,6 @@ export function ProfileImage({
                 onClick={() => ref.current?.click()}
                 className="h-7 w-7"
               ></ImagePlus>
-
-
             </div>
           )}
         </div>

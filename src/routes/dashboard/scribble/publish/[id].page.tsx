@@ -12,8 +12,8 @@ export default function PublishScribblePage({ params }: PageProps) {
   const page_ctx = usePageContext();
   const scribble_id = params.id;
 
-  if(!isString(scribble_id)){
-    navigate("/dashboard/scribble")
+  if (!isString(scribble_id)) {
+    navigate("/dashboard/scribble");
   }
   const query = useSuspenseQuery({
     queryKey: ["scribble_posts", scribble_id],

@@ -6,18 +6,16 @@ import { useFormHook } from "@/components/form/useForm";
 import {
   Dialog,
   DialogContent,
-
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/shadcn/ui/dialog";
 import { TheTextAreaInput } from "@/components/form/inputs/TheTextArea";
-import {usePageContext, useSSM } from "rakkasjs";
+import { usePageContext, useSSM } from "rakkasjs";
 import { toast } from "react-toastify";
 import { palmAITextStuff } from "@/lib/ai";
 import { canProompt } from "@/routes/api/ai/helpers";
-
 
 interface ScribbleAIModalProps {
   scribble: ScribblePostsResponse;
@@ -33,11 +31,11 @@ export function ScribbleAIModal({
   setInput,
 }: ScribbleAIModalProps) {
   const [open, setOpen] = useState(false);
-  const page_ctx = usePageContext()
-  const user_id = page_ctx.locals?.pb?.authStore?.model?.id
+  const page_ctx = usePageContext();
+  const user_id = page_ctx.locals?.pb?.authStore?.model?.id;
   const ai_mutation = useSSM(
     async (ctx, vars: { user_prompt: string; text_input: string }) => {
-    const can_proompt = await canProompt(ctx,user_id);
+      const can_proompt = await canProompt(ctx, user_id);
       if (!can_proompt.can_proompt) {
         return {
           data: null,

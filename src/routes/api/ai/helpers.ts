@@ -1,6 +1,4 @@
-import {
-  serverSideAdminPocketBaseInstance,
-} from "@/lib/pb/client";
+import { serverSideAdminPocketBaseInstance } from "@/lib/pb/client";
 import { tryCatchWrapper } from "@/utils/async";
 import { RequestContext } from "rakkasjs";
 
@@ -64,10 +62,9 @@ export async function canProompt(
           const data = {
             last_proompted: new Date(),
             user_id: user_id,
-
           };
           await pb.collection("rate_limitter").update(rate_limit.data.id, data);
-        return {
+          return {
             can_proompt: true,
             can_proompt_after: 0,
             issue: "",
@@ -90,7 +87,6 @@ export async function canProompt(
             " hours",
         };
       }
-
     }
     return {
       can_proompt: false,

@@ -7,7 +7,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/shadcn/ui/dropdown-menu";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
-import { ChevronRightCircle, Edit2, ExternalLink, MoreVertical } from "lucide-react";
+import {
+  ChevronRightCircle,
+  Edit2,
+  ExternalLink,
+  MoreVertical,
+} from "lucide-react";
 import { Link } from "rakkasjs";
 import { useState } from "react";
 
@@ -56,7 +61,7 @@ export function ScribbleCardOptions({ post }: ScribbleCardOptionsProps) {
               className="flex gap-2 p-1 w-full justify-between"
             >
               <div className="flex gap-2 p-1 w-full justify-between">
-                view details  <ChevronRightCircle className="w-4 h-4" />
+                view details <ChevronRightCircle className="w-4 h-4" />
               </div>
             </Link>
           </DropdownMenuItem>

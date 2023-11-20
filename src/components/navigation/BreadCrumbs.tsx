@@ -22,5 +22,3 @@ export default function BreadCrumbs({}: BreadCrumbsProps) {
     </div>
   );
 }
-
-

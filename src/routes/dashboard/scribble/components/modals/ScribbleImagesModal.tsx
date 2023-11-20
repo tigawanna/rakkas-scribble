@@ -12,7 +12,6 @@ import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { Image } from "@unpic/react";
 import { useScribblePostsMutation } from "../utils/mutation";
 
-
 interface ScribbleImagesModalProps {
   input: Partial<ScribblePostsResponse>;
 }

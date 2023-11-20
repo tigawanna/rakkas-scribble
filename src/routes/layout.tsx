@@ -4,7 +4,6 @@ import {
   LayoutProps,
   PageContext,
   useLocation,
-
 } from "rakkasjs";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,7 +11,6 @@ import "cherry-markdown/dist/cherry-markdown.css";
 import "./index.css";
 import React from "react";
 import { Toolbar } from "@/components/navigation/Toolbar";
-
 
 function Layout({ children }: LayoutProps) {
   const location = useLocation();
@@ -25,7 +23,6 @@ function Layout({ children }: LayoutProps) {
         <Nprogress isAnimating={location && location?.pending ? true : false} />
       </ClientSuspense>
       <Toolbar />
-
 
       {children}
       <ToastContainer

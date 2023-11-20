@@ -14,9 +14,8 @@ interface DevToPostProps {
 }
 
 export function OneDevToPost({ id, user, scribble }: DevToPostProps) {
-
   const { update_published_scribble_mutation } = useDevtoScribble();
- const query = useSSQ(async (ctx) => {
+  const query = useSSQ(async (ctx) => {
     console.log({ key: user?.keys?.devto?.key, id });
     //    return getDevtoPublishedPosts({key:user?.keys?.devto?.key,query:{page:1,per_page:30}})
     return getDevtoPostById({

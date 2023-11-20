@@ -70,7 +70,7 @@ export function ProfileComponenst({}: ProfileComponentProps) {
   });
 
   const response = query.data;
-  const avatar_url = randomImageURL("")
+  const avatar_url = randomImageURL("");
   return (
     <div className="w-full h-full flex flex-col items-center  px-4 ">
       {response?.error && <PBReturnedUseQueryError error={response.error} />}

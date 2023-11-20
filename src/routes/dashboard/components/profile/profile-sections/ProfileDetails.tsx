@@ -1,12 +1,18 @@
 import { TheTextInput } from "@/components/form/inputs/TheTextInput";
 import { ScribbleUserResponse, ScribbleUserUpdate } from "@/lib/pb/db-types";
-import { Github, Linkedin, Loader, Mail, UserCircle2, Verified } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Loader,
+  Mail,
+  UserCircle2,
+  Verified,
+} from "lucide-react";
 import { VerifyEmailModal } from "./VerifyEmailModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { tryCatchWrapper } from "@/utils/async";
 import { usePageContext } from "rakkasjs";
 import { toast } from "react-toastify";
-
 
 interface ProfileDetailsProps {
   profile: ScribbleUserResponse;
@@ -21,21 +27,26 @@ export function ProfileDetails({
   setInput,
   input,
 }: ProfileDetailsProps) {
-const page_ctx= usePageContext()
-const qc = useQueryClient()
+  const page_ctx = usePageContext();
+  const qc = useQueryClient();
   const request_email_change_mutation = useMutation({
-    mutationFn: (email:string) => {
+    mutationFn: (email: string) => {
       return tryCatchWrapper(
-     page_ctx.locals.pb?.collection('scribble_user').requestEmailChange(email)
+        page_ctx.locals.pb
+          ?.collection("scribble_user")
+          .requestEmailChange(email),
       );
     },
     onSuccess(data, variables, context) {
       if (data.data) {
         qc.invalidateQueries({ queryKey: ["scribble_user"] });
-        toast("Email reset request sent, Check your email", { type: "success" });
-        }
+        toast("Email reset request sent, Check your email", {
+          type: "success",
+        });
+      }
       if (data.error) {
-        const error = data.error?.data?.data?.newEmail?.message??data?.error?.message
+        const error =
+          data.error?.data?.data?.newEmail?.message ?? data?.error?.message;
         toast(error, { type: "error", autoClose: false });
       }
     },
@@ -51,7 +62,6 @@ const qc = useQueryClient()
       };
     });
   }
-
 
   return (
     <div className="w-full flex lg:flex-row flex-col  items-center sm:px-3 p-1 gap-2">
@@ -88,7 +98,7 @@ const qc = useQueryClient()
             >
               <span className="text-xs">request email change</span>
               {request_email_change_mutation.isPending && (
-                <Loader className="w-4 h-4 animate-spin"/>
+                <Loader className="w-4 h-4 animate-spin" />
               )}
             </button>
           )}

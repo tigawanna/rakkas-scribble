@@ -14,7 +14,7 @@ export async function devtoUnpublishArticle({
   query,
 }: DevtoUnpublishArticle) {
   try {
-    console.log({ path, query,key });
+    console.log({ path, query, key });
     if (!path?.id) {
       return {
         data: null,
@@ -46,7 +46,11 @@ export async function devtoUnpublishArticle({
       },
       // body: JSON.stringify({}),
     });
-    console.log("===== DEVTO UNPUBLISHED RESPONSE =====", response.status,response.statusText);
+    console.log(
+      "===== DEVTO UNPUBLISHED RESPONSE =====",
+      response.status,
+      response.statusText,
+    );
     if (response.ok) {
       const data = await response.json();
       return {

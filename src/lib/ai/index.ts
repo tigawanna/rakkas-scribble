@@ -3,13 +3,16 @@ import { GoogleAuth } from "google-auth-library";
 
 interface PalmAITextStuff {
   user_prompt: string;
-  text_input:string;
+  text_input: string;
 }
 
-export async function palmAITextStuff({ user_prompt,text_input }: PalmAITextStuff) {
+export async function palmAITextStuff({
+  user_prompt,
+  text_input,
+}: PalmAITextStuff) {
   const MODEL_NAME = "models/text-bison-001";
   const API_KEY = import.meta.env.RAKKAS_PALM_API_KEY;
-    const the_proompt = `Restructue the following blog post  ${text_input} , and adhere to the following ${user_prompt}`;
+  const the_proompt = `Restructue the following blog post  ${text_input} , and adhere to the following ${user_prompt}`;
 
   const promptString = the_proompt;
   const stopSequences: string[] = [];

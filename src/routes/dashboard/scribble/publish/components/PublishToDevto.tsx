@@ -12,7 +12,6 @@ interface PublishToDevtoProps {
   >;
 }
 
-
 export function PublishToDevto({
   scribble,
   input,

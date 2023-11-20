@@ -58,7 +58,7 @@ export function Publishers({}: ProvidresProps) {
       <h3 className="text-3xl font-bold">Publishing Platforms </h3>
       <div className="w-full h-full gap-5 p-5 flex flex-col md:flex-row items-center justify-center">
         {user_providers.map((item) => {
-          return <PublishersCard provider={item} />;
+          return <PublishersCard provider={item} key={item.name} />;
         })}
       </div>
     </div>
@@ -223,22 +223,23 @@ export function PublishersCard({ provider }: ProviderCardProps) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        {editing&&<div className="w-full flex justify-between">
-          <button
-            className="btn btn-sm flex gap-2"
-            onClick={() => mutation.mutate()}
-          >
-            Update {mutation.isPending && <Loader className="animate-spin" />}
-          </button>
-          <DeleteConfirm
-            handleDelete={() => {
-              delete_mutation.mutate();
-            }}
-            is_loading={delete_mutation.isPending}
-            modal_id="delete_provider_id"
-          />
-        </div>}
-
+        {editing && (
+          <div className="w-full flex justify-between">
+            <button
+              className="btn btn-sm flex gap-2"
+              onClick={() => mutation.mutate()}
+            >
+              Update {mutation.isPending && <Loader className="animate-spin" />}
+            </button>
+            <DeleteConfirm
+              handleDelete={() => {
+                delete_mutation.mutate();
+              }}
+              is_loading={delete_mutation.isPending}
+              modal_id="delete_provider_id"
+            />
+          </div>
+        )}
       </CardFooter>
     </Card>
   );

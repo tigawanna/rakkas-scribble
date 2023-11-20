@@ -1,22 +1,22 @@
 import { serverSidePocketBaseInstance } from "@/lib/pb/client";
 import { ScribblePostsResponse, ScribbleUserResponse } from "@/lib/pb/db-types";
 import { tryCatchWrapper } from "@/utils/async";
-import { randomImageURL, removeDuplicatesFromStringList } from "@/utils/helpers/others";
+import {
+  randomImageURL,
+  removeDuplicatesFromStringList,
+} from "@/utils/helpers/others";
 import { RequestContext } from "rakkasjs";
 import { DevToArticleInput, DevToPublishResponse } from "./types";
-
-
 
 interface PublishProps {
   ctx: RequestContext<unknown>;
   input: Partial<ScribblePostsResponse>;
-  publish?:boolean;
-
+  publish?: boolean;
 }
 export async function publishScribbleToDevTo({
   ctx,
   input,
-  publish=false
+  publish = false,
 }: PublishProps): Promise<{
   data: DevToPublishResponse | null;
   error: null | { message: string };
@@ -26,10 +26,10 @@ export async function publishScribbleToDevTo({
       body_markdown: input.content,
       description: input.description,
       title: input.title,
-      main_image:randomImageURL(input.main_post_image_url),
+      main_image: randomImageURL(input.main_post_image_url),
       series: input.series,
       tags: input.tags?.split(",") ?? ["webdev"],
-      published:publish,
+      published: publish,
     };
     const { data: pb, error: pb_error } = await tryCatchWrapper(
       serverSidePocketBaseInstance(ctx),

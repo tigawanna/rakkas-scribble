@@ -4,11 +4,11 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/shadcn/ui/dialog";
-import { Edit3,  Loader } from "lucide-react";
+import { Edit3, Loader } from "lucide-react";
 import { useState } from "react";
 import { ScribblePostsResponse } from "@/lib/pb/db-types";
 import { useScribblePostsMutation } from "../utils/mutation";
-import  ScribbleDetailsForm  from "../ScribbleDetailsForm";
+import ScribbleDetailsForm from "../ScribbleDetailsForm";
 import { Button } from "@/components/shadcn/ui/button";
 
 interface ScribbleDetailsModalProps {
@@ -24,7 +24,7 @@ export function ScribbleDetailsModal({
   input,
   setInput,
 }: ScribbleDetailsModalProps) {
-  const [open,setOpen]=useState(false)
+  const [open, setOpen] = useState(false);
   const { update_post_mutation } = useScribblePostsMutation();
   return (
     <Dialog open={open} onOpenChange={setOpen}>
