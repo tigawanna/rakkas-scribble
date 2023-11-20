@@ -107,3 +107,20 @@ export async function serverSidePocketBaseInstance(
     throw error;
   }
 }
+export async function serverSideAdminPocketBaseInstance(
+  ctx: RequestContext<unknown>,
+) {
+  try {
+
+    const pb = new PocketBase(
+      import.meta.env.RAKKAS_PB_URL,
+    ) as PocketBaseClient;
+    await pb.admins.authWithPassword(
+      import.meta.env.RAKKAS_ADMIN_USERNAME,
+      import.meta.env.RAKKAS_ADMIN_PASSWORD,
+    )
+    return pb;
+  } catch (error) {
+    throw error;
+  }
+}

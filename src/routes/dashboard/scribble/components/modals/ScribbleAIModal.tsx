@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from "@/components/shadcn/ui/dialog";
 import { TheTextAreaInput } from "@/components/form/inputs/TheTextArea";
-import {useSSM } from "rakkasjs";
+import {usePageContext, useSSM } from "rakkasjs";
 import { toast } from "react-toastify";
 import { palmAITextStuff } from "@/lib/ai";
 import { canProompt } from "@/routes/api/ai/helpers";
@@ -33,10 +33,11 @@ export function ScribbleAIModal({
   setInput,
 }: ScribbleAIModalProps) {
   const [open, setOpen] = useState(false);
-
+  const page_ctx = usePageContext()
+  const user_id = page_ctx.locals?.pb?.authStore?.model?.id
   const ai_mutation = useSSM(
     async (ctx, vars: { user_prompt: string; text_input: string }) => {
-    const can_proompt = await canProompt(ctx);
+    const can_proompt = await canProompt(ctx,user_id);
       if (!can_proompt.can_proompt) {
         return {
           data: null,

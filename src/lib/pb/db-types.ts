@@ -195,9 +195,38 @@ export type ScribbleUserCollection = {
   relations: {};
 };
 
+// ===== rate_limitter =====
+
+export type RateLimitterResponse = {
+  last_proompted?: string;
+  user_id?: string;
+} & BaseCollectionRecord;
+
+export type RateLimitterCreate = {
+  last_proompted?: string | Date;
+  user_id?: string;
+};
+
+export type RateLimitterUpdate = {
+  last_proompted?: string | Date;
+  user_id?: string;
+};
+
+export type RateLimitterCollection = {
+  type: 'base';
+  collectionId: 'ocr07zxiuigx4qh';
+  collectionName: 'rate_limitter';
+  response: RateLimitterResponse;
+  create: RateLimitterCreate;
+  update: RateLimitterUpdate;
+  relations: {};
+};
+
+
 // ===== Schema =====
 
 export type Schema = {
   scribble_posts: ScribblePostsCollection;
   scribble_user: ScribbleUserCollection;
+  rate_limitter: RateLimitterCollection;
 };
