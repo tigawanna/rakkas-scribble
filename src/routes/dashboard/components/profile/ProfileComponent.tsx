@@ -14,6 +14,7 @@ import { TheTextAreaInput } from "@/components/form/inputs/TheTextArea";
 import { TheStringListInput } from "@/components/form/inputs/StringListInput";
 import { useUser } from "@/lib/rakkas/hooks/useUser";
 import { isString } from "@/utils/helpers/string";
+import { randomImageURL } from "@/utils/helpers/others";
 
 interface ProfileComponentProps {}
 
@@ -69,11 +70,7 @@ export function ProfileComponenst({}: ProfileComponentProps) {
   });
 
   const response = query.data;
-  const avatar_url = getFileURL({
-    collection_id_or_name: "scribble_user",
-    file_name: profile?.avatar,
-    record_id: id,
-  });
+  const avatar_url = randomImageURL("")
   return (
     <div className="w-full h-full flex flex-col items-center  px-4 ">
       {response?.error && <PBReturnedUseQueryError error={response.error} />}

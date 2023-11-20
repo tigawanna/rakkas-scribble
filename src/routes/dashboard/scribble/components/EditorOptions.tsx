@@ -32,7 +32,7 @@ export function EditorOptions({
   return (
     <Popover>
       <PopoverTrigger>
-        <PencilRuler className="w-9 h-9" />
+        <PencilRuler className="w-9 h-9 text-accent" />
       </PopoverTrigger>
       <PopoverContent
         className="w-fit flex flex-col 
